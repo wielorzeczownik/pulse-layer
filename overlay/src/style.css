@@ -1,0 +1,199 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --calm-color: #52c27a;
+  --normal-color: #5b9bd5;
+  --high-color: #e5b950;
+  --fast-color: #e07a30;
+  --alarm-color: #d94545;
+  --panel-bg: rgba(10, 10, 18, 0.82);
+}
+
+body {
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 24px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  transition:
+    border-color 0.8s ease,
+    box-shadow 0.8s ease,
+    background 0.8s ease;
+}
+
+.calm {
+  --zone: var(--calm-color);
+}
+.normal {
+  --zone: var(--normal-color);
+}
+.high {
+  --zone: var(--high-color);
+}
+.fast {
+  --zone: var(--fast-color);
+}
+.alarm {
+  --zone: var(--alarm-color);
+}
+
+.bpm-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Heart widget */
+#heart-widget {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 26px 14px 20px;
+}
+
+.heart {
+  font-size: 42px;
+  line-height: 1;
+  display: inline-block;
+  color: var(--zone, rgba(255, 255, 255, 0.5));
+  transition: color 0.8s ease;
+  animation: beat var(--heart-duration, 0.86s) ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes beat {
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.26);
+  }
+  36% {
+    transform: scale(1.13);
+  }
+}
+
+.hw-data {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 2px;
+  width: 108px;
+}
+
+.hw-bpm {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+  color: var(--zone, #ffffff);
+  transition: color 0.8s ease;
+  line-height: 0.92;
+}
+.hw-label {
+  padding-left: 2px;
+}
+
+#heart-widget.off .hw-bpm {
+  color: rgba(255, 255, 255, 0.22);
+}
+#heart-widget.off .heart {
+  color: rgba(255, 255, 255, 0.12);
+  animation-play-state: paused;
+}
+#heart-widget.off {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: none !important;
+}
+#heart-widget.alarm .heart {
+  animation-name: beat-alarm;
+}
+
+@keyframes beat-alarm {
+  0%,
+  42%,
+  100% {
+    transform: scale(1);
+  }
+  8% {
+    transform: scale(1.36);
+  }
+  26% {
+    transform: scale(1.2);
+  }
+}
+
+/* ECG widget */
+#ecg-widget {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 18px 12px;
+  width: 238px;
+}
+
+#ecg-svg {
+  display: block;
+}
+
+#ecg-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: none;
+  transition: stroke 0.8s ease;
+}
+
+#ecg-widget:not(.off) #ecg-path {
+  animation: ecg-draw var(--ecg-duration, 0.86s) linear infinite;
+}
+
+@keyframes ecg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ecg-bottom {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.ecg-bpm {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--zone, #ffffff);
+  transition: color 0.8s ease;
+  line-height: 1;
+}
+
+#ecg-widget.off .ecg-bpm {
+  color: rgba(255, 255, 255, 0.22);
+}
+#ecg-widget.off {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: none !important;
+}

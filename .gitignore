@@ -1,0 +1,11 @@
+/target/
+**/*.rs.bk
+/.cargo/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+overlay/node_modules
+overlay/dist

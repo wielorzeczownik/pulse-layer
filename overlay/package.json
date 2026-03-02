@@ -1,0 +1,16 @@
+{
+  "name": "pulselayer-overlay",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "typescript": "^5.8.2",
+    "vite": "7.3.1",
+    "vite-plugin-singlefile": "2.3.0",
+    "vite-plugin-html": "3.2.2"
+  }
+}

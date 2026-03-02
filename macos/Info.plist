@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key>
+  <string>PulseLayer</string>
+  <key>CFBundleDisplayName</key>
+  <string>PulseLayer</string>
+  <key>CFBundleIdentifier</key>
+  <string>com.pulselayer.app</string>
+  <key>CFBundleExecutable</key>
+  <string>pulse-layer</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>__VERSION__</string>
+  <key>CFBundleVersion</key>
+  <string>__VERSION__</string>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>PulseLayer needs Bluetooth to connect to your heart rate ring.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>PulseLayer needs Bluetooth to connect to your heart rate ring.</string>
+</dict>
+</plist>

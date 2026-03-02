@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PulseLayer Overlay</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="panel off" id="heart-widget">
+      <span class="heart" id="heart">♥</span>
+      <div class="hw-data">
+        <span class="hw-bpm" id="hw-bpm">--</span>
+        <span class="bpm-label hw-label">bpm</span>
+      </div>
+    </div>
+    <div class="panel off" id="ecg-widget">
+      <svg id="ecg-svg" viewBox="0 0 200 44" width="200" height="44">
+        <line
+          x1="0"
+          y1="22"
+          x2="200"
+          y2="22"
+          stroke="rgba(255,255,255,0.06)"
+          stroke-width="1"
+        />
+        <path
+          id="ecg-path"
+          d="M0,22 L30,22 L33,20 L36,22 L41,25 L43,3 L46,36 L49,22 L65,22 L71,17 L80,17 L86,22 L200,22"
+          pathLength="1"
+          fill="none"
+          stroke="rgba(255,255,255,0.5)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <div class="ecg-bottom">
+        <span class="ecg-bpm" id="ecg-bpm">--</span>
+        <span class="bpm-label">bpm</span>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
