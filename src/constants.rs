@@ -9,6 +9,7 @@ pub const CMD_STOP_HEART_RATE: u8 = 0x6A;
 
 pub const SCAN_REFRESH_SECS: u64 = 3;
 pub const KEEP_ALIVE_SECS: u64 = 60; // some models stop streaming without a periodic re-trigger
+pub const BPM_RETRIGGER_SECS: u64 = 5; // re-send START if no valid BPM received for this long
 pub const BLE_CHANNEL_BUFFER: usize = 100;
 
 // Packet format: [cmd (1 B)][payload (14 B, zero-padded)][checksum (1 B)]

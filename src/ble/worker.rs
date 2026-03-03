@@ -11,8 +11,9 @@ use tokio::time::{Instant, interval_at};
 
 use super::protocol::{build_cmd, parse_cmd};
 use crate::constants::{
-  CMD_START_HEART_RATE, CMD_STOP_HEART_RATE, KEEP_ALIVE_SECS, MAX_VALID_BPM, MIN_RR_INTERVAL_MS,
-  MIN_VALID_BPM, RR_TO_BPM_MS, SCAN_REFRESH_SECS, UUID_READ, UUID_WRITE,
+  BPM_RETRIGGER_SECS, CMD_START_HEART_RATE, CMD_STOP_HEART_RATE, KEEP_ALIVE_SECS,
+  MAX_VALID_BPM, MIN_RR_INTERVAL_MS, MIN_VALID_BPM, RR_TO_BPM_MS, SCAN_REFRESH_SECS, UUID_READ,
+  UUID_WRITE,
 };
 use crate::types::{BleCmd, BleEvent, DeviceInfo};
 
@@ -182,27 +183,49 @@ async fn connect_device(
 
   let mut notifications = peripheral.notifications().await?;
   let tx = evt_tx.clone();
+  // Clone peripheral + write_char into the notify task so it can re-trigger measurement
+  // when no valid BPM arrives for BPM_RETRIGGER_SECS (ring finishes its measurement cycle).
+  let p_notify = peripheral.clone();
+  let wc_notify = write_char.clone();
   let notify_handle = tokio::spawn(async move {
-    while let Some(data) = notifications.next().await {
-      let Some((cmd, payload)) = parse_cmd(&data.value) else {
-        continue;
-      };
+    let retrigger_after = Duration::from_secs(BPM_RETRIGGER_SECS);
+    let mut last_bpm_at = tokio::time::Instant::now();
 
-      if cmd == CMD_START_HEART_RATE && payload.len() >= 7 && payload[0] == 1 && payload[1] == 0 {
-        // payload[0] == 1: streaming active, payload[1] == 0: measurement type is RR interval
-        // payload[5..7]: RR interval in ms (LE u16) — time between heartbeats
-        let rr_ms = u16::from_le_bytes([payload[5], payload[6]]) as u32;
-        if rr_ms >= MIN_RR_INTERVAL_MS {
-          let bpm = (RR_TO_BPM_MS / rr_ms) as u8;
-          if is_valid_hr(bpm) {
-            let _ = tx.send(BleEvent::HeartRate(bpm));
+    loop {
+      tokio::select! {
+        data = notifications.next() => {
+          let Some(data) = data else {
+            // Stream ended naturally (ring out of range / off). When do_disconnect() aborts this task,
+            // it's cancelled at the .await above, so the line below never runs — no double Disconnected event.
+            let _ = tx.send(BleEvent::Disconnected);
+            break;
+          };
+          let Some((cmd, payload)) = parse_cmd(&data.value) else {
+            continue;
+          };
+          if cmd == CMD_START_HEART_RATE && payload.len() >= 7 && payload[0] == 1 && payload[1] == 0 {
+            // payload[0] == 1: streaming active, payload[1] == 0: measurement type is RR interval
+            // payload[5..7]: RR interval in ms (LE u16) — time between heartbeats
+            let rr_ms = u16::from_le_bytes([payload[5], payload[6]]) as u32;
+            if rr_ms >= MIN_RR_INTERVAL_MS {
+              let bpm = (RR_TO_BPM_MS / rr_ms) as u8;
+              if is_valid_hr(bpm) {
+                last_bpm_at = tokio::time::Instant::now();
+                let _ = tx.send(BleEvent::HeartRate(bpm));
+              }
+            }
           }
+        }
+        _ = tokio::time::sleep_until(last_bpm_at + retrigger_after) => {
+          // No valid BPM for BPM_RETRIGGER_SECS ring finished its measurement cycle.
+          // Re-send START to immediately begin the next one.
+          let _ = p_notify
+            .write(&wc_notify, &build_cmd(CMD_START_HEART_RATE, &[1, 0]), WriteType::WithoutResponse)
+            .await;
+          last_bpm_at = tokio::time::Instant::now();
         }
       }
     }
-    // Stream ended naturally (ring out of range / off). When do_disconnect() aborts this task,
-    // it's cancelled at the .await above, so the line below never runs — no double Disconnected event.
-    let _ = tx.send(BleEvent::Disconnected);
   });
 
   Ok((peripheral, name, write_char, notify_handle, realtime_handle))
