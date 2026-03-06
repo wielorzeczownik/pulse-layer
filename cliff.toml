@@ -12,7 +12,7 @@ body = """
 {%- if group != "Internal" %}
 #### {{ group }}
 {% for commit in grouped_commits -%}
-- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim | split(pat=": ") | slice(start=1) | join(sep=": ") }}
+- {% if remote.github.owner and remote.github.repo %}[{{ commit.id | truncate(length=7, end="") }}](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }}){% else %}{{ commit.id | truncate(length=7, end="") }}{% endif %} {{ commit.message | split(pat="\n") | first | trim }}
 {% endfor -%}
 {%- endif %}
 {%- endfor %}
