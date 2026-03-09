@@ -53,13 +53,8 @@ fn build_stream(data: &BleData) -> BoxStream<'static, Message> {
         }
       };
 
-      loop {
-        match evt_rx.recv().await {
-          Some(event) => {
-            let _ = output.send(Message::BleEvent(event)).await;
-          }
-          None => break,
-        }
+      while let Some(event) = evt_rx.recv().await {
+        let _ = output.send(Message::BleEvent(event)).await;
       }
 
       // Never return

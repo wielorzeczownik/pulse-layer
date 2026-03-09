@@ -29,6 +29,11 @@ pub const BPM_ZONE_NORMAL_MAX: u8 = 80;
 pub const BPM_ZONE_HIGH_MAX: u8 = 100;
 pub const BPM_ZONE_FAST_MAX: u8 = 130;
 
+// Lower bounds derived from upper bounds, used in match range patterns to avoid overlapping arms.
+pub const BPM_ZONE_NORMAL_MIN: u8 = BPM_ZONE_CALM_MAX + 1;
+pub const BPM_ZONE_HIGH_MIN: u8 = BPM_ZONE_NORMAL_MAX + 1;
+pub const BPM_ZONE_FAST_MIN: u8 = BPM_ZONE_HIGH_MAX + 1;
+
 pub const WINDOW_WIDTH: f32 = 440.0;
 pub const WINDOW_HEIGHT: f32 = 400.0;
 

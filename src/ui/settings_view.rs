@@ -6,7 +6,9 @@ use crate::App;
 use crate::settings::{OverlayStyle, ZoneKind, parse_hex_color};
 use crate::types::Message;
 
-const ZONES: &[(ZoneKind, fn(&crate::i18n::Strings) -> &'static str, &str)] = &[
+type ZoneDef = (ZoneKind, fn(&crate::i18n::Strings) -> &'static str, &'static str);
+
+const ZONES: &[ZoneDef] = &[
   (ZoneKind::Calm, |l| l.zone_calm, "0-64"),
   (ZoneKind::Normal, |l| l.zone_normal, "65-80"),
   (ZoneKind::High, |l| l.zone_high, "81-100"),

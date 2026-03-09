@@ -4,7 +4,8 @@ use iced::{Alignment, Color, Element, Length};
 use super::{helpers, style};
 use crate::App;
 use crate::constants::{
-  BPM_ZONE_CALM_MAX, BPM_ZONE_FAST_MAX, BPM_ZONE_HIGH_MAX, BPM_ZONE_NORMAL_MAX,
+  BPM_ZONE_CALM_MAX, BPM_ZONE_FAST_MAX, BPM_ZONE_FAST_MIN, BPM_ZONE_HIGH_MAX, BPM_ZONE_HIGH_MIN,
+  BPM_ZONE_NORMAL_MAX, BPM_ZONE_NORMAL_MIN,
 };
 use crate::settings::{ZoneKind, parse_hex_color};
 use crate::types::Message;
@@ -13,14 +14,14 @@ use crate::types::Message;
 fn current_zone(bpm: u8) -> ZoneKind {
   match bpm {
     0..=BPM_ZONE_CALM_MAX => ZoneKind::Calm,
-    ..=BPM_ZONE_NORMAL_MAX => ZoneKind::Normal,
-    ..=BPM_ZONE_HIGH_MAX => ZoneKind::High,
-    ..=BPM_ZONE_FAST_MAX => ZoneKind::Fast,
+    BPM_ZONE_NORMAL_MIN..=BPM_ZONE_NORMAL_MAX => ZoneKind::Normal,
+    BPM_ZONE_HIGH_MIN..=BPM_ZONE_HIGH_MAX => ZoneKind::High,
+    BPM_ZONE_FAST_MIN..=BPM_ZONE_FAST_MAX => ZoneKind::Fast,
     _ => ZoneKind::Alarm,
   }
 }
 
-fn zone_label<'a>(zone: ZoneKind, lang: &'a crate::i18n::Strings) -> &'a str {
+fn zone_label(zone: ZoneKind, lang: &crate::i18n::Strings) -> &str {
   match zone {
     ZoneKind::Calm => lang.zone_calm,
     ZoneKind::Normal => lang.zone_normal,

@@ -43,7 +43,7 @@ async fn run(hr_rx: watch::Receiver<Option<u8>>, settings_rx: watch::Receiver<Ap
   let addr = std::net::SocketAddr::from(([127, 0, 0, 1], PORT));
   let listener = tokio::net::TcpListener::bind(addr)
     .await
-    .expect(format!("bind port {}", PORT).as_str());
+    .unwrap_or_else(|_| panic!("bind port {}", PORT));
 
   axum::serve(listener, app).await.expect("server error");
 }
