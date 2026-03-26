@@ -18,15 +18,15 @@ interface Config {
 
 interface WsMessage {
   config?: Config;
-  bpm?: number | null;
+  bpm?: number;
 }
 
 const root = document.documentElement;
-const heartEl = document.getElementById("heart-widget") as HTMLElement;
+const heartElement = document.getElementById("heart-widget") as HTMLElement;
 const hwBpm = document.getElementById("hw-bpm") as HTMLElement;
 const heartGlyph = document.getElementById("heart") as HTMLElement;
-const ecgEl = document.getElementById("ecg-widget") as HTMLElement;
-const ecgBpmEl = document.getElementById("ecg-bpm") as HTMLElement;
+const ecgElement = document.getElementById("ecg-widget") as HTMLElement;
+const ecgBpmElement = document.getElementById("ecg-bpm") as HTMLElement;
 const ecgPath = document.getElementById(
   "ecg-path"
 ) as unknown as SVGPathElement;
@@ -47,19 +47,19 @@ const colors: Record<string, string> = {
   alarm: "#D94545",
 };
 
-let currentBpm: number | null = null;
+let currentBpm: number | undefined;
 let activeStyle = "heart";
 
-function hexToRgba(hex: string, a: number): string {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  return `rgba(${r},${g},${b},${a})`;
+function hexToRgba(hex: string, alpha: number): string {
+  const raw = hex.replace("#", "");
+  const red = Number.parseInt(raw.slice(0, 2), 16);
+  const green = Number.parseInt(raw.slice(2, 4), 16);
+  const blue = Number.parseInt(raw.slice(4, 6), 16);
+  return `rgba(${red},${green},${blue},${alpha})`;
 }
 
 function zoneForBpm(bpm: number): Zone {
-  return ZONES.find((z) => bpm <= z.max) ?? ZONES[ZONES.length - 1];
+  return ZONES.find((zone) => bpm <= zone.max) ?? ZONES[ZONES.length - 1];
 }
 
 function applyPanelZone(panel: HTMLElement, zone: Zone): void {
@@ -70,7 +70,7 @@ function applyPanelZone(panel: HTMLElement, zone: Zone): void {
     zone.glowA > 0
       ? `0 0 ${zone.glowPx}px ${hexToRgba(color, zone.glowA)}`
       : "";
-  if (panel === ecgEl) ecgPath.style.setProperty("stroke", color);
+  if (panel === ecgElement) ecgPath.style.setProperty("stroke", color);
 }
 
 function applyConfig(cfg: Config): void {
@@ -81,11 +81,11 @@ function applyConfig(cfg: Config): void {
     fast: "--fast-color",
     alarm: "--alarm-color",
   };
-  for (const [k, prop] of Object.entries(zoneMap)) {
-    const val = cfg[k as keyof Config];
-    if (val) {
-      colors[k] = val;
-      root.style.setProperty(prop, val);
+  for (const [key, property] of Object.entries(zoneMap)) {
+    const value = cfg[key as keyof Config];
+    if (value) {
+      colors[key] = value;
+      root.style.setProperty(property, value);
     }
   }
   if (cfg.panel_bg) {
@@ -93,57 +93,63 @@ function applyConfig(cfg: Config): void {
   }
   if (cfg.style !== undefined) {
     activeStyle = cfg.style;
-    heartEl.style.display = activeStyle === "heart" ? "flex" : "none";
-    ecgEl.style.display = activeStyle === "pulse" ? "flex" : "none";
+    heartElement.style.display = activeStyle === "heart" ? "flex" : "none";
+    ecgElement.style.display = activeStyle === "pulse" ? "flex" : "none";
   }
-  if (currentBpm !== null) applyBpm(currentBpm);
+  if (currentBpm !== undefined) applyBpm(currentBpm);
 }
 
-function applyBpm(bpm: number | null): void {
+function applyBpm(bpm?: number): void {
   currentBpm = bpm;
-  activeStyle === "pulse" ? applyEcgBpm(bpm) : applyHeartBpm(bpm);
+  if (activeStyle === "pulse") {
+    applyEcgBpm(bpm);
+  } else {
+    applyHeartBpm(bpm);
+  }
 }
 
-function applyHeartBpm(bpm: number | null): void {
-  if (bpm === null) {
+function applyHeartBpm(bpm?: number): void {
+  if (bpm === undefined) {
     hwBpm.textContent = "--";
-    heartEl.className = "panel off";
-    heartEl.style.borderColor = heartEl.style.boxShadow = "";
+    heartElement.className = "panel off";
+    heartElement.style.borderColor = heartElement.style.boxShadow = "";
     return;
   }
   hwBpm.textContent = String(bpm);
   heartGlyph.style.setProperty("--heart-duration", (60 / bpm).toFixed(3) + "s");
-  applyPanelZone(heartEl, zoneForBpm(bpm));
+  applyPanelZone(heartElement, zoneForBpm(bpm));
 }
 
-function applyEcgBpm(bpm: number | null): void {
-  if (bpm === null) {
-    ecgBpmEl.textContent = "--";
-    ecgEl.className = "panel off";
-    ecgEl.style.borderColor = ecgEl.style.boxShadow = "";
+function applyEcgBpm(bpm?: number): void {
+  if (bpm === undefined) {
+    ecgBpmElement.textContent = "--";
+    ecgElement.className = "panel off";
+    ecgElement.style.borderColor = ecgElement.style.boxShadow = "";
     return;
   }
-  ecgBpmEl.textContent = String(bpm);
+  ecgBpmElement.textContent = String(bpm);
   ecgPath.style.setProperty("--ecg-duration", (60 / bpm).toFixed(3) + "s");
-  applyPanelZone(ecgEl, zoneForBpm(bpm));
+  applyPanelZone(ecgElement, zoneForBpm(bpm));
 }
 
 function connect(): void {
   const ws = new WebSocket("ws://localhost:9000/ws");
-  ws.onmessage = (e: MessageEvent<string>) => {
+  ws.addEventListener("message", (event: MessageEvent<string>) => {
     try {
-      const msg = JSON.parse(e.data) as WsMessage;
-      if (msg.config !== undefined) applyConfig(msg.config);
-      if (msg.bpm !== undefined) applyBpm(msg.bpm ?? null);
+      const message = JSON.parse(event.data) as WsMessage;
+      if (message.config !== undefined) applyConfig(message.config);
+      if (message.bpm !== undefined) applyBpm(message.bpm);
     } catch {
       /* ignore malformed frames */
     }
-  };
-  ws.onclose = () => {
-    applyBpm(null);
+  });
+  ws.addEventListener("close", () => {
+    applyBpm();
     setTimeout(connect, 2000);
-  };
-  ws.onerror = () => ws.close();
+  });
+  ws.addEventListener("error", () => {
+    ws.close();
+  });
 }
 
 connect();
