@@ -36,8 +36,33 @@ jobs:
       - name: Clippy
         run: cargo clippy --all-targets -- -D warnings
 
-      - name: Install cargo-audit
-        uses: taiki-e/install-action@cargo-audit
+  overlay-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
 
-      - name: Cargo audit
-        run: cargo audit
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: overlay/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Build
+        run: npm run build
