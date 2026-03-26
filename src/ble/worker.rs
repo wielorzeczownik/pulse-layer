@@ -11,8 +11,9 @@ use tokio::time::{Instant, interval_at};
 
 use super::protocol::{build_cmd, parse_cmd};
 use crate::constants::{
-  BPM_RETRIGGER_SECS, CMD_START_HEART_RATE, CMD_STOP_HEART_RATE, KEEP_ALIVE_SECS, MAX_VALID_BPM,
-  MIN_RR_INTERVAL_MS, MIN_VALID_BPM, RR_TO_BPM_MS, SCAN_REFRESH_SECS, UUID_READ, UUID_WRITE,
+  BPM_RETRIGGER_SECS, CMD_REALTIME_HEART_RATE, CMD_START_HEART_RATE, CMD_STOP_HEART_RATE,
+  KEEP_ALIVE_SECS, MAX_VALID_BPM, MIN_RR_INTERVAL_MS, MIN_VALID_BPM, RR_TO_BPM_MS,
+  SCAN_REFRESH_SECS, UUID_READ, UUID_WRITE,
 };
 use crate::types::{BleCmd, BleEvent, DeviceInfo};
 
@@ -152,6 +153,7 @@ async fn connect_device(
     .ok_or_else(|| anyhow!("notify characteristic not found"))?;
 
   peripheral.subscribe(&read_char).await?;
+  // Step 1: open the measurement session (StartHeartRateReq).
   peripheral
     .write(
       &write_char,
@@ -159,8 +161,16 @@ async fn connect_device(
       WriteType::WithResponse,
     )
     .await?;
+  // Step 2: request first real-time BPM reading.
+  peripheral
+    .write(
+      &write_char,
+      &build_cmd(CMD_REALTIME_HEART_RATE, &[3]),
+      WriteType::WithoutResponse,
+    )
+    .await?;
 
-  // Keep-alive: re-send START every KEEP_ALIVE_SECS so the ring doesn't stop streaming.
+  // Keep-alive: re-send RealTimeHeartRate(3) every KEEP_ALIVE_SECS so the ring doesn't stop streaming.
   let p_rt = peripheral.clone();
   let wc_rt = write_char.clone();
   let realtime_handle = tokio::spawn(async move {
@@ -173,7 +183,7 @@ async fn connect_device(
       let _ = p_rt
         .write(
           &wc_rt,
-          &build_cmd(CMD_START_HEART_RATE, &[1, 0]),
+          &build_cmd(CMD_REALTIME_HEART_RATE, &[3]),
           WriteType::WithResponse,
         )
         .await;
@@ -203,7 +213,6 @@ async fn connect_device(
             continue;
           };
           if cmd == CMD_START_HEART_RATE && payload.len() >= 7 && payload[0] == 1 && payload[1] == 0 {
-            // payload[0] == 1: streaming active, payload[1] == 0: measurement type is RR interval
             // payload[5..7]: RR interval in ms (LE u16) — time between heartbeats
             let rr_ms = u16::from_le_bytes([payload[5], payload[6]]) as u32;
             if rr_ms >= MIN_RR_INTERVAL_MS {
@@ -216,10 +225,12 @@ async fn connect_device(
           }
         }
         _ = tokio::time::sleep_until(last_bpm_at + retrigger_after) => {
-          // No valid BPM for BPM_RETRIGGER_SECS ring finished its measurement cycle.
-          // Re-send START to immediately begin the next one.
+          // No valid BPM for BPM_RETRIGGER_SECS — reopen session then trigger a new measurement.
           let _ = p_notify
             .write(&wc_notify, &build_cmd(CMD_START_HEART_RATE, &[1, 0]), WriteType::WithoutResponse)
+            .await;
+          let _ = p_notify
+            .write(&wc_notify, &build_cmd(CMD_REALTIME_HEART_RATE, &[3]), WriteType::WithoutResponse)
             .await;
           last_bpm_at = tokio::time::Instant::now();
         }
