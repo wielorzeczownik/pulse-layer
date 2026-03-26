@@ -28,6 +28,16 @@ cargo clippy --all-targets -- -D warnings
 cargo check --all-targets --locked
 ```
 
+If you changed anything in `overlay/`:
+
+```bash
+cd overlay
+npm run format:check
+npm run lint
+npm run lint:css
+npm run build
+```
+
 ## Commit style
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/). Commit messages drive automatic changelog generation and version bumping.
