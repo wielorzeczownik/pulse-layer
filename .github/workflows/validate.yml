@@ -1,4 +1,4 @@
-name: Cargo Check
+name: Validate
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  cargo-check:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,12 +31,18 @@ jobs:
             libwayland-dev
 
       - name: Cargo check
-        run: cargo check
+        run: cargo check --all-targets --locked
 
       - name: Clippy
         run: cargo clippy --all-targets -- -D warnings
 
-  overlay-check:
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@cargo-audit
+
+      - name: Cargo audit
+        run: cargo audit
+
+  overlay-validate:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -66,3 +72,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Audit
+        run: npm audit
