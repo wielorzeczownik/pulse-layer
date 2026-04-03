@@ -12,8 +12,22 @@
       "automerge": true
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "commitMessageSuffix": " [skip release]"
+      "matchDepTypes": [
+        "buildDependencies"
+      ],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "semanticCommitType": "ci"
     }
   ]
 }
