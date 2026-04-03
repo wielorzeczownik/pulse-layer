@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   prepare-release:
-    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip release]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -236,7 +236,7 @@ jobs:
           chmod +x "$APP/Contents/MacOS/pulse-layer"
           codesign --force --deep --sign - "$APP"
           mkdir dist
-          tar -czf "dist/pulse-layer-${{ needs.prepare-release.outputs.version }}-${{ matrix.target }}.tar.gz" "$APP"
+          tar -czf "dist/pulse-layer-${{ matrix.target }}.tar.gz" "$APP"
 
       - name: Package Windows exe
         if: runner.os == 'Windows'
@@ -245,7 +245,7 @@ jobs:
           New-Item -ItemType Directory -Force dist | Out-Null
           Compress-Archive `
             -Path "target/${{ matrix.target }}/release/pulse-layer.exe" `
-            -DestinationPath "dist/pulse-layer-${{ needs.prepare-release.outputs.version }}-${{ matrix.target }}.zip"
+            -DestinationPath "dist/pulse-layer-${{ matrix.target }}.zip"
 
       - name: Package Linux binary
         if: runner.os == 'Linux'
@@ -253,7 +253,7 @@ jobs:
         run: |
           mkdir dist
           tar -C "target/${{ matrix.target }}/release" \
-              -czf "dist/pulse-layer-${{ needs.prepare-release.outputs.version }}-${{ matrix.target }}.tar.gz" \
+              -czf "dist/pulse-layer-${{ matrix.target }}.tar.gz" \
               pulse-layer
 
       - name: Upload artifact
