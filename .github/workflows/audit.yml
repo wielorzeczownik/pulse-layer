@@ -1,0 +1,100 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rust-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@cargo-audit
+
+      - name: Run audit
+        id: audit
+        run: |
+          if cargo audit; then
+            echo "vulnerable=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "vulnerable=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Try cargo audit fix
+        if: steps.audit.outputs.vulnerable == 'true'
+        run: cargo audit fix
+
+      - name: Re-run audit after fix
+        if: steps.audit.outputs.vulnerable == 'true'
+        run: cargo audit
+
+      - name: Commit fixed Cargo.lock
+        if: steps.audit.outputs.vulnerable == 'true'
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: "Cargo.lock"
+          default_author: github_actions
+          message: "fix(deps): resolve Rust audit advisories [skip ci]"
+          push: true
+
+  js-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: overlay/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run audit
+        id: audit
+        run: |
+          if npm audit; then
+            echo "vulnerable=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "vulnerable=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Try npm audit fix
+        if: steps.audit.outputs.vulnerable == 'true'
+        run: npm audit fix
+
+      - name: Re-run audit after fix
+        if: steps.audit.outputs.vulnerable == 'true'
+        run: npm audit
+
+      - name: Commit fixed package-lock.json
+        if: steps.audit.outputs.vulnerable == 'true'
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: "overlay/package-lock.json"
+          default_author: github_actions
+          message: "fix(deps): resolve JS audit advisories [skip ci]"
+          push: true
