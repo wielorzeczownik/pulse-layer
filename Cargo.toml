@@ -3,6 +3,12 @@ name = "pulse-layer"
 version = "0.1.17"
 edition = "2024"
 rust-version = "1.88"
+description = "Real-time heart rate OBS overlay powered by a Bluetooth smart ring"
+license = "MIT"
+repository = "https://github.com/wielorzeczownik/pulse-layer"
+readme = "README.md"
+keywords = ["obs", "overlay", "heart-rate", "bluetooth", "bpm"]
+categories = ["gui", "network-programming"]
 
 [dependencies]
 # Runtime + error handling
