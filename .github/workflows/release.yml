@@ -183,12 +183,33 @@ jobs:
         include:
           - os: macos-15
             target: aarch64-apple-darwin
+            archive: tar.gz
           - os: macos-15-intel
             target: x86_64-apple-darwin
+            archive: tar.gz
           - os: windows-latest
             target: x86_64-pc-windows-msvc
+            archive: zip
+          - os: windows-latest
+            target: i686-pc-windows-msvc
+            archive: zip
+          - os: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            archive: zip
           - os: ubuntu-22.04
             target: x86_64-unknown-linux-gnu
+            archive: tar.gz
+          - os: ubuntu-22.04
+            target: aarch64-unknown-linux-gnu
+            archive: tar.gz
+          - os: ubuntu-22.04
+            target: x86_64-unknown-linux-musl
+            archive: tar.gz
+            build_cmd: cargo zigbuild
+          - os: ubuntu-22.04
+            target: aarch64-unknown-linux-musl
+            archive: tar.gz
+            build_cmd: cargo zigbuild
 
     steps:
       - name: Checkout tag
@@ -221,8 +242,24 @@ jobs:
             libxcb-shape0-dev libxcb-xfixes0-dev \
             libwayland-dev
 
+      - name: Install Linux ARM64 cross-compiler
+        if: ${{ matrix.target == 'aarch64-unknown-linux-gnu' }}
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Install Zig
+        if: ${{ matrix.build_cmd == 'cargo zigbuild' }}
+        run: pip install ziglang
+
+      - name: Install cargo-zigbuild
+        if: ${{ matrix.build_cmd == 'cargo zigbuild' }}
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-zigbuild
+
       - name: Build
-        run: cargo build --release --target ${{ matrix.target }}
+        env:
+          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+        run: ${{ matrix.build_cmd || 'cargo build' }} --release --target ${{ matrix.target }}
 
       - name: Package macOS app bundle
         if: runner.os == 'macOS'
