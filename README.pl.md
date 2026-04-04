@@ -33,9 +33,8 @@ Najnowsze wydanie: [GitHub Releases](https://github.com/wielorzeczownik/pulse-la
 
 Pobierz archiwum dla swojej platformy:
 
-**Linux (glibc – wymaga glibc 2.35+):**
+**Linux:**
 - [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
-- [pulse-layer-aarch64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-gnu.tar.gz) – Linux (ARM64, np. Raspberry Pi 64-bit)
 
 
 **macOS:**
