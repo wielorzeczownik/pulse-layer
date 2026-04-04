@@ -37,9 +37,6 @@ Download the latest release asset for your platform:
 - [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
 - [pulse-layer-aarch64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-gnu.tar.gz) – Linux (ARM64, e.g. Raspberry Pi 64-bit)
 
-**Linux (musl – fully static, no glibc dependency):**
-- [pulse-layer-x86_64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-musl.tar.gz) – Linux (Intel/AMD 64-bit)
-- [pulse-layer-aarch64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-musl.tar.gz) – Linux (ARM64)
 
 **macOS:**
 - [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS on Intel
