@@ -7,7 +7,7 @@ description = "Real-time heart rate OBS overlay powered by a Bluetooth smart rin
 license = "MIT"
 repository = "https://github.com/wielorzeczownik/pulse-layer"
 readme = "README.md"
-keywords = ["obs", "overlay", "heart-rate", "bluetooth", "bpm", "smart-ring"]
+keywords = ["obs", "overlay", "heart-rate", "bluetooth", "bpm", "smart-ring", "qring"]
 categories = ["gui", "network-programming"]
 
 [dependencies]
