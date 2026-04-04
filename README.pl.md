@@ -10,7 +10,7 @@
 
 <p align="center">🇬🇧 <a href="README.md">English</a> | 🇵🇱 Polski</p>
 
-Nakładka na OBS wyświetlająca **tętno w czasie rzeczywistym** - odczytuje BPM z pierścienia Bluetooth i serwuje widget przeglądarki bezpośrednio na stream. Bez subskrypcji, bez chmury - działa w całości lokalnie.
+Nakładka na OBS wyświetlająca **tętno w czasie rzeczywistym** – odczytuje BPM z pierścienia Bluetooth i serwuje widget przeglądarki bezpośrednio na stream. Bez subskrypcji, bez chmury – działa w całości lokalnie.
 
 Stworzona dla VTuberów i streamerów, którzy chcą pokazywać tętno na streamie bez niczego więcej niż tani pierścień i OBS. Pierwotnie zrobiona dla **[KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu)**.
 
@@ -25,7 +25,7 @@ Stworzona dla VTuberów i streamerów, którzy chcą pokazywać tętno na stream
 Testowane na **Smartring COLMI R12**. Starsze modele COLMI i inne pierścienie korzystające z tego samego protokołu BLE powinny też działać.
 
 > [!NOTE]
-> Aktualnie obsługiwane są tylko pierścienie z aplikacji Qring. Dodanie innych marek nie jest planowane, ale jeśli będzie zainteresowanie - jestem otwarty.
+> Aktualnie obsługiwane są tylko pierścienie z aplikacji Qring. Dodanie innych marek nie jest planowane, ale jeśli będzie zainteresowanie – jestem otwarty.
 
 ## Pobieranie i instalacja
 
@@ -33,21 +33,33 @@ Najnowsze wydanie: [GitHub Releases](https://github.com/wielorzeczownik/pulse-la
 
 Pobierz archiwum dla swojej platformy:
 
-- [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) - macOS na Apple Silicon (M1/M2/M3/M4)
-- [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) - macOS na Intel
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) - Windows 64-bit
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) - Linux 64-bit
+**Linux (glibc – wymaga glibc 2.35+):**
+- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-aarch64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-gnu.tar.gz) – Linux (ARM64, np. Raspberry Pi 64-bit)
+
+**Linux (musl – w pełni statyczny, bez zależności od glibc):**
+- [pulse-layer-x86_64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-musl.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-aarch64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-musl.tar.gz) – Linux (ARM64)
+
+**macOS:**
+- [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS na Intel
+- [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) – macOS na Apple Silicon (M1/M2/M3/M4)
+
+**Windows:**
+- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
+- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
 
 ### macOS
 
 Po rozpakowaniu archiwum otrzymasz `PulseLayer.app`. Przy pierwszym uruchomieniu macOS zablokuje aplikację, bo nie jest podpisana płatnym certyfikatem Apple. Żeby to obejść:
 
-**Opcja A - prawy przycisk myszy:**
+**Opcja A – prawy przycisk myszy:**
 
 1. Kliknij prawym przyciskiem na `PulseLayer.app` → **Otwórz**
 2. Kliknij **Otwórz** w oknie dialogowym
 
-**Opcja B - terminal (jednorazowo):**
+**Opcja B – terminal (jednorazowo):**
 
 ```bash
 xattr -cr PulseLayer.app
@@ -71,7 +83,7 @@ tar -xzf pulse-layer-*.tar.gz
 
 1. Upewnij się, że pierścień jest naładowany i w pobliżu.
 2. Uruchom PulseLayer i kliknij **Scan**.
-3. Pierścień pojawi się na liście - kliknij **Connect**.
+3. Pierścień pojawi się na liście – kliknij **Connect**.
 
 ### Pierścień jest już sparowany z telefonem
 
@@ -83,9 +95,9 @@ Rozwiązanie: **wyłącz Bluetooth na telefonie** przed skanowaniem. PulseLayer 
 
 Pierścień pamięta parowanie. Żeby sparować go z telefonem od nowa, trzeba usunąć parowanie z obu stron:
 
-1. W PulseLayer - kliknij **Disconnect**.
-2. Na komputerze - ustawienia Bluetooth, znajdź pierścień, kliknij **Zapomnij / Usuń urządzenie**.
-3. Na telefonie - też zapomnij pierścień.
+1. W PulseLayer – kliknij **Disconnect**.
+2. Na komputerze – ustawienia Bluetooth, znajdź pierścień, kliknij **Zapomnij / Usuń urządzenie**.
+3. Na telefonie – też zapomnij pierścień.
 4. Sparuj od nowa przez aplikację Qring.
 
 > [!IMPORTANT]
@@ -95,7 +107,7 @@ Pierścień pamięta parowanie. Żeby sparować go z telefonem od nowa, trzeba u
 
 Nakładka działa jako lokalna strona przeglądarki serwowana przez PulseLayer. Zewnętrzny hosting nie jest potrzebny.
 
-1. **Uruchom PulseLayer** i połącz się z pierścieniem - serwer startuje na porcie `9000`.
+1. **Uruchom PulseLayer** i połącz się z pierścieniem – serwer startuje na porcie `9000`.
 2. W OBS kliknij **+** w panelu Źródła → **Przeglądarka**.
 3. Ustaw URL na:
    ```
@@ -103,29 +115,29 @@ Nakładka działa jako lokalna strona przeglądarki serwowana przez PulseLayer. 
    ```
 4. Ustaw **Szerokość** na `400` i **Wysokość** na `300` (możesz dowolnie zmieniać rozmiar i przycinać w OBS).
 5. Zaznacz **Odśwież przeglądarkę gdy scena staje się aktywna**, jeśli chcesz automatycznego ponownego połączenia.
-6. Kliknij **OK** - widget pojawi się na scenie. Użyj **Edytuj transformację**, żeby umieścić go gdzie chcesz.
+6. Kliknij **OK** – widget pojawi się na scenie. Użyj **Edytuj transformację**, żeby umieścić go gdzie chcesz.
 
 > [!TIP]
 > Widget jest zakotwiczony do lewego dolnego rogu ramki przeglądarki. Przytnij źródło przeglądarki ciasno, a możesz umieścić je w dowolnym miejscu na scenie.
 
-Nakładka sama się reconnectuje po restarcie PulseLayer - nie musisz dotykać źródła przeglądarki.
+Nakładka sama się reconnectuje po restarcie PulseLayer – nie musisz dotykać źródła przeglądarki.
 
 ## Style nakładki
 
 Przełączaj między stylami w panelu **Settings** w PulseLayer.
 
-**Serce** - bijąca ikona serca z dużą liczbą BPM. Proste i czytelne.
+**Serce** – bijąca ikona serca z dużą liczbą BPM. Proste i czytelne.
 
-**EKG** - animowana linia EKG rysująca się raz na uderzenie serca, z BPM poniżej. Lepsze dla bardziej technicznego wyglądu.
+**EKG** – animowana linia EKG rysująca się raz na uderzenie serca, z BPM poniżej. Lepsze dla bardziej technicznego wyglądu.
 
 Oba zmieniają kolor w zależności od strefy BPM. Wszystkie kolory są konfigurowalne.
 
 | Strefa   | Domyślny zakres BPM | Domyślny kolor |
 | -------- | ------------------- | -------------- |
-| Spokój   | 0 - 64              | Zielony        |
-| Normalne | 65 - 80             | Niebieski      |
-| Wysokie  | 81 - 100            | Żółty          |
-| Szybkie  | 101 - 130           | Pomarańczowy   |
+| Spokój   | 0 – 64              | Zielony        |
+| Normalne | 65 – 80             | Niebieski      |
+| Wysokie  | 81 – 100            | Żółty          |
+| Szybkie  | 101 – 130           | Pomarańczowy   |
 | Alarm    | 131+                | Czerwony       |
 
 ## Budowanie ze źródeł
@@ -138,7 +150,7 @@ cd pulse-layer
 cargo build --release
 ```
 
-Frontend nakładki jest kompilowany przez Vite w ramach `cargo build` i wbudowany w binarny plik - nie ma osobnego kroku budowania.
+Frontend nakładki jest kompilowany przez Vite w ramach `cargo build` i wbudowany w binarny plik – nie ma osobnego kroku budowania.
 
 **Szybkie uruchomienie na macOS (build debug):**
 

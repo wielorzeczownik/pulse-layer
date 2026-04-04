@@ -10,7 +10,7 @@
 
 <p align="center">🇬🇧 English | 🇵🇱 <a href="README.pl.md">Polski</a></p>
 
-A real-time **heart rate OBS overlay** that reads live BPM from a Bluetooth smart ring and serves a browser widget directly to your stream. No subscriptions, no cloud - runs entirely on your machine.
+A real-time **heart rate OBS overlay** that reads live BPM from a Bluetooth smart ring and serves a browser widget directly to your stream. No subscriptions, no cloud – runs entirely on your machine.
 
 Made for VTubers and streamers who want to show live heart rate on stream with nothing more than a cheap smart ring and OBS. Originally built for **[KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu)**.
 
@@ -33,21 +33,33 @@ Latest release: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer
 
 Download the latest release asset for your platform:
 
-- [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) - macOS on Apple Silicon (M1/M2/M3/M4)
-- [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) - macOS on Intel
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) - Windows 64-bit
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) - Linux 64-bit
+**Linux (glibc – requires glibc 2.35+):**
+- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-aarch64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-gnu.tar.gz) – Linux (ARM64, e.g. Raspberry Pi 64-bit)
+
+**Linux (musl – fully static, no glibc dependency):**
+- [pulse-layer-x86_64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-musl.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-aarch64-unknown-linux-musl.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-unknown-linux-musl.tar.gz) – Linux (ARM64)
+
+**macOS:**
+- [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS on Intel
+- [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) – macOS on Apple Silicon (M1/M2/M3/M4)
+
+**Windows:**
+- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
+- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
 
 ### macOS
 
 Extract the archive and you'll get `PulseLayer.app`. On first launch macOS will block it because the app isn't signed with a paid Apple certificate. To get past that:
 
-**Option A - right-click:**
+**Option A – right-click:**
 
 1. Right-click `PulseLayer.app` → **Open**
 2. Click **Open** in the dialog
 
-**Option B - terminal (one-time):**
+**Option B – terminal (one-time):**
 
 ```bash
 xattr -cr PulseLayer.app
@@ -71,7 +83,7 @@ tar -xzf pulse-layer-*.tar.gz
 
 1. Make sure your ring is charged and nearby.
 2. Launch PulseLayer and click **Scan**.
-3. Your ring appears in the list - click **Connect**.
+3. Your ring appears in the list – click **Connect**.
 
 ### Ring is already paired with your phone
 
@@ -83,9 +95,9 @@ Fix: **turn off Bluetooth on your phone** before scanning. PulseLayer will pick 
 
 The ring remembers the pairing. To re-pair with your phone you need to clear it from both sides:
 
-1. In PulseLayer - click **Disconnect**.
-2. On your computer - Bluetooth settings, find the ring, click **Forget / Remove device**.
-3. On your phone - forget the ring too.
+1. In PulseLayer – click **Disconnect**.
+2. On your computer – Bluetooth settings, find the ring, click **Forget / Remove device**.
+3. On your phone – forget the ring too.
 4. Re-pair from scratch via the Qring app.
 
 > [!IMPORTANT]
@@ -95,7 +107,7 @@ The ring remembers the pairing. To re-pair with your phone you need to clear it 
 
 The overlay runs as a local browser page served by PulseLayer. No external hosting needed.
 
-1. **Start PulseLayer** and connect to your ring - the server starts on port `9000`.
+1. **Start PulseLayer** and connect to your ring – the server starts on port `9000`.
 2. In OBS, click **+** in the Sources panel → **Browser**.
 3. Set the URL to:
    ```
@@ -114,18 +126,18 @@ The overlay reconnects on its own if PulseLayer restarts, so you don't need to t
 
 Switch between styles in the **Settings** panel inside PulseLayer.
 
-**Heart** - a beating heart icon with a large BPM number. Simple and readable.
+**Heart** – a beating heart icon with a large BPM number. Simple and readable.
 
-**ECG** - an animated ECG line that draws once per heartbeat, with a BPM readout below. Better for a more technical look.
+**ECG** – an animated ECG line that draws once per heartbeat, with a BPM readout below. Better for a more technical look.
 
 Both change color based on BPM zone. All colors are customizable.
 
 | Zone   | Default BPM range | Default color |
 | ------ | ----------------- | ------------- |
-| Calm   | 0 - 64            | Green         |
-| Normal | 65 - 80           | Blue          |
-| High   | 81 - 100          | Yellow        |
-| Fast   | 101 - 130         | Orange        |
+| Calm   | 0 – 64            | Green         |
+| Normal | 65 – 80           | Blue          |
+| High   | 81 – 100          | Yellow        |
+| Fast   | 101 – 130         | Orange        |
 | Alarm  | 131+              | Red           |
 
 ## Building from source
@@ -138,7 +150,7 @@ cd pulse-layer
 cargo build --release
 ```
 
-The overlay frontend is compiled by Vite as part of `cargo build` and embedded into the binary - no separate build step.
+The overlay frontend is compiled by Vite as part of `cargo build` and embedded into the binary – no separate build step.
 
 **macOS quick launch (debug build):**
 
