@@ -35,6 +35,8 @@ pub struct App {
 
   pub settings: AppSettings,
   pub settings_open: bool,
+  pub color_picker_zone: Option<crate::settings::ZoneKind>,
+  pub bg_picker_open: bool,
 }
 
 impl App {
@@ -72,6 +74,8 @@ impl App {
 
       settings: loaded,
       settings_open: false,
+      color_picker_zone: None,
+      bg_picker_open: false,
     }
   }
 
@@ -117,8 +121,23 @@ impl App {
       }
       Message::CloseSettings => {
         self.settings_open = false;
+        self.color_picker_zone = None;
+        self.bg_picker_open = false;
+      }
+      Message::OpenColorPicker(zone) => {
+        self.color_picker_zone = Some(zone);
+        self.bg_picker_open = false;
+      }
+      Message::OpenBgPicker => {
+        self.bg_picker_open = true;
+        self.color_picker_zone = None;
+      }
+      Message::CloseColorPicker => {
+        self.color_picker_zone = None;
+        self.bg_picker_open = false;
       }
       Message::SetZoneHex(zone, hex) => {
+        self.color_picker_zone = None;
         self.settings.set_zone_hex(zone, hex);
         config::save(&self.settings);
         let _ = self.settings_tx.send(self.settings.clone());
@@ -129,6 +148,7 @@ impl App {
         let _ = self.settings_tx.send(self.settings.clone());
       }
       Message::SetPanelBg(hex) => {
+        self.bg_picker_open = false;
         self.settings.panel_bg_hex = hex;
         config::save(&self.settings);
         let _ = self.settings_tx.send(self.settings.clone());

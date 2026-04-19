@@ -44,6 +44,9 @@ pub enum Message {
   // Settings
   OpenSettings,
   CloseSettings,
+  OpenColorPicker(ZoneKind),
+  OpenBgPicker,
+  CloseColorPicker,
   SetZoneHex(ZoneKind, String),
   SetOverlayStyle(OverlayStyle),
   SetPanelBg(String),

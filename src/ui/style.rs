@@ -1,5 +1,7 @@
 use iced::widget::{button, text_input};
 use iced::{Background, Border, Color, Shadow, Theme, Vector};
+use iced_aw::style::Status as CpStatus;
+use iced_aw::style::color_picker::Style as CpStyle;
 
 // Palette
 const SURFACE: Color = Color {
@@ -144,6 +146,33 @@ pub fn btn_icon(_theme: &Theme, status: button::Status) -> button::Style {
       ..Default::default()
     },
     ..Default::default()
+  }
+}
+
+pub fn color_picker(_theme: &Theme, _status: CpStatus) -> CpStyle {
+  CpStyle {
+    background: Background::Color(Color {
+      r: 0.07,
+      g: 0.07,
+      b: 0.11,
+      a: 1.0,
+    }),
+    border_radius: 12.0,
+    border_width: 1.0,
+    border_color: Color {
+      r: 0.22,
+      g: 0.22,
+      b: 0.32,
+      a: 1.0,
+    },
+    bar_border_radius: 6.0,
+    bar_border_width: 1.0,
+    bar_border_color: Color {
+      r: 0.22,
+      g: 0.22,
+      b: 0.32,
+      a: 1.0,
+    },
   }
 }
 

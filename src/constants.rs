@@ -36,7 +36,7 @@ pub const BPM_ZONE_HIGH_MIN: u8 = BPM_ZONE_NORMAL_MAX + 1;
 pub const BPM_ZONE_FAST_MIN: u8 = BPM_ZONE_HIGH_MAX + 1;
 
 pub const WINDOW_WIDTH: f32 = 440.0;
-pub const WINDOW_HEIGHT: f32 = 400.0;
+pub const WINDOW_HEIGHT: f32 = 480.0;
 
 // Embedded at compile time by build.rs (Vite build output)
 pub const OVERLAY_HTML: &str = include_str!("../overlay/dist/index.html");

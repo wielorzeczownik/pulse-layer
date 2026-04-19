@@ -1,9 +1,10 @@
-use iced::widget::{Space, button, column, container, row, text};
-use iced::{Alignment, Color, Element, Length};
+use iced::widget::{Space, button, column, container, row, text, text_input};
+use iced::{Alignment, Background, Border, Color, Element, Length};
+use iced_aw::ColorPicker;
 
 use super::{helpers, style};
 use crate::App;
-use crate::settings::{OverlayStyle, ZoneKind, parse_hex_color};
+use crate::settings::{OverlayStyle, ZoneKind, color_to_hex, parse_hex_color};
 use crate::types::Message;
 
 type ZoneDef = (
@@ -37,6 +38,50 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
   let mut zone_inputs = column![].spacing(10);
   for &(zone, get_label, bpm_range) in ZONES {
     let label_str = format!("{} ({})", get_label(lang), bpm_range);
+    let hex = s.zone_hex(zone);
+    let color = parse_hex_color(hex);
+    let show = app.color_picker_zone == Some(zone);
+
+    let dot_btn = button(text(""))
+      .width(28.0)
+      .height(28.0)
+      .style(
+        move |_: &iced::Theme, status: iced::widget::button::Status| {
+          let border_alpha = if matches!(status, iced::widget::button::Status::Hovered) {
+            0.80
+          } else {
+            0.45
+          };
+          iced::widget::button::Style {
+            background: Some(Background::Color(color)),
+            border: Border {
+              color: Color {
+                r: color.r,
+                g: color.g,
+                b: color.b,
+                a: border_alpha,
+              },
+              width: 2.0,
+              radius: 6.0.into(),
+            },
+            ..Default::default()
+          }
+        },
+      )
+      .on_press(Message::OpenColorPicker(zone));
+
+    let picker = ColorPicker::new(show, color, dot_btn, Message::CloseColorPicker, move |c| {
+      Message::SetZoneHex(zone, color_to_hex(c))
+    })
+    .style(style::color_picker);
+
+    let hex_input = text_input(lang.hex_placeholder, hex)
+      .on_input(move |v| Message::SetZoneHex(zone, v))
+      .padding([6, 10])
+      .size(13.5)
+      .style(style::text_input_field)
+      .width(Length::Fill);
+
     let zone_row = row![
       text(label_str)
         .size(12.0)
@@ -47,11 +92,10 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
           a: 1.0
         })
         .width(Length::Fixed(110.0)),
-      helpers::color_hex_input(lang.hex_placeholder, s.zone_hex(zone), move |v| {
-        Message::SetZoneHex(zone, v)
-      },),
+      picker,
+      hex_input,
     ]
-    .spacing(10)
+    .spacing(8)
     .align_y(Alignment::Center);
     zone_inputs = zone_inputs.push(zone_row);
   }
@@ -114,6 +158,44 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
   ]
   .spacing(8);
 
+  let bg_color = parse_hex_color(&s.panel_bg_hex);
+  let bg_dot = button(text(""))
+    .width(28.0)
+    .height(28.0)
+    .style(
+      move |_: &iced::Theme, status: iced::widget::button::Status| {
+        let border_alpha = if matches!(status, iced::widget::button::Status::Hovered) {
+          0.80
+        } else {
+          0.45
+        };
+        iced::widget::button::Style {
+          background: Some(Background::Color(bg_color)),
+          border: Border {
+            color: Color {
+              r: bg_color.r,
+              g: bg_color.g,
+              b: bg_color.b,
+              a: border_alpha,
+            },
+            width: 2.0,
+            radius: 6.0.into(),
+          },
+          ..Default::default()
+        }
+      },
+    )
+    .on_press(Message::OpenBgPicker);
+
+  let bg_picker = ColorPicker::new(
+    app.bg_picker_open,
+    bg_color,
+    bg_dot,
+    Message::CloseColorPicker,
+    |c| Message::SetPanelBg(color_to_hex(c)),
+  )
+  .style(style::color_picker);
+
   let panel_bg_row = row![
     text(lang.label_bg)
       .size(12.0)
@@ -124,11 +206,15 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
         a: 1.0
       })
       .width(Length::Fixed(110.0)),
-    helpers::color_hex_input(lang.hex_placeholder, &s.panel_bg_hex, |v| {
-      Message::SetPanelBg(v)
-    },),
+    bg_picker,
+    text_input(lang.hex_placeholder, &s.panel_bg_hex)
+      .on_input(Message::SetPanelBg)
+      .padding([6, 10])
+      .size(13.5)
+      .style(style::text_input_field)
+      .width(Length::Fill),
   ]
-  .spacing(10)
+  .spacing(8)
   .align_y(Alignment::Center);
 
   let controls = column![

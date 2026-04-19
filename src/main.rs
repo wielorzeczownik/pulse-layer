@@ -18,6 +18,7 @@ fn main() -> iced::Result {
     .title(App::title)
     .theme(App::theme)
     .subscription(App::subscription)
+    .font(iced_aw::ICED_AW_FONT_BYTES)
     .window(iced::window::Settings {
       size: iced::Size::new(WINDOW_WIDTH, WINDOW_HEIGHT),
       resizable: false,

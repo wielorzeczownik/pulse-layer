@@ -1,6 +1,13 @@
 use iced::Color;
 use serde::{Deserialize, Serialize};
 
+pub fn color_to_hex(color: iced::Color) -> String {
+  let r = (color.r * 255.0).round() as u8;
+  let g = (color.g * 255.0).round() as u8;
+  let b = (color.b * 255.0).round() as u8;
+  format!("#{:02X}{:02X}{:02X}", r, g, b)
+}
+
 /// Parses "#RRGGBB" or "RRGGBB" into an iced Color. Falls back to gray on bad input.
 pub fn parse_hex_color(hex: &str) -> Color {
   let s = hex.trim_start_matches('#');
