@@ -4,8 +4,11 @@ Thank you for considering a contribution. This document describes how to get sta
 
 ## Prerequisites
 
-- [Rust](https://rustup.rs/) (stable toolchain, 1.88+)
+- [Rust](https://rustup.rs/) (stable toolchain)
 - [Node.js](https://nodejs.org/) 24+ (for the overlay frontend)
+- [cargo-audit](https://github.com/rustsec/rustsec/tree/main/cargo-audit)
+- [shfmt](https://github.com/mvdan/sh)
+- [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
 - Bluetooth adapter (for testing BLE functionality)
 
 ## Development setup
@@ -18,14 +21,34 @@ cargo run
 
 The overlay frontend is built automatically by `build.rs` during `cargo build`/`cargo run`.
 
+## Project structure
+
+- `src/` – Rust source code
+- `overlay/` – web-based frontend overlay (Vite + TypeScript)
+- `macos/` – macOS app bundle metadata
+- `scripts/bump-version.sh` – determines the next release version from git-cliff output and bumps `Cargo.toml`
+
 ## Before submitting a PR
 
-Make sure these pass locally:
+Run all checks locally before opening a pull request.
+
+### With tools installed locally
 
 ```bash
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo check --all-targets --locked
+cargo audit
+shfmt --diff scripts/ run_macos.sh
+markdownlint-cli2 "**/*.md"
+```
+
+### With Docker (no local installs required)
+
+```bash
+docker run --rm -v "$(pwd):/src" -w /src mvdan/shfmt --diff scripts/ run_macos.sh
+
+docker run --rm -v "$(pwd):/workdir" davidanson/markdownlint-cli2 "**/*.md"
 ```
 
 If you changed anything in `overlay/`:
@@ -33,10 +56,13 @@ If you changed anything in `overlay/`:
 ```bash
 cd overlay
 npm run format:check
+npm run typecheck
 npm run lint
 npm run lint:css
 npm run build
 ```
+
+The CI runs all of the above plus an `npm audit` on the overlay.
 
 ## Commit style
 
@@ -44,15 +70,15 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/). 
 
 Common prefixes:
 
-| Prefix | When to use |
-|--------|-------------|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `chore:` | Maintenance, dependency updates |
+| Prefix      | When to use                         |
+| ----------- | ----------------------------------- |
+| `feat:`     | New feature                         |
+| `fix:`      | Bug fix                             |
+| `chore:`    | Maintenance, dependency updates     |
 | `refactor:` | Code change without behavior change |
-| `docs:` | Documentation only |
-| `style:` | Formatting, no logic change |
-| `ci:` | CI/CD changes |
+| `docs:`     | Documentation only                  |
+| `style:`    | Formatting, no logic change         |
+| `ci:`       | CI/CD changes                       |
 
 Breaking changes must include `BREAKING CHANGE:` in the commit footer.
 
@@ -60,11 +86,12 @@ Breaking changes must include `BREAKING CHANGE:` in the commit footer.
 
 - Keep PRs focused on a single concern.
 - Reference any related issue in the PR description.
-- The CI `cargo-check` workflow must pass.
+- All CI checks must pass: Rust linting, shell linting, Markdown linting, and overlay validation.
 
 ## Reporting bugs
 
 Open an [issue](https://github.com/wielorzeczownik/pulse-layer/issues) and include:
+
 - What you did
 - What you expected
 - What actually happened
