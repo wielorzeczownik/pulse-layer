@@ -32,7 +32,7 @@ futures = "0.3.32"
 
 # GUI overlay
 iced = { version = "0.14.0", features = ["tokio", "wgpu"] }
-iced_aw = { version = "0.13.1", features = ["full"] }
+iced_aw = { version = "0.14.0", features = ["full"] }
 
 # Serialization
 serde = { version = "1.0.228", features = ["derive"] }
