@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import { viteSingleFile } from "vite-plugin-singlefile";
-import { createHtmlPlugin } from "vite-plugin-html";
-import autoprefixer from "autoprefixer";
+import { defineConfig } from 'vite';
+import { viteSingleFile } from 'vite-plugin-singlefile';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   plugins: [
@@ -16,8 +16,8 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist",
+    outDir: 'dist',
     emptyOutDir: true,
-    target: "es2015",
+    target: 'es2015',
   },
 });
