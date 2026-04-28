@@ -34,14 +34,16 @@ Najnowsze wydanie: [GitHub Releases](https://github.com/wielorzeczownik/pulse-la
 Pobierz archiwum dla swojej platformy:
 
 **Linux:**
+
 - [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
 
-
 **macOS:**
+
 - [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS na Intel
 - [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) – macOS na Apple Silicon (M1/M2/M3/M4)
 
 **Windows:**
+
 - [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
 - [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
 - [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
@@ -106,9 +108,11 @@ Nakładka działa jako lokalna strona przeglądarki serwowana przez PulseLayer. 
 1. **Uruchom PulseLayer** i połącz się z pierścieniem – serwer startuje na porcie `9000`.
 2. W OBS kliknij **+** w panelu Źródła → **Przeglądarka**.
 3. Ustaw URL na:
-   ```
+
+   ```text
    http://localhost:9000
    ```
+
 4. Ustaw **Szerokość** na `400` i **Wysokość** na `300` (możesz dowolnie zmieniać rozmiar i przycinać w OBS).
 5. Zaznacz **Odśwież przeglądarkę gdy scena staje się aktywna**, jeśli chcesz automatycznego ponownego połączenia.
 6. Kliknij **OK** – widget pojawi się na scenie. Użyj **Edytuj transformację**, żeby umieścić go gdzie chcesz.

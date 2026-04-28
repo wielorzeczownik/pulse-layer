@@ -34,14 +34,16 @@ Latest release: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer
 Download the latest release asset for your platform:
 
 **Linux:**
+
 - [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
 
-
 **macOS:**
+
 - [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS on Intel
 - [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) – macOS on Apple Silicon (M1/M2/M3/M4)
 
 **Windows:**
+
 - [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
 - [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
 - [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
@@ -106,9 +108,11 @@ The overlay runs as a local browser page served by PulseLayer. No external hosti
 1. **Start PulseLayer** and connect to your ring – the server starts on port `9000`.
 2. In OBS, click **+** in the Sources panel → **Browser**.
 3. Set the URL to:
-   ```
+
+   ```text
    http://localhost:9000
    ```
+
 4. Set **Width** to `400` and **Height** to `300` (you can resize/crop freely in OBS).
 5. Check **Refresh browser when scene becomes active** if you want it to reconnect automatically.
 6. Click **OK** and the widget shows up. Use **Edit Transform** to place it where you want.
