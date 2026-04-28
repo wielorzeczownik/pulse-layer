@@ -9,9 +9,12 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
+    "typecheck": "tsc --noEmit",
     "fix": "eslint --fix src && prettier --write src"
   },
   "devDependencies": {
+    "@types/ejs": "3.1.5",
+    "@types/html-minifier-terser": "7.0.2",
     "@types/node": "25.6.0",
     "autoprefixer": "10.5.0",
     "eslint": "10.2.1",
