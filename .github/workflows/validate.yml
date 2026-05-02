@@ -3,14 +3,15 @@ name: Validate
 on:
   pull_request:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   cargo-check:
     name: Cargo check
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -39,6 +40,8 @@ jobs:
     name: Clippy
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -69,6 +72,8 @@ jobs:
     name: rustfmt
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -87,6 +92,8 @@ jobs:
     name: Cargo audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -101,10 +108,12 @@ jobs:
       - name: Cargo audit
         run: cargo audit
 
-  overlay-validate:
-    name: Overlay
+  overlay-lint:
+    name: Overlay / Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     defaults:
       run:
         working-directory: overlay
@@ -133,11 +142,86 @@ jobs:
       - name: Lint CSS
         run: npm run lint:css
 
+  overlay-typecheck:
+    name: Overlay / Typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: overlay/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Typecheck
         run: npm run typecheck
 
+  overlay-build:
+    name: Overlay / Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: overlay/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build
         run: npm run build
+
+  overlay-audit:
+    name: Overlay / Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: overlay/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Audit
         run: npm audit
@@ -146,6 +230,8 @@ jobs:
     name: shfmt
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -162,6 +248,8 @@ jobs:
     name: markdownlint
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
