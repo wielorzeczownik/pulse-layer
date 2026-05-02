@@ -79,7 +79,7 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/). 
 
 Breaking changes must include `BREAKING CHANGE:` in the commit footer.
 
-Keep commits focused on a single concern. If a change touches both logic and tests, a single commit is fine — if it touches unrelated areas, split it.
+Keep commits focused on a single concern. If a change touches both logic and tests, a single commit is fine – if it touches unrelated areas, split it.
 
 ## Pull requests
 
