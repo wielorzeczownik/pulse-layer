@@ -20,7 +20,7 @@
 - [ ] `cargo audit` passes — if `Cargo.lock` changed
 - [ ] Shell scripts formatted (`shfmt --diff scripts/ run_macos.sh`) — if any `.sh` changed
 - [ ] Markdown lints cleanly — if any `.md` changed
-- [ ] Relevant documentation updated (README, comments)
+- [ ] Relevant documentation updated
 
 **If `overlay/` was changed:**
 
