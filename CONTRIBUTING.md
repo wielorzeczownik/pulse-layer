@@ -1,15 +1,21 @@
 # Contributing to PulseLayer
 
-Thank you for considering a contribution. This document describes how to get started.
+Thank you for considering a contribution. This document covers everything you need to get started.
 
-## Prerequisites
+## Overview
 
-- [Rust](https://rustup.rs/) (stable toolchain)
-- [Node.js](https://nodejs.org/) 24+ (for the overlay frontend)
-- [cargo-audit](https://github.com/rustsec/rustsec/tree/main/cargo-audit)
-- [shfmt](https://github.com/mvdan/sh)
-- [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
-- Bluetooth adapter (for testing BLE functionality)
+A macOS application that reads data from BLE smart rings and displays it in an on-screen overlay.
+
+## Project structure
+
+```text
+.
+├── src/                     Rust source code
+├── overlay/                 on-screen overlay frontend (Vite + TypeScript)
+├── macos/                   macOS app bundle metadata
+└── scripts/
+    └── bump-version.sh      determines the next release version and bumps Cargo.toml
+```
 
 ## Development setup
 
@@ -19,27 +25,33 @@ cd pulse-layer
 cargo run
 ```
 
-The overlay frontend is built automatically by `build.rs` during `cargo build`/`cargo run`.
+The `overlay/` frontend is built automatically by `build.rs` during `cargo build`/`cargo run`.
 
-## Project structure
-
-- `src/` – Rust source code
-- `overlay/` – web-based frontend overlay (Vite + TypeScript)
-- `macos/` – macOS app bundle metadata
-- `scripts/bump-version.sh` – determines the next release version from git-cliff output and bumps `Cargo.toml`
-
-## Before submitting a PR
-
-Run all checks locally before opening a pull request.
+## Running checks locally
 
 ### With tools installed locally
 
 ```bash
+# Rust
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo check --all-targets --locked
 cargo audit
+
+# Overlay
+cd overlay
+npm run format:check
+npm run lint
+npm run lint:css
+npm run typecheck
+npm run build
+npm audit
+cd ..
+
+# Shell
 shfmt --diff scripts/ run_macos.sh
+
+# Markdown
 markdownlint-cli2 "**/*.md"
 ```
 
@@ -51,28 +63,13 @@ docker run --rm -v "$(pwd):/src" -w /src mvdan/shfmt --diff scripts/ run_macos.s
 docker run --rm -v "$(pwd):/workdir" davidanson/markdownlint-cli2 "**/*.md"
 ```
 
-If you changed anything in `overlay/`:
-
-```bash
-cd overlay
-npm run format:check
-npm run typecheck
-npm run lint
-npm run lint:css
-npm run build
-```
-
-The CI runs all of the above plus an `npm audit` on the overlay.
-
 ## Commit style
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/). Commit messages drive automatic changelog generation and version bumping.
 
-Common prefixes:
-
 | Prefix      | When to use                         |
 | ----------- | ----------------------------------- |
-| `feat:`     | New feature                         |
+| `feat:`     | New feature or behavior             |
 | `fix:`      | Bug fix                             |
 | `chore:`    | Maintenance, dependency updates     |
 | `refactor:` | Code change without behavior change |
@@ -82,11 +79,13 @@ Common prefixes:
 
 Breaking changes must include `BREAKING CHANGE:` in the commit footer.
 
+Keep commits focused on a single concern. If a change touches both logic and tests, a single commit is fine — if it touches unrelated areas, split it.
+
 ## Pull requests
 
 - Keep PRs focused on a single concern.
 - Reference any related issue in the PR description.
-- All CI checks must pass: Rust linting, shell linting, Markdown linting, and overlay validation.
+- All CI checks must pass before merging.
 
 ## Reporting bugs
 
@@ -95,11 +94,9 @@ Open an [issue](https://github.com/wielorzeczownik/pulse-layer/issues) and inclu
 - What you did
 - What you expected
 - What actually happened
-- Relevant logs or error messages
-- Your platform and Bluetooth adapter model
-- Smart ring model (if relevant)
+- Your environment (OS, Bluetooth adapter model, smart ring model)
 
-> For security issues, please read [SECURITY.md](SECURITY.md) before opening a public issue.
+> For security issues, read [SECURITY.md](SECURITY.md) before opening a public issue.
 
 ## License
 
