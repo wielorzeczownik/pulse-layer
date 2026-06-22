@@ -47,8 +47,7 @@ const colors: Record<string, string> = {
   alarm: '#D94545',
 };
 
-let currentBpm: number | undefined;
-let activeStyle = 'heart';
+const state = { currentBpm: undefined as number | undefined, activeStyle: 'heart' };
 
 function hexToRgba(hex: string, alpha: number): string {
   const raw = hex.replace('#', '');
@@ -73,7 +72,7 @@ function applyPanelZone(panel: HTMLElement, zone: Zone): void {
   if (panel === ecgElement) ecgPath.style.setProperty('stroke', color);
 }
 
-function applyConfig(cfg: Config): void {
+function applyConfig(config: Config): void {
   const zoneMap: Record<string, string> = {
     calm: '--calm-color',
     normal: '--normal-color',
@@ -82,26 +81,26 @@ function applyConfig(cfg: Config): void {
     alarm: '--alarm-color',
   };
   for (const [key, property] of Object.entries(zoneMap)) {
-    const value = cfg[key as keyof Config];
+    const value = config[key as keyof Config];
     if (value) {
       colors[key] = value;
       root.style.setProperty(property, value);
     }
   }
-  if (cfg.panel_bg) {
-    root.style.setProperty('--panel-bg', hexToRgba(cfg.panel_bg, 0.82));
+  if (config.panel_bg) {
+    root.style.setProperty('--panel-bg', hexToRgba(config.panel_bg, 0.82));
   }
-  if (cfg.style !== undefined) {
-    activeStyle = cfg.style;
-    heartElement.style.display = activeStyle === 'heart' ? 'flex' : 'none';
-    ecgElement.style.display = activeStyle === 'pulse' ? 'flex' : 'none';
+  if (config.style !== undefined) {
+    state.activeStyle = config.style;
+    heartElement.style.display = state.activeStyle === 'heart' ? 'flex' : 'none';
+    ecgElement.style.display = state.activeStyle === 'pulse' ? 'flex' : 'none';
   }
-  if (currentBpm !== undefined) applyBpm(currentBpm);
+  if (state.currentBpm !== undefined) applyBpm(state.currentBpm);
 }
 
 function applyBpm(bpm?: number): void {
-  currentBpm = bpm;
-  if (activeStyle === 'pulse') {
+  state.currentBpm = bpm;
+  if (state.activeStyle === 'pulse') {
     applyEcgBpm(bpm);
   } else {
     applyHeartBpm(bpm);
