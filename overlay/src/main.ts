@@ -47,7 +47,10 @@ const colors: Record<string, string> = {
   alarm: '#D94545',
 };
 
-const state = { currentBpm: undefined as number | undefined, activeStyle: 'heart' };
+const state = {
+  currentBpm: undefined as number | undefined,
+  activeStyle: 'heart',
+};
 
 function hexToRgba(hex: string, alpha: number): string {
   const raw = hex.replace('#', '');
@@ -92,7 +95,8 @@ function applyConfig(config: Config): void {
   }
   if (config.style !== undefined) {
     state.activeStyle = config.style;
-    heartElement.style.display = state.activeStyle === 'heart' ? 'flex' : 'none';
+    heartElement.style.display =
+      state.activeStyle === 'heart' ? 'flex' : 'none';
     ecgElement.style.display = state.activeStyle === 'pulse' ? 'flex' : 'none';
   }
   if (state.currentBpm !== undefined) applyBpm(state.currentBpm);
