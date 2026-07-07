@@ -7,12 +7,6 @@ pub struct DeviceInfo {
   pub rssi: Option<i16>,
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub enum Screen {
-  Scanning,
-  Connected,
-}
-
 #[derive(Debug, Clone)]
 pub enum BleCmd {
   StartScan,

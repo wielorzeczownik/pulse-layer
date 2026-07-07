@@ -3,14 +3,21 @@ use iced::{Alignment, Color, Element, Length};
 
 use super::{helpers, style};
 use crate::App;
-use crate::constants::{
-  BPM_ZONE_CALM_MAX, BPM_ZONE_FAST_MAX, BPM_ZONE_FAST_MIN, BPM_ZONE_HIGH_MAX, BPM_ZONE_HIGH_MIN,
-  BPM_ZONE_NORMAL_MAX, BPM_ZONE_NORMAL_MIN,
-};
 use crate::settings::{ZoneKind, parse_hex_color};
 use crate::types::Message;
 
-// Thresholds are defined in constants.rs — changing them there updates both this logic and the UI labels.
+// BPM zone upper bounds (Alarm = everything above FAST_MAX).
+const BPM_ZONE_CALM_MAX: u8 = 64;
+const BPM_ZONE_NORMAL_MAX: u8 = 80;
+const BPM_ZONE_HIGH_MAX: u8 = 100;
+const BPM_ZONE_FAST_MAX: u8 = 130;
+
+// Lower bounds derived from upper bounds, used in match range patterns to avoid overlapping arms.
+const BPM_ZONE_NORMAL_MIN: u8 = BPM_ZONE_CALM_MAX + 1;
+const BPM_ZONE_HIGH_MIN: u8 = BPM_ZONE_NORMAL_MAX + 1;
+const BPM_ZONE_FAST_MIN: u8 = BPM_ZONE_HIGH_MAX + 1;
+
+// These thresholds double as the match arms below and the UI zone labels; change them here to update both.
 fn current_zone(bpm: u8) -> ZoneKind {
   match bpm {
     0..=BPM_ZONE_CALM_MAX => ZoneKind::Calm,

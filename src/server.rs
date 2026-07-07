@@ -10,8 +10,13 @@ use axum::{
 use futures::{sink::SinkExt, stream::StreamExt};
 use tokio::sync::watch;
 
-use crate::constants::{OVERLAY_HTML, PORT};
 use crate::settings::{AppSettings, OverlayStyle};
+
+// Embedded at compile time by build.rs (Vite build output)
+const OVERLAY_HTML: &str = include_str!("../overlay/dist/index.html");
+
+// Port the overlay server binds to on localhost.
+pub const PORT: u16 = 9000;
 
 #[derive(Clone)]
 struct ServerState {

@@ -8,14 +8,30 @@ use std::time::Duration;
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 use tokio::task::JoinHandle;
 use tokio::time::{Instant, interval_at};
+use uuid::Uuid;
 
 use super::protocol::{build_cmd, parse_cmd};
-use crate::constants::{
-  BPM_RETRIGGER_SECS, CMD_REALTIME_HEART_RATE, CMD_START_HEART_RATE, CMD_STOP_HEART_RATE,
-  KEEP_ALIVE_SECS, MAX_VALID_BPM, MIN_RR_INTERVAL_MS, MIN_VALID_BPM, RR_TO_BPM_MS,
-  SCAN_REFRESH_SECS, UUID_READ, UUID_WRITE,
-};
 use crate::types::{BleCmd, BleEvent, DeviceInfo};
+
+// Nordic UART Service
+const UUID_WRITE: Uuid = Uuid::from_u128(0x6e40_0002_b5a3_f393_e0a9_e50e_24dc_ca9e);
+const UUID_READ: Uuid = Uuid::from_u128(0x6e40_0003_b5a3_f393_e0a9_e50e_24dc_ca9e);
+
+const CMD_START_HEART_RATE: u8 = 0x69;
+const CMD_STOP_HEART_RATE: u8 = 0x6A;
+const CMD_REALTIME_HEART_RATE: u8 = 0x1E;
+
+const SCAN_REFRESH_SECS: u64 = 3;
+const KEEP_ALIVE_SECS: u64 = 60; // some models stop streaming without a periodic re-trigger
+const BPM_RETRIGGER_SECS: u64 = 5; // re-send START if no valid BPM received for this long
+
+// Ring reports RR interval in ms; BPM = 60000 / rr_ms
+const RR_TO_BPM_MS: u32 = 60_000;
+const MIN_RR_INTERVAL_MS: u32 = 300; // below this → BPM > 200, discard
+
+// Ring sends 0xEE when it loses skin contact — filter it out along with other non-human values
+const MIN_VALID_BPM: u8 = 30;
+const MAX_VALID_BPM: u8 = 200;
 
 pub async fn ble_worker(mut cmd_rx: UnboundedReceiver<BleCmd>, evt_tx: UnboundedSender<BleEvent>) {
   let Some(adapter) = init_adapter(&evt_tx).await else {

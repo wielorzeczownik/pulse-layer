@@ -8,13 +8,19 @@ use iced::{Element, Subscription, Task};
 
 use crate::ble;
 use crate::config;
-use crate::constants::PORT;
 use crate::i18n;
 use crate::i18n::Strings;
 use crate::server;
+use crate::server::PORT;
 use crate::settings::AppSettings;
-use crate::types::{BleCmd, BleEvent, DeviceInfo, Message, Screen};
+use crate::types::{BleCmd, BleEvent, DeviceInfo, Message};
 use crate::ui;
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Screen {
+  Scanning,
+  Connected,
+}
 
 pub struct App {
   cmd_tx: UnboundedSender<BleCmd>,

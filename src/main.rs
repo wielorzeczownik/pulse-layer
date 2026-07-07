@@ -3,7 +3,6 @@
 mod app;
 mod ble;
 mod config;
-mod constants;
 mod i18n;
 mod server;
 mod settings;
@@ -11,7 +10,9 @@ mod types;
 mod ui;
 
 use crate::app::App;
-use constants::{WINDOW_HEIGHT, WINDOW_WIDTH};
+
+const WINDOW_WIDTH: f32 = 440.0;
+const WINDOW_HEIGHT: f32 = 480.0;
 
 fn main() -> iced::Result {
   iced::application(App::new, App::update, App::view)

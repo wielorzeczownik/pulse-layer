@@ -7,9 +7,10 @@ use std::hash::{Hash, Hasher};
 use std::sync::{Arc, Mutex};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
-use crate::constants::BLE_CHANNEL_BUFFER;
 use crate::types::{BleCmd, BleEvent, Message};
 use worker::ble_worker;
+
+const BLE_CHANNEL_BUFFER: usize = 100;
 
 struct BleData {
   cmd_rx: Arc<Mutex<Option<UnboundedReceiver<BleCmd>>>>,

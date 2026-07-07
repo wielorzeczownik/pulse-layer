@@ -1,4 +1,5 @@
-use crate::constants::PACKET_SIZE;
+// Packet format: [cmd (1 B)][payload (14 B, zero-padded)][checksum (1 B)]
+const PACKET_SIZE: usize = 16;
 
 // Packet layout: [cmd (1 B)][payload up to 14 B, zero-padded][checksum (1 B)]
 // Checksum = low byte of the sum of bytes 0..14.
