@@ -16,7 +16,7 @@ use constants::{WINDOW_HEIGHT, WINDOW_WIDTH};
 fn main() -> iced::Result {
   iced::application(App::new, App::update, App::view)
     .title(App::title)
-    .theme(App::theme)
+    .theme(|_state: &App| iced::Theme::Dark)
     .subscription(App::subscription)
     .font(iced_aw::ICED_AW_FONT_BYTES)
     .window(iced::window::Settings {

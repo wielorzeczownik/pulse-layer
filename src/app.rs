@@ -4,7 +4,7 @@ use tokio::sync::{
   watch,
 };
 
-use iced::{Element, Subscription, Task, Theme};
+use iced::{Element, Subscription, Task};
 
 use crate::ble;
 use crate::config;
@@ -81,9 +81,6 @@ impl App {
 
   pub fn title(&self) -> String {
     self.lang.app_title.to_string()
-  }
-  pub fn theme(&self) -> Theme {
-    Theme::Dark
   }
 
   pub fn subscription(&self) -> Subscription<Message> {
@@ -182,8 +179,8 @@ impl App {
         BleEvent::Error(err) => {
           self.status = format!("{}: {err}", lang.status_error);
         }
-        BleEvent::Status(s) => {
-          self.status = s;
+        BleEvent::Status(status) => {
+          self.status = status;
         }
       },
     }

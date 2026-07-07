@@ -14,16 +14,15 @@ type ZoneDef = (
 );
 
 const ZONES: &[ZoneDef] = &[
-  (ZoneKind::Calm, |l| l.zone_calm, "0-64"),
-  (ZoneKind::Normal, |l| l.zone_normal, "65-80"),
-  (ZoneKind::High, |l| l.zone_high, "81-100"),
-  (ZoneKind::Fast, |l| l.zone_fast, "101-130"),
-  (ZoneKind::Alarm, |l| l.zone_alarm, "131+"),
+  (ZoneKind::Calm, |lang| lang.zone_calm, "0-64"),
+  (ZoneKind::Normal, |lang| lang.zone_normal, "65-80"),
+  (ZoneKind::High, |lang| lang.zone_high, "81-100"),
+  (ZoneKind::Fast, |lang| lang.zone_fast, "101-130"),
+  (ZoneKind::Alarm, |lang| lang.zone_alarm, "131+"),
 ];
 
 pub fn settings_view(app: &App) -> Element<'_, Message> {
   let lang = app.lang;
-  let s = &app.settings;
 
   let header = row![
     text(lang.settings_title).size(18.0).color(Color::WHITE),
@@ -35,10 +34,52 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
   ]
   .align_y(Alignment::Center);
 
+  let controls = column![
+    helpers::section_label(lang.label_style),
+    Space::new().height(8.0),
+    style_toggle(app),
+    Space::new().height(16.0),
+    helpers::section_label(lang.label_bg),
+    Space::new().height(8.0),
+    background_row(app),
+    Space::new().height(16.0),
+    helpers::section_label(lang.label_indicator_color),
+    Space::new().height(8.0),
+    zone_inputs(app),
+  ]
+  .spacing(0)
+  .width(Length::Fill);
+
+  let preview_col = column![
+    helpers::section_label(lang.label_preview),
+    Space::new().height(6.0),
+    preview_panel(app),
+  ]
+  .spacing(0);
+
+  let content = column![
+    header,
+    Space::new().height(16.0),
+    row![controls, Space::new().width(16.0), preview_col],
+  ]
+  .padding(18)
+  .spacing(0);
+
+  container(content)
+    .width(Length::Fill)
+    .height(Length::Fill)
+    .into()
+}
+
+// One editable row per BPM zone: colored dot (opens a picker) + hex text field.
+fn zone_inputs(app: &App) -> Element<'_, Message> {
+  let lang = app.lang;
+  let settings = &app.settings;
+
   let mut zone_inputs = column![].spacing(10);
   for &(zone, get_label, bpm_range) in ZONES {
     let label_str = format!("{} ({})", get_label(lang), bpm_range);
-    let hex = s.zone_hex(zone);
+    let hex = settings.zone_hex(zone);
     let color = parse_hex_color(hex);
     let show = app.color_picker_zone == Some(zone);
 
@@ -70,13 +111,17 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
       )
       .on_press(Message::OpenColorPicker(zone));
 
-    let picker = ColorPicker::new(show, color, dot_btn, Message::CloseColorPicker, move |c| {
-      Message::SetZoneHex(zone, color_to_hex(c))
-    })
+    let picker = ColorPicker::new(
+      show,
+      color,
+      dot_btn,
+      Message::CloseColorPicker,
+      move |picked| Message::SetZoneHex(zone, color_to_hex(picked)),
+    )
     .style(style::color_picker);
 
     let hex_input = text_input(lang.hex_placeholder, hex)
-      .on_input(move |v| Message::SetZoneHex(zone, v))
+      .on_input(move |value| Message::SetZoneHex(zone, value))
       .padding([6, 10])
       .size(13.5)
       .style(style::text_input_field)
@@ -100,9 +145,17 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
     zone_inputs = zone_inputs.push(zone_row);
   }
 
+  zone_inputs.into()
+}
+
+// Live preview card: a big heart/number plus the per-zone legend below it.
+fn preview_panel(app: &App) -> Element<'_, Message> {
+  let lang = app.lang;
+  let settings = &app.settings;
+
   let mut preview_zones = column![].spacing(3).align_x(Alignment::Center);
   for &(zone, get_label, _) in ZONES {
-    let col = parse_hex_color(s.zone_hex(zone));
+    let col = parse_hex_color(settings.zone_hex(zone));
     let row = row![
       text("♥").size(13.0).color(col),
       text(get_label(lang)).size(8.0).color(col),
@@ -112,8 +165,8 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
     preview_zones = preview_zones.push(row);
   }
 
-  let preview_big_col = parse_hex_color(s.zone_hex(ZoneKind::Normal));
-  let preview = container(
+  let preview_big_col = parse_hex_color(settings.zone_hex(ZoneKind::Normal));
+  container(
     column![
       row![
         text("♥").size(44.0).color(preview_big_col),
@@ -135,10 +188,15 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
   )
   .style(style::card)
   .padding([16, 22])
-  .align_x(Alignment::Center);
+  .align_x(Alignment::Center)
+  .into()
+}
 
-  let is_heart = s.overlay_style == OverlayStyle::Heart;
-  let style_toggle = row![
+// Heart / Pulse overlay style switch.
+fn style_toggle(app: &App) -> Element<'_, Message> {
+  let lang = app.lang;
+  let is_heart = app.settings.overlay_style == OverlayStyle::Heart;
+  row![
     button(text(format!("♥  {}", lang.style_heart)).size(12.5))
       .style(if is_heart {
         style::btn_primary
@@ -156,9 +214,16 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
       .on_press(Message::SetOverlayStyle(OverlayStyle::Pulse))
       .padding([7, 14]),
   ]
-  .spacing(8);
+  .spacing(8)
+  .into()
+}
 
-  let bg_color = parse_hex_color(&s.panel_bg_hex);
+// Panel background color: colored dot (opens a picker) + hex text field.
+fn background_row(app: &App) -> Element<'_, Message> {
+  let lang = app.lang;
+  let settings = &app.settings;
+
+  let bg_color = parse_hex_color(&settings.panel_bg_hex);
   let bg_dot = button(text(""))
     .width(28.0)
     .height(28.0)
@@ -192,11 +257,11 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
     bg_color,
     bg_dot,
     Message::CloseColorPicker,
-    |c| Message::SetPanelBg(color_to_hex(c)),
+    |picked| Message::SetPanelBg(color_to_hex(picked)),
   )
   .style(style::color_picker);
 
-  let panel_bg_row = row![
+  row![
     text(lang.label_bg)
       .size(12.0)
       .color(Color {
@@ -207,7 +272,7 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
       })
       .width(Length::Fixed(110.0)),
     bg_picker,
-    text_input(lang.hex_placeholder, &s.panel_bg_hex)
+    text_input(lang.hex_placeholder, &settings.panel_bg_hex)
       .on_input(Message::SetPanelBg)
       .padding([6, 10])
       .size(13.5)
@@ -215,41 +280,6 @@ pub fn settings_view(app: &App) -> Element<'_, Message> {
       .width(Length::Fill),
   ]
   .spacing(8)
-  .align_y(Alignment::Center);
-
-  let controls = column![
-    helpers::section_label(lang.label_style),
-    Space::new().height(8.0),
-    style_toggle,
-    Space::new().height(16.0),
-    helpers::section_label(lang.label_bg),
-    Space::new().height(8.0),
-    panel_bg_row,
-    Space::new().height(16.0),
-    helpers::section_label(lang.label_indicator_color),
-    Space::new().height(8.0),
-    zone_inputs,
-  ]
-  .spacing(0)
-  .width(Length::Fill);
-
-  let preview_col = column![
-    helpers::section_label(lang.label_preview),
-    Space::new().height(6.0),
-    preview,
-  ]
-  .spacing(0);
-
-  let content = column![
-    header,
-    Space::new().height(16.0),
-    row![controls, Space::new().width(16.0), preview_col],
-  ]
-  .padding(18)
-  .spacing(0);
-
-  container(content)
-    .width(Length::Fill)
-    .height(Length::Fill)
-    .into()
+  .align_y(Alignment::Center)
+  .into()
 }

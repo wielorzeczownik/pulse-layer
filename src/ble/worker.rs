@@ -18,9 +18,8 @@ use crate::constants::{
 use crate::types::{BleCmd, BleEvent, DeviceInfo};
 
 pub async fn ble_worker(mut cmd_rx: UnboundedReceiver<BleCmd>, evt_tx: UnboundedSender<BleEvent>) {
-  let adapter = match init_adapter(&evt_tx).await {
-    Some(a) => a,
-    None => return,
+  let Some(adapter) = init_adapter(&evt_tx).await else {
+    return;
   };
 
   let mut scanning = false;
@@ -36,12 +35,12 @@ pub async fn ble_worker(mut cmd_rx: UnboundedReceiver<BleCmd>, evt_tx: Unbounded
             match cmd {
                 Some(BleCmd::StartScan) => {
                     match adapter.start_scan(ScanFilter::default()).await {
-                        Ok(_) => {
+                        Ok(()) => {
                             scanning = true;
                             let _ = evt_tx.send(BleEvent::Status("Scanning...".to_string()));
                         }
-                        Err(e) => {
-                            let _ = evt_tx.send(BleEvent::Error(format!("Scan failed: {e}")));
+                        Err(err) => {
+                            let _ = evt_tx.send(BleEvent::Error(format!("Scan failed: {err}")));
                         }
                     }
                 }
@@ -58,16 +57,16 @@ pub async fn ble_worker(mut cmd_rx: UnboundedReceiver<BleCmd>, evt_tx: Unbounded
                     let _ = evt_tx.send(BleEvent::Status("Connecting...".to_string()));
 
                     match connect_device(&adapter, &id, &evt_tx).await {
-                        Ok((p, name, wc, nh, rth)) => {
-                            let device_id = p.id().to_string();
-                            write_char     = Some(wc);
-                            connected      = Some(p);
-                            notify_task    = Some(nh);
-                            realtime_task  = Some(rth);
+                        Ok((peripheral, name, write, notify, realtime)) => {
+                            let device_id = peripheral.id().to_string();
+                            write_char     = Some(write);
+                            connected      = Some(peripheral);
+                            notify_task    = Some(notify);
+                            realtime_task  = Some(realtime);
                             let _ = evt_tx.send(BleEvent::Connected(device_id, name));
                         }
-                        Err(e) => {
-                            let _ = evt_tx.send(BleEvent::Error(format!("Connect failed: {e}")));
+                        Err(err) => {
+                            let _ = evt_tx.send(BleEvent::Error(format!("Connect failed: {err}")));
                         }
                     }
                 }
@@ -93,18 +92,20 @@ async fn do_disconnect(
   notify_task: &mut Option<JoinHandle<()>>,
   realtime_task: &mut Option<JoinHandle<()>>,
 ) {
-  if let (Some(p), Some(wc)) = (connected.as_ref(), write_char.as_ref()) {
+  if let (Some(peripheral), Some(write)) = (connected.as_ref(), write_char.as_ref()) {
     let stop = build_cmd(CMD_STOP_HEART_RATE, &[0]);
-    let _ = p.write(wc, &stop, WriteType::WithoutResponse).await;
-    let _ = p.disconnect().await;
+    let _ = peripheral
+      .write(write, &stop, WriteType::WithoutResponse)
+      .await;
+    let _ = peripheral.disconnect().await;
   }
   *connected = None;
   *write_char = None;
-  if let Some(h) = notify_task.take() {
-    h.abort();
+  if let Some(handle) = notify_task.take() {
+    handle.abort();
   }
-  if let Some(h) = realtime_task.take() {
-    h.abort();
+  if let Some(handle) = realtime_task.take() {
+    handle.abort();
   }
 }
 
@@ -124,7 +125,7 @@ async fn connect_device(
 
   let peripheral = peripherals
     .into_iter()
-    .find(|p| p.id().to_string().to_lowercase() == needle)
+    .find(|peripheral| peripheral.id().to_string().to_lowercase() == needle)
     .ok_or_else(|| anyhow!("Device not found: {id}"))?;
 
   let name = peripheral
@@ -132,7 +133,7 @@ async fn connect_device(
     .await
     .ok()
     .flatten()
-    .and_then(|p| p.local_name)
+    .and_then(|props| props.local_name)
     .unwrap_or_else(|| id.to_string());
 
   if !peripheral.is_connected().await? {
@@ -143,12 +144,12 @@ async fn connect_device(
   let chars = peripheral.characteristics();
   let write_char = chars
     .iter()
-    .find(|c| c.uuid == UUID_WRITE)
+    .find(|characteristic| characteristic.uuid == UUID_WRITE)
     .cloned()
     .ok_or_else(|| anyhow!("write characteristic not found"))?;
   let read_char = chars
     .iter()
-    .find(|c| c.uuid == UUID_READ)
+    .find(|characteristic| characteristic.uuid == UUID_READ)
     .cloned()
     .ok_or_else(|| anyhow!("notify characteristic not found"))?;
 
@@ -170,33 +171,42 @@ async fn connect_device(
     )
     .await?;
 
-  // Keep-alive: re-send RealTimeHeartRate(3) every KEEP_ALIVE_SECS so the ring doesn't stop streaming.
-  let p_rt = peripheral.clone();
-  let wc_rt = write_char.clone();
-  let realtime_handle = tokio::spawn(async move {
+  let realtime_handle = spawn_keep_alive(peripheral.clone(), write_char.clone());
+  let notify_handle = spawn_notifier(&peripheral, write_char.clone(), evt_tx.clone()).await?;
+
+  Ok((peripheral, name, write_char, notify_handle, realtime_handle))
+}
+
+// Keep-alive: re-send RealTimeHeartRate(3) every KEEP_ALIVE_SECS so the ring doesn't stop streaming.
+fn spawn_keep_alive(peripheral: Peripheral, write_char: Characteristic) -> JoinHandle<()> {
+  tokio::spawn(async move {
     let mut interval = interval_at(
       Instant::now() + Duration::from_secs(KEEP_ALIVE_SECS),
       Duration::from_secs(KEEP_ALIVE_SECS),
     );
     loop {
       interval.tick().await;
-      let _ = p_rt
+      let _ = peripheral
         .write(
-          &wc_rt,
+          &write_char,
           &build_cmd(CMD_REALTIME_HEART_RATE, &[3]),
           WriteType::WithResponse,
         )
         .await;
     }
-  });
+  })
+}
 
+// Parse incoming notifications into BPM events, re-triggering measurement when no valid BPM
+// arrives for BPM_RETRIGGER_SECS (ring finishes its measurement cycle).
+async fn spawn_notifier(
+  peripheral: &Peripheral,
+  write_char: Characteristic,
+  evt_tx: UnboundedSender<BleEvent>,
+) -> Result<JoinHandle<()>> {
   let mut notifications = peripheral.notifications().await?;
-  let tx = evt_tx.clone();
-  // Clone peripheral + write_char into the notify task so it can re-trigger measurement
-  // when no valid BPM arrives for BPM_RETRIGGER_SECS (ring finishes its measurement cycle).
-  let p_notify = peripheral.clone();
-  let wc_notify = write_char.clone();
-  let notify_handle = tokio::spawn(async move {
+  let peripheral = peripheral.clone();
+  Ok(tokio::spawn(async move {
     let retrigger_after = Duration::from_secs(BPM_RETRIGGER_SECS);
     let mut last_bpm_at = tokio::time::Instant::now();
 
@@ -206,7 +216,7 @@ async fn connect_device(
           let Some(data) = data else {
             // Stream ended naturally (ring out of range / off). When do_disconnect() aborts this task,
             // it's cancelled at the .await above, so the line below never runs — no double Disconnected event.
-            let _ = tx.send(BleEvent::Disconnected);
+            let _ = evt_tx.send(BleEvent::Disconnected);
             break;
           };
           let Some((cmd, payload)) = parse_cmd(&data.value) else {
@@ -214,31 +224,29 @@ async fn connect_device(
           };
           if cmd == CMD_START_HEART_RATE && payload.len() >= 7 && payload[0] == 1 && payload[1] == 0 {
             // payload[5..7]: RR interval in ms (LE u16) — time between heartbeats
-            let rr_ms = u16::from_le_bytes([payload[5], payload[6]]) as u32;
-            if rr_ms >= MIN_RR_INTERVAL_MS {
-              let bpm = (RR_TO_BPM_MS / rr_ms) as u8;
-              if is_valid_hr(bpm) {
-                last_bpm_at = tokio::time::Instant::now();
-                let _ = tx.send(BleEvent::HeartRate(bpm));
-              }
+            let rr_ms = u32::from(u16::from_le_bytes([payload[5], payload[6]]));
+            if rr_ms >= MIN_RR_INTERVAL_MS
+              && let Ok(bpm) = u8::try_from(RR_TO_BPM_MS / rr_ms)
+              && is_valid_hr(bpm)
+            {
+              last_bpm_at = tokio::time::Instant::now();
+              let _ = evt_tx.send(BleEvent::HeartRate(bpm));
             }
           }
         }
-        _ = tokio::time::sleep_until(last_bpm_at + retrigger_after) => {
+        () = tokio::time::sleep_until(last_bpm_at + retrigger_after) => {
           // No valid BPM for BPM_RETRIGGER_SECS — reopen session then trigger a new measurement.
-          let _ = p_notify
-            .write(&wc_notify, &build_cmd(CMD_START_HEART_RATE, &[1, 0]), WriteType::WithoutResponse)
+          let _ = peripheral
+            .write(&write_char, &build_cmd(CMD_START_HEART_RATE, &[1, 0]), WriteType::WithoutResponse)
             .await;
-          let _ = p_notify
-            .write(&wc_notify, &build_cmd(CMD_REALTIME_HEART_RATE, &[3]), WriteType::WithoutResponse)
+          let _ = peripheral
+            .write(&write_char, &build_cmd(CMD_REALTIME_HEART_RATE, &[3]), WriteType::WithoutResponse)
             .await;
           last_bpm_at = tokio::time::Instant::now();
         }
       }
     }
-  });
-
-  Ok((peripheral, name, write_char, notify_handle, realtime_handle))
+  }))
 }
 
 // Ring sends 0xEE (238) when it loses skin contact — discard that and anything out of human range.
@@ -248,33 +256,32 @@ fn is_valid_hr(bpm: u8) -> bool {
 
 async fn init_adapter(evt_tx: &UnboundedSender<BleEvent>) -> Option<btleplug::platform::Adapter> {
   let manager = match Manager::new().await {
-    Ok(m) => m,
-    Err(e) => {
-      let _ = evt_tx.send(BleEvent::Error(format!("Bluetooth manager error: {e}")));
+    Ok(manager) => manager,
+    Err(err) => {
+      let _ = evt_tx.send(BleEvent::Error(format!("Bluetooth manager error: {err}")));
       return None;
     }
   };
 
   let adapters = match manager.adapters().await {
-    Ok(a) => a,
-    Err(e) => {
-      let msg = e.to_string();
+    Ok(adapters) => adapters,
+    Err(error) => {
+      let msg = error.to_string();
       let err = if msg.to_lowercase().contains("permission") {
         "Bluetooth permission denied.".to_string()
       } else {
-        format!("Adapter error: {e}")
+        format!("Adapter error: {error}")
       };
       let _ = evt_tx.send(BleEvent::Error(err));
       return None;
     }
   };
 
-  match adapters.into_iter().next() {
-    Some(a) => Some(a),
-    None => {
-      let _ = evt_tx.send(BleEvent::Error("No Bluetooth adapters found".to_string()));
-      None
-    }
+  if let Some(adapter) = adapters.into_iter().next() {
+    Some(adapter)
+  } else {
+    let _ = evt_tx.send(BleEvent::Error("No Bluetooth adapters found".to_string()));
+    None
   }
 }
 
@@ -284,8 +291,8 @@ pub async fn collect_devices(adapter: &btleplug::platform::Adapter) -> Vec<Devic
     return Vec::new();
   };
   let mut list = Vec::new();
-  for p in peripherals {
-    let Some(props) = p.properties().await.ok().flatten() else {
+  for peripheral in peripherals {
+    let Some(props) = peripheral.properties().await.ok().flatten() else {
       continue;
     };
     let name = props.local_name.unwrap_or_default();
@@ -293,16 +300,16 @@ pub async fn collect_devices(adapter: &btleplug::platform::Adapter) -> Vec<Devic
       continue;
     }
     list.push(DeviceInfo {
-      id: p.id().to_string(),
+      id: peripheral.id().to_string(),
       name,
       rssi: props.rssi,
     });
   }
-  list.sort_by(|a, b| match (b.rssi, a.rssi) {
-    (Some(br), Some(ar)) => br.cmp(&ar),
+  list.sort_by(|left, right| match (right.rssi, left.rssi) {
+    (Some(right_rssi), Some(left_rssi)) => right_rssi.cmp(&left_rssi),
     (Some(_), None) => std::cmp::Ordering::Less,
     (None, Some(_)) => std::cmp::Ordering::Greater,
-    (None, None) => a.name.cmp(&b.name),
+    (None, None) => left.name.cmp(&right.name),
   });
   list
 }

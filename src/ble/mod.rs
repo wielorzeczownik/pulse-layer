@@ -45,12 +45,9 @@ fn build_stream(data: &BleData) -> BoxStream<'static, Message> {
       }
 
       let evt_rx_taken = { evt_rx.lock().unwrap().take() };
-      let mut evt_rx = match evt_rx_taken {
-        Some(rx) => rx,
-        None => {
-          pending::<()>().await;
-          unreachable!();
-        }
+      let Some(mut evt_rx) = evt_rx_taken else {
+        pending::<()>().await;
+        unreachable!();
       };
 
       while let Some(event) = evt_rx.recv().await {
@@ -59,7 +56,7 @@ fn build_stream(data: &BleData) -> BoxStream<'static, Message> {
 
       // Never return
       // iced would treat a finished stream as "subscription ended" and restart it.
-      pending::<()>().await
+      pending::<()>().await;
     },
   )
   .boxed()

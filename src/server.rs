@@ -43,7 +43,7 @@ async fn run(hr_rx: watch::Receiver<Option<u8>>, settings_rx: watch::Receiver<Ap
   let addr = std::net::SocketAddr::from(([127, 0, 0, 1], PORT));
   let listener = tokio::net::TcpListener::bind(addr)
     .await
-    .unwrap_or_else(|_| panic!("bind port {}", PORT));
+    .unwrap_or_else(|_| panic!("bind port {PORT}"));
 
   axum::serve(listener, app).await.expect("server error");
 }
@@ -96,19 +96,19 @@ fn format_hr(hr: Option<u8>) -> String {
   }
 }
 
-fn format_config(s: &AppSettings) -> String {
-  let style = match s.overlay_style {
+fn format_config(settings: &AppSettings) -> String {
+  let style = match settings.overlay_style {
     OverlayStyle::Heart => "heart",
     OverlayStyle::Pulse => "pulse",
   };
   format!(
     r#"{{"config":{{"calm":"{calm}","normal":"{normal}","high":"{high}","fast":"{fast}","alarm":"{alarm}","style":"{style}","panel_bg":"{panel_bg}"}}}}"#,
-    calm = s.zone_calm_hex,
-    normal = s.zone_normal_hex,
-    high = s.zone_high_hex,
-    fast = s.zone_fast_hex,
-    alarm = s.zone_alarm_hex,
+    calm = settings.zone_calm_hex,
+    normal = settings.zone_normal_hex,
+    high = settings.zone_high_hex,
+    fast = settings.zone_fast_hex,
+    alarm = settings.zone_alarm_hex,
     style = style,
-    panel_bg = s.panel_bg_hex,
+    panel_bg = settings.panel_bg_hex,
   )
 }

@@ -3,8 +3,8 @@ use iced::{Background, Border, Color, Element};
 
 use crate::types::Message;
 
-pub fn section_label(s: &str) -> Element<'_, Message> {
-  text(s.to_string())
+pub fn section_label(label: &str) -> Element<'_, Message> {
+  text(label.to_string())
     .size(10.5)
     .color(Color {
       r: 0.48,

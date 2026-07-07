@@ -62,7 +62,10 @@ pub fn scan_view(app: &App) -> Element<'_, Message> {
   }
 
   for device in &app.devices {
-    let rssi_str = device.rssi.map(|r| format!("{r} dBm")).unwrap_or_default();
+    let rssi_str = device
+      .rssi
+      .map(|rssi| format!("{rssi} dBm"))
+      .unwrap_or_default();
 
     let entry = container(
       row![

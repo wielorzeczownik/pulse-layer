@@ -1,8 +1,8 @@
 use uuid::Uuid;
 
 // Nordic UART Service
-pub const UUID_WRITE: Uuid = Uuid::from_u128(0x6e400002b5a3f393e0a9e50e24dcca9e);
-pub const UUID_READ: Uuid = Uuid::from_u128(0x6e400003b5a3f393e0a9e50e24dcca9e);
+pub const UUID_WRITE: Uuid = Uuid::from_u128(0x6e40_0002_b5a3_f393_e0a9_e50e_24dc_ca9e);
+pub const UUID_READ: Uuid = Uuid::from_u128(0x6e40_0003_b5a3_f393_e0a9_e50e_24dc_ca9e);
 
 pub const CMD_START_HEART_RATE: u8 = 0x69;
 pub const CMD_STOP_HEART_RATE: u8 = 0x6A;

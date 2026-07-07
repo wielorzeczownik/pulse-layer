@@ -2,23 +2,21 @@ use iced::Color;
 use serde::{Deserialize, Serialize};
 
 pub fn color_to_hex(color: iced::Color) -> String {
-  let r = (color.r * 255.0).round() as u8;
-  let g = (color.g * 255.0).round() as u8;
-  let b = (color.b * 255.0).round() as u8;
-  format!("#{:02X}{:02X}{:02X}", r, g, b)
+  let [red, green, blue, _alpha] = color.into_rgba8();
+  format!("#{red:02X}{green:02X}{blue:02X}")
 }
 
 /// Parses "#RRGGBB" or "RRGGBB" into an iced Color. Falls back to gray on bad input.
 pub fn parse_hex_color(hex: &str) -> Color {
-  let s = hex.trim_start_matches('#');
-  if s.len() == 6
-    && let (Ok(r), Ok(g), Ok(b)) = (
-      u8::from_str_radix(&s[0..2], 16),
-      u8::from_str_radix(&s[2..4], 16),
-      u8::from_str_radix(&s[4..6], 16),
+  let trimmed = hex.trim_start_matches('#');
+  if trimmed.len() == 6
+    && let (Ok(red), Ok(green), Ok(blue)) = (
+      u8::from_str_radix(&trimmed[0..2], 16),
+      u8::from_str_radix(&trimmed[2..4], 16),
+      u8::from_str_radix(&trimmed[4..6], 16),
     )
   {
-    return Color::from_rgb8(r, g, b);
+    return Color::from_rgb8(red, green, blue);
   }
   Color {
     r: 0.6,

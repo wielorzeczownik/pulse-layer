@@ -36,16 +36,13 @@ pub fn connected_view(app: &App) -> Element<'_, Message> {
   let settings = &app.settings;
   let device_name = app.connected_name.as_deref().unwrap_or(lang.unknown_device);
 
-  let (hr_str, zone_col, badge_label) = match app.heart_rate {
-    Some(bpm) => {
-      let zone = current_zone(bpm);
-      let color = parse_hex_color(settings.zone_hex(zone));
-      (format!("{bpm}"), color, zone_label(zone, lang))
-    }
-    None => {
-      let idle = parse_hex_color(settings.zone_hex(ZoneKind::Calm));
-      ("--".to_string(), idle, "---")
-    }
+  let (hr_str, zone_col, badge_label) = if let Some(bpm) = app.heart_rate {
+    let zone = current_zone(bpm);
+    let color = parse_hex_color(settings.zone_hex(zone));
+    (format!("{bpm}"), color, zone_label(zone, lang))
+  } else {
+    let idle = parse_hex_color(settings.zone_hex(ZoneKind::Calm));
+    ("--".to_string(), idle, "---")
   };
 
   let header = row![
