@@ -14,6 +14,18 @@ A real-time **heart rate OBS overlay** that reads live BPM from a Bluetooth smar
 
 Made for VTubers and streamers who want to show live heart rate on stream with nothing more than a cheap smart ring and OBS. Originally built for **[KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu)**.
 
+## Screenshots
+
+<div align="center">
+<table>
+<tr>
+<td align="center" width="33%"><img src="assets/app-connected.png" alt="Live heart rate in the app"/><br/><sub><b>Live BPM</b> · color-coded zones</sub></td>
+<td align="center" width="33%"><img src="assets/app-settings.png" alt="Appearance settings"/><br/><sub><b>Appearance</b> · style &amp; zone colors</sub></td>
+<td align="center" width="33%"><img src="assets/app-scan.png" alt="Scanning for nearby rings"/><br/><sub><b>Scan &amp; connect</b> · find your ring</sub></td>
+</tr>
+</table>
+</div>
+
 ## Features
 
 - Live BPM with color-coded zones (calm → alarm)
@@ -125,6 +137,15 @@ The overlay reconnects on its own if PulseLayer restarts, so you don't need to t
 ## Overlay styles
 
 Switch between styles in the **Settings** panel inside PulseLayer.
+
+<div align="center">
+<table>
+<tr>
+<td align="center" width="50%"><img src="assets/overlay-heart.png" alt="Heart overlay style on stream"/><br/><sub><b>Heart</b> style</sub></td>
+<td align="center" width="50%"><img src="assets/overlay-ecg.png" alt="ECG overlay style on stream"/><br/><sub><b>ECG</b> style</sub></td>
+</tr>
+</table>
+</div>
 
 **Heart** – a beating heart icon with a large BPM number. Simple and readable.
 
