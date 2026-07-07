@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.13](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.12...v0.2.13) - 2026-07-07
+
+### Build System
+
+- Update dependency @types/node to v26.1.0 ([83d964e](https://github.com/wielorzeczownik/pulse-layer/commit/83d964eaebe97fd7ed5b7e7e8da4806713a018a5))
+- Update dependency eslint-plugin-unicorn to v70 ([4c2bcc2](https://github.com/wielorzeczownik/pulse-layer/commit/4c2bcc2936670f7e096620dd0b3f726ff835230f))
+- Update dependency typescript-eslint to v8.62.1 ([5942c3b](https://github.com/wielorzeczownik/pulse-layer/commit/5942c3b37bfda9daff1e500e21d0e4b38e9db070))
+- Update dependency prettier to v3.9.4 ([a44cae0](https://github.com/wielorzeczownik/pulse-layer/commit/a44cae0937d7cb9a30d47729f1799879dd1b1e00))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.6 ([f9c17fa](https://github.com/wielorzeczownik/pulse-layer/commit/f9c17fa7316e6a376ce00e0a2343bd540c37c2b8))
+
 ## [0.2.12](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.11...v0.2.12) - 2026-07-07
 
 ### Refactoring
