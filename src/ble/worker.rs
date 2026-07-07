@@ -29,9 +29,17 @@ const BPM_RETRIGGER_SECS: u64 = 5; // re-send START if no valid BPM received for
 const RR_TO_BPM_MS: u32 = 60_000;
 const MIN_RR_INTERVAL_MS: u32 = 300; // below this → BPM > 200, discard
 
-// Ring sends 0xEE when it loses skin contact — filter it out along with other non-human values
+// Ring sends 0xEE when it loses skin contact
 const MIN_VALID_BPM: u8 = 30;
 const MAX_VALID_BPM: u8 = 200;
+
+// Command payloads. The ring echoes START_HR_ARGS back at the start of a real-time HR report
+const START_HR_ARGS: [u8; 2] = [1, 0];
+const REALTIME_HR_ARGS: [u8; 1] = [3];
+const STOP_HR_ARGS: [u8; 1] = [0];
+
+// Real-time HR report: RR interval is a little-endian u16 at this payload offset
+const RR_INTERVAL_OFFSET: usize = 5;
 
 pub async fn ble_worker(mut cmd_rx: UnboundedReceiver<BleCmd>, evt_tx: UnboundedSender<BleEvent>) {
   let Some(adapter) = init_adapter(&evt_tx).await else {
@@ -109,7 +117,7 @@ async fn do_disconnect(
   realtime_task: &mut Option<JoinHandle<()>>,
 ) {
   if let (Some(peripheral), Some(write)) = (connected.as_ref(), write_char.as_ref()) {
-    let stop = build_cmd(CMD_STOP_HEART_RATE, &[0]);
+    let stop = build_cmd(CMD_STOP_HEART_RATE, &STOP_HR_ARGS);
     let _ = peripheral
       .write(write, &stop, WriteType::WithoutResponse)
       .await;
@@ -174,7 +182,7 @@ async fn connect_device(
   peripheral
     .write(
       &write_char,
-      &build_cmd(CMD_START_HEART_RATE, &[1, 0]),
+      &build_cmd(CMD_START_HEART_RATE, &START_HR_ARGS),
       WriteType::WithResponse,
     )
     .await?;
@@ -182,7 +190,7 @@ async fn connect_device(
   peripheral
     .write(
       &write_char,
-      &build_cmd(CMD_REALTIME_HEART_RATE, &[3]),
+      &build_cmd(CMD_REALTIME_HEART_RATE, &REALTIME_HR_ARGS),
       WriteType::WithoutResponse,
     )
     .await?;
@@ -205,7 +213,7 @@ fn spawn_keep_alive(peripheral: Peripheral, write_char: Characteristic) -> JoinH
       let _ = peripheral
         .write(
           &write_char,
-          &build_cmd(CMD_REALTIME_HEART_RATE, &[3]),
+          &build_cmd(CMD_REALTIME_HEART_RATE, &REALTIME_HR_ARGS),
           WriteType::WithResponse,
         )
         .await;
@@ -238,9 +246,15 @@ async fn spawn_notifier(
           let Some((cmd, payload)) = parse_cmd(&data.value) else {
             continue;
           };
-          if cmd == CMD_START_HEART_RATE && payload.len() >= 7 && payload[0] == 1 && payload[1] == 0 {
-            // payload[5..7]: RR interval in ms (LE u16) — time between heartbeats
-            let rr_ms = u32::from(u16::from_le_bytes([payload[5], payload[6]]));
+          if cmd == CMD_START_HEART_RATE
+            && payload.len() >= RR_INTERVAL_OFFSET + 2
+            && payload.starts_with(&START_HR_ARGS)
+          {
+            // RR interval in ms (LE u16) — time between heartbeats
+            let rr_ms = u32::from(u16::from_le_bytes([
+              payload[RR_INTERVAL_OFFSET],
+              payload[RR_INTERVAL_OFFSET + 1],
+            ]));
             if rr_ms >= MIN_RR_INTERVAL_MS
               && let Ok(bpm) = u8::try_from(RR_TO_BPM_MS / rr_ms)
               && is_valid_hr(bpm)
@@ -253,10 +267,10 @@ async fn spawn_notifier(
         () = tokio::time::sleep_until(last_bpm_at + retrigger_after) => {
           // No valid BPM for BPM_RETRIGGER_SECS — reopen session then trigger a new measurement.
           let _ = peripheral
-            .write(&write_char, &build_cmd(CMD_START_HEART_RATE, &[1, 0]), WriteType::WithoutResponse)
+            .write(&write_char, &build_cmd(CMD_START_HEART_RATE, &START_HR_ARGS), WriteType::WithoutResponse)
             .await;
           let _ = peripheral
-            .write(&write_char, &build_cmd(CMD_REALTIME_HEART_RATE, &[3]), WriteType::WithoutResponse)
+            .write(&write_char, &build_cmd(CMD_REALTIME_HEART_RATE, &REALTIME_HR_ARGS), WriteType::WithoutResponse)
             .await;
           last_bpm_at = tokio::time::Instant::now();
         }

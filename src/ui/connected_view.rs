@@ -79,12 +79,7 @@ pub fn connected_view(app: &App) -> Element<'_, Message> {
       ]
       .spacing(8)
       .align_y(Alignment::Center),
-      text(lang.bpm).size(11.5).color(Color {
-        r: 0.40,
-        g: 0.40,
-        b: 0.48,
-        a: 1.0
-      }),
+      text(lang.bpm).size(11.5).color(style::TEXT_FAINT),
       Space::new().height(6.0),
       helpers::zone_badge(badge_label, zone_col),
     ]

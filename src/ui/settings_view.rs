@@ -130,12 +130,7 @@ fn zone_inputs(app: &App) -> Element<'_, Message> {
     let zone_row = row![
       text(label_str)
         .size(12.0)
-        .color(Color {
-          r: 0.70,
-          g: 0.70,
-          b: 0.76,
-          a: 1.0
-        })
+        .color(style::TEXT_MUTED)
         .width(Length::Fixed(110.0)),
       picker,
       hex_input,
@@ -174,12 +169,7 @@ fn preview_panel(app: &App) -> Element<'_, Message> {
       ]
       .spacing(8)
       .align_y(Alignment::Center),
-      text("BPM").size(10.5).color(Color {
-        r: 0.40,
-        g: 0.40,
-        b: 0.48,
-        a: 1.0
-      }),
+      text("BPM").size(10.5).color(style::TEXT_FAINT),
       Space::new().height(8.0),
       preview_zones,
     ]
@@ -264,12 +254,7 @@ fn background_row(app: &App) -> Element<'_, Message> {
   row![
     text(lang.label_bg)
       .size(12.0)
-      .color(Color {
-        r: 0.70,
-        g: 0.70,
-        b: 0.76,
-        a: 1.0
-      })
+      .color(style::TEXT_MUTED)
       .width(Length::Fixed(110.0)),
     bg_picker,
     text_input(lang.hex_placeholder, &settings.panel_bg_hex)

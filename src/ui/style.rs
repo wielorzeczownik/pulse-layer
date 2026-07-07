@@ -28,6 +28,25 @@ const TEXT_DIM: Color = Color {
   b: 0.62,
   a: 1.0,
 };
+// Muted / faint label text, shared with the view modules
+pub const TEXT_MUTED: Color = Color {
+  r: 0.70,
+  g: 0.70,
+  b: 0.76,
+  a: 1.0,
+};
+pub const TEXT_FAINT: Color = Color {
+  r: 0.40,
+  g: 0.40,
+  b: 0.48,
+  a: 1.0,
+};
+const PICKER_BORDER: Color = Color {
+  r: 0.22,
+  g: 0.22,
+  b: 0.32,
+  a: 1.0,
+};
 
 pub fn card(_theme: &Theme) -> iced::widget::container::Style {
   iced::widget::container::Style {
@@ -159,20 +178,10 @@ pub fn color_picker(_theme: &Theme, _status: CpStatus) -> CpStyle {
     }),
     border_radius: 12.0,
     border_width: 1.0,
-    border_color: Color {
-      r: 0.22,
-      g: 0.22,
-      b: 0.32,
-      a: 1.0,
-    },
+    border_color: PICKER_BORDER,
     bar_border_radius: 6.0,
     bar_border_width: 1.0,
-    bar_border_color: Color {
-      r: 0.22,
-      g: 0.22,
-      b: 0.32,
-      a: 1.0,
-    },
+    bar_border_color: PICKER_BORDER,
   }
 }
 

@@ -1,6 +1,9 @@
 // Packet format: [cmd (1 B)][payload (14 B, zero-padded)][checksum (1 B)]
 const PACKET_SIZE: usize = 16;
 
+// The ring sets bit 7 of the cmd byte as a response flag; CMD_* constants don't carry it
+const RESPONSE_FLAG: u8 = 0x80;
+
 // Packet layout: [cmd (1 B)][payload up to 14 B, zero-padded][checksum (1 B)]
 // Checksum = low byte of the sum of bytes 0..14.
 pub fn build_cmd(key: u8, payload: &[u8]) -> [u8; PACKET_SIZE] {
@@ -31,6 +34,5 @@ pub fn parse_cmd(data: &[u8]) -> Option<(u8, &[u8])> {
   if !checksum_ok(data) {
     return None;
   }
-  // Mask off bit 7 the ring sets it as a response flag, CMD_* constants don't have it.
-  Some((data[0] & 0x7F, &data[1..PACKET_SIZE - 1]))
+  Some((data[0] & !RESPONSE_FLAG, &data[1..PACKET_SIZE - 1]))
 }
