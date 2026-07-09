@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.15](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.14...v0.2.15) - 2026-07-09
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v71 ([b4adccd](https://github.com/wielorzeczownik/pulse-layer/commit/b4adccd23c3eac35cbe477123025eabba125ad9b))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.7 ([b4d1dfa](https://github.com/wielorzeczownik/pulse-layer/commit/b4d1dfaa271dd11209c95f72111076ff5169a2d8))
+
 ## [0.2.14](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.13...v0.2.14) - 2026-07-07
 
 ### Build System
@@ -30,6 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Colocate constants/types and name magic values ([bbc3d30](https://github.com/wielorzeczownik/pulse-layer/commit/bbc3d304f44c9958594fa5136617a6461d6ae7f8))
 - Colocate constants and types ([4cb569d](https://github.com/wielorzeczownik/pulse-layer/commit/4cb569d336fa0adf3299657c0b9aba7ba9b382f9))
+
+### Documentation
+
+- Add app and overlay screenshots to README ([60413ba](https://github.com/wielorzeczownik/pulse-layer/commit/60413ba0d15c5756f92c8020343446f5926cc05e))
 
 ### Build System
 
