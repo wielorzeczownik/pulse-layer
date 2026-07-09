@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.16](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.15...v0.2.16) - 2026-07-09
+
+### Build System
+
+- Update dependency typescript-eslint to v8.63.0 ([6e27ee9](https://github.com/wielorzeczownik/pulse-layer/commit/6e27ee9ecc62ec6973ad95c3ad7a265095f39805))
+
 ## [0.2.15](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.14...v0.2.15) - 2026-07-09
 
 ### Build System
