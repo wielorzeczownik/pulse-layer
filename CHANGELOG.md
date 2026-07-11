@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.18](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.17...v0.2.18) - 2026-07-11
+
+### Build System
+
+- Update dependency @types/node to v26.1.1 ([fb6b992](https://github.com/wielorzeczownik/pulse-layer/commit/fb6b992be33a492ec41121f4193a20d8d7343fd6))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.8 ([b509835](https://github.com/wielorzeczownik/pulse-layer/commit/b5098355daae664a87cf2227b66fc6bebe6b2d58))
+- Update davidanson/markdownlint-cli2-action action to v24 ([c833005](https://github.com/wielorzeczownik/pulse-layer/commit/c833005177f149fdc85bf3f5362cf0e2216b80ad))
+
 ## [0.2.17](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.16...v0.2.17) - 2026-07-10
 
 ### Performance
