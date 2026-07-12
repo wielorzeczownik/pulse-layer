@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.19](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.18...v0.2.19) - 2026-07-12
+
+### Build System
+
+- Update dependency vite to v8.1.4 ([0a78404](https://github.com/wielorzeczownik/pulse-layer/commit/0a7840416787125d82f0b1b89d9ba33fb649e855))
+
 ## [0.2.18](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.17...v0.2.18) - 2026-07-11
 
 ### Build System
