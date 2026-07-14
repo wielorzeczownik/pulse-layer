@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.21](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.20...v0.2.21) - 2026-07-14
+
+### Build System
+
+- Update dependency @html-eslint/eslint-plugin to v0.64.0 ([343fddf](https://github.com/wielorzeczownik/pulse-layer/commit/343fddf0f677b73c44f2534fdd639f11c1c3e4ac))
+- Update dependency eslint to v10.7.0 ([1de6e0d](https://github.com/wielorzeczownik/pulse-layer/commit/1de6e0ddeafb70005fb0748da681770f59dd0f0b))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.10 ([6cd03fe](https://github.com/wielorzeczownik/pulse-layer/commit/6cd03fe2981d13d1a965d6b8075c05b8b736501f))
+
 ## [0.2.20](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.19...v0.2.20) - 2026-07-13
 
 ### Build System
