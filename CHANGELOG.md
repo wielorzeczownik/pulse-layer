@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.22](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.21...v0.2.22) - 2026-07-16
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.82.11 ([be11eb6](https://github.com/wielorzeczownik/pulse-layer/commit/be11eb65a6534c9b8a7e4f6c468c7ecbe0c3b2ae))
+
+### Dependencies
+
+- Update rust crate uuid to v1.23.5 ([46c92ba](https://github.com/wielorzeczownik/pulse-layer/commit/46c92baaaa74d21a69bfa5f3465c97b90e87a219))
+
 ## [0.2.21](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.20...v0.2.21) - 2026-07-14
 
 ### Build System
