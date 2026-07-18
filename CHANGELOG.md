@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.23](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.22...v0.2.23) - 2026-07-18
+
+### Build System
+
+- Update dependency typescript-eslint to v8.64.0 ([661457c](https://github.com/wielorzeczownik/pulse-layer/commit/661457cea9463da9516887814613c851d4437427))
+- Update dependency autoprefixer to v10.5.3 ([58405dc](https://github.com/wielorzeczownik/pulse-layer/commit/58405dcc4d46e5dad2277609532a0afcd6819f6a))
+- Update dependency eslint-plugin-unicorn to v72 ([f28b7ad](https://github.com/wielorzeczownik/pulse-layer/commit/f28b7ad4dd00ca074cc623fd8750a53b05e56839))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.83.1 ([7de88b0](https://github.com/wielorzeczownik/pulse-layer/commit/7de88b03bffcc76d8ca484dbd910f5cef6c54a0c))
+- Update taiki-e/install-action action to v2.83.0 ([c7d9489](https://github.com/wielorzeczownik/pulse-layer/commit/c7d9489f68c33bf391e0ac9b5aaef12841216651))
+
 ## [0.2.22](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.21...v0.2.22) - 2026-07-16
 
 ### CI/CD
