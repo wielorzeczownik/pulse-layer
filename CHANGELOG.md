@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.25](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.24...v0.2.25) - 2026-07-19
+
+### Dependencies
+
+- Update rust crate uuid to v1.24.0 ([c303521](https://github.com/wielorzeczownik/pulse-layer/commit/c303521c95b9a2b473e60f7d1abdf63106317e88))
+
 ## [0.2.24](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.23...v0.2.24) - 2026-07-19
 
 ### Build System
