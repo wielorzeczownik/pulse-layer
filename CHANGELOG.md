@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.24](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.23...v0.2.24) - 2026-07-19
+
+### Build System
+
+- Update dependency eslint-plugin-sonarjs to v4.2.0 ([1139461](https://github.com/wielorzeczownik/pulse-layer/commit/11394617b6725b028bb2c1f2bf434381237caa92))
+
 ## [0.2.23](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.22...v0.2.23) - 2026-07-18
 
 ### Build System
