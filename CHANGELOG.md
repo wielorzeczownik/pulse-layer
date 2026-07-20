@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.26](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.25...v0.2.26) - 2026-07-20
+
+### Build System
+
+- Update dependency autoprefixer to v10.5.4 ([8df5934](https://github.com/wielorzeczownik/pulse-layer/commit/8df5934107e7aa7308ec2530c502d7c49c69c5f4))
+- Update dependency vite to v8.1.5 ([9dcb08a](https://github.com/wielorzeczownik/pulse-layer/commit/9dcb08a8987db64d8e197d37156208786cf5177c))
+- Update dependency eslint-plugin-simple-import-sort to v14 ([b3b1e62](https://github.com/wielorzeczownik/pulse-layer/commit/b3b1e6254cd696bd30fee771049f4d7feb812c6f))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.83.2 ([6fc5a4d](https://github.com/wielorzeczownik/pulse-layer/commit/6fc5a4d4f29bbe1e15090e3b0c14d5692922e388))
+
+### Dependencies
+
+- Update rust crate tokio to v1.52.4 ([5800892](https://github.com/wielorzeczownik/pulse-layer/commit/5800892522a5b053fe9060d04b4aa6b73a057679))
+
 ## [0.2.25](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.24...v0.2.25) - 2026-07-19
 
 ### Dependencies
