@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.28](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.27...v0.2.28) - 2026-07-21
+
+### Build System
+
+- Resolve audit advisories ([db37d47](https://github.com/wielorzeczownik/pulse-layer/commit/db37d4713e185cf383b272ad1cc86c814b1b2b80))
+
+### CI/CD
+
+- Update actions/setup-node action to v7 ([b30f6ea](https://github.com/wielorzeczownik/pulse-layer/commit/b30f6eaf4cd3731c89ce3bc134bd8349b84d07b1))
+- Update actions/setup-node action to v6.5.0 ([2402cb4](https://github.com/wielorzeczownik/pulse-layer/commit/2402cb400a9f62a0623ab41ba9a38a961ae98514))
+- Update softprops/action-gh-release action to v3.0.2 ([c42d14e](https://github.com/wielorzeczownik/pulse-layer/commit/c42d14e9c0f3dcc68f7c8ddc01734dfce1842ddc))
+
+### Dependencies
+
+- Update rust crate futures to v0.3.33 ([de8d0c9](https://github.com/wielorzeczownik/pulse-layer/commit/de8d0c9ba6c130d187975bd8bf4dd861a209177e))
+
 ## [0.2.27](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.26...v0.2.27) - 2026-07-20
 
 ### Dependencies
