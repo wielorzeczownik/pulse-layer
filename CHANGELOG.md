@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.30](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.29...v0.2.30) - 2026-07-23
+
+### Build System
+
+- Update dependency stylelint to v17.14.1 ([6363939](https://github.com/wielorzeczownik/pulse-layer/commit/6363939b7ae8fa9a6fde1fa287a5c77902438fa9))
+
 ## [0.2.29](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.28...v0.2.29) - 2026-07-22
 
 ### Build System
