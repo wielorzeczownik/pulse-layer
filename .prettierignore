@@ -1,4 +1,10 @@
 .idea/
 .vscode/
 .DS_Store
-src/*.rs
+
+target/
+overlay/node_modules/
+overlay/dist/
+
+# Generated from commit messages by git-cliff; never hand-formatted.
+CHANGELOG.md

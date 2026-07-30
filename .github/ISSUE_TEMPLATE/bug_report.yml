@@ -38,13 +38,13 @@ body:
     id: ring_model
     attributes:
       label: Smart ring model
-      placeholder: "e.g. COLMI R12"
+      placeholder: 'e.g. COLMI R12'
 
   - type: input
     id: version
     attributes:
       label: Version
-      placeholder: "e.g. v0.1.6"
+      placeholder: 'e.g. v0.1.6'
     validations:
       required: true
 
