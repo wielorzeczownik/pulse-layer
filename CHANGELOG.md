@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.34](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.33...v0.2.34) - 2026-07-30
+
+### Dependencies
+
+- Update rust crate tokio to v1.53.1 ([a6078ee](https://github.com/wielorzeczownik/pulse-layer/commit/a6078eed270acded14e377ef2616b3b87e66e601))
+
 ## [0.2.33](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.32...v0.2.33) - 2026-07-30
 
 ### Build System
