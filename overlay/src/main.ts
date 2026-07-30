@@ -1,10 +1,5 @@
-interface Zone {
-  max: number;
-  cls: string;
-  borderA: number;
-  glowA: number;
-  glowPx: number;
-}
+import type { Zone } from './zones';
+import { DEFAULT_COLORS, hexToRgba, zoneForBpm } from './zones';
 
 interface Config {
   calm?: string;
@@ -31,38 +26,12 @@ const ecgPath = document.getElementById(
   'ecg-path'
 ) as unknown as SVGPathElement;
 
-const ZONES: Zone[] = [
-  { max: 64, cls: 'calm', borderA: 0.2, glowA: 0, glowPx: 0 },
-  { max: 80, cls: 'normal', borderA: 0.2, glowA: 0, glowPx: 0 },
-  { max: 100, cls: 'high', borderA: 0.25, glowA: 0, glowPx: 0 },
-  { max: 130, cls: 'fast', borderA: 0.35, glowA: 0.15, glowPx: 22 },
-  { max: 999, cls: 'alarm', borderA: 0.55, glowA: 0.22, glowPx: 38 },
-];
-
-const colors: Record<string, string> = {
-  calm: '#52C27A',
-  normal: '#5B9BD5',
-  high: '#E5B950',
-  fast: '#E07A30',
-  alarm: '#D94545',
-};
+const colors: Record<string, string> = { ...DEFAULT_COLORS };
 
 const state = {
   currentBpm: undefined as number | undefined,
   activeStyle: 'heart',
 };
-
-function hexToRgba(hex: string, alpha: number): string {
-  const raw = hex.replace('#', '');
-  const red = Number.parseInt(raw.slice(0, 2), 16);
-  const green = Number.parseInt(raw.slice(2, 4), 16);
-  const blue = Number.parseInt(raw.slice(4, 6), 16);
-  return `rgba(${red},${green},${blue},${alpha})`;
-}
-
-function zoneForBpm(bpm: number): Zone {
-  return ZONES.find((zone) => bpm <= zone.max) ?? ZONES[ZONES.length - 1];
-}
 
 function applyPanelZone(panel: HTMLElement, zone: Zone): void {
   panel.className = `panel ${zone.cls}`;

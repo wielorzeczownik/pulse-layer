@@ -161,6 +161,35 @@ Both change color based on BPM zone. All colors are customizable.
 | Fast   | 101 – 130         | Orange        |
 | Alarm  | 131+              | Red           |
 
+## Configuration
+
+PulseLayer has no environment variables and no command-line flags. Everything is
+set in the **Settings** panel and saved to `pulselayer/settings.json` in your
+platform's config directory:
+
+| Platform | Path                                                     |
+| -------- | -------------------------------------------------------- |
+| macOS    | `~/Library/Application Support/pulselayer/settings.json` |
+| Linux    | `~/.config/pulselayer/settings.json`                     |
+| Windows  | `%APPDATA%\pulselayer\settings.json`                     |
+
+| Key               | Required | Default   | Meaning                                              |
+| ----------------- | -------- | --------- | ---------------------------------------------------- |
+| `zone_calm_hex`   | yes      | `#52C27A` | Colour for the calm zone (0 – 64 BPM)                |
+| `zone_normal_hex` | yes      | `#5B9BD5` | Colour for the normal zone (65 – 80 BPM)             |
+| `zone_high_hex`   | yes      | `#E5B950` | Colour for the high zone (81 – 100 BPM)              |
+| `zone_fast_hex`   | yes      | `#E07A30` | Colour for the fast zone (101 – 130 BPM)             |
+| `zone_alarm_hex`  | yes      | `#D94545` | Colour for the alarm zone (131+ BPM)                 |
+| `panel_bg_hex`    | yes      | `#0A0A12` | Overlay panel background, rendered at 82% opacity    |
+| `overlay_style`   | yes      | `"Heart"` | Overlay style: `"Heart"` or `"Pulse"` (the ECG line) |
+
+Every key is required in the sense that a file missing any of them, or holding
+invalid JSON, is discarded whole and every setting returns to its default. A hex
+value that is not six hexadecimal digits renders as grey rather than failing.
+
+The overlay server always listens on `127.0.0.1:9000`; the port is not
+configurable.
+
 ## Building from source
 
 Requirements: [Rust](https://rustup.rs) stable, [Node.js](https://nodejs.org) 24+.

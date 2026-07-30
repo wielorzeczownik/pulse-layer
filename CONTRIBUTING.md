@@ -10,11 +10,16 @@ A macOS application that reads data from BLE smart rings and displays it in an o
 
 ```text
 .
-├── src/                     Rust source code
-├── overlay/                 on-screen overlay frontend (Vite + TypeScript)
-├── macos/                   macOS app bundle metadata
+├── src/                        Rust source code, with tests beside the code they cover
+├── overlay/
+│   ├── src/                    overlay frontend (Vite + TypeScript)
+│   └── tests/                  vitest suites, mirroring overlay/src
+├── macos/                      macOS app bundle metadata
 └── scripts/
-    └── bump-version.sh      determines the next release version and bumps Cargo.toml
+    ├── bump-version.sh         determines the next release version and bumps Cargo.toml
+    ├── install-linux-deps.sh   apt packages the Linux build needs
+    ├── package-macos.sh        assembles and signs PulseLayer.app for a release
+    └── security-audit.sh       runs both audits, attempts a fix, reports what is left
 ```
 
 ## Development setup
@@ -29,36 +34,53 @@ The `overlay/` frontend is built automatically by `build.rs` during `cargo build
 
 ## Running checks locally
 
-### With tools installed locally
+CI runs exactly these commands. Anything that passes here passes there.
+
+### With tools installed
 
 ```bash
 # Rust
 cargo fmt --check
-cargo clippy --all-targets -- -D warnings
-cargo check --all-targets --locked
-cargo audit
+cargo clippy --all-targets --locked -- -D warnings
+cargo test --locked
+cargo audit                          # reported, never blocking
 
 # Overlay
 cd overlay
-npm run format:check
-npm run lint
-npm run lint:css
-npm run typecheck
+npm ci
+npm run lint                         # eslint, warnings are errors
+npm run lint:css                     # stylelint
+npm run typecheck                    # tsc --noEmit
+npm test                             # vitest run
 npm run build
-npm audit
+npm audit                            # reported, never blocking
 cd ..
+
+# Formatting (whole repo, honours .prettierignore)
+npx prettier@3.9.6 --check .
 
 # Shell
 shfmt --diff scripts/ run_macos.sh
+shellcheck scripts/*.sh run_macos.sh
 
-# Markdown
+# Workflows
+actionlint
+
+# Markdown (exclusions come from .markdownlint-cli2.yaml)
 markdownlint-cli2 "**/*.md"
 ```
+
+`npm run fix` inside `overlay/` applies every autofixable finding from eslint,
+stylelint and prettier in one go.
 
 ### With Docker (no local installs required)
 
 ```bash
 docker run --rm -v "$(pwd):/src" -w /src mvdan/shfmt --diff scripts/ run_macos.sh
+
+docker run --rm -v "$(pwd):/mnt" -w /mnt koalaman/shellcheck:stable scripts/*.sh run_macos.sh
+
+docker run --rm -v "$(pwd):/repo" -w /repo rhysd/actionlint:1.7.12
 
 docker run --rm -v "$(pwd):/workdir" davidanson/markdownlint-cli2 "**/*.md"
 ```
@@ -67,15 +89,18 @@ docker run --rm -v "$(pwd):/workdir" davidanson/markdownlint-cli2 "**/*.md"
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/). Commit messages drive automatic changelog generation and version bumping.
 
-| Prefix      | When to use                         |
-| ----------- | ----------------------------------- |
-| `feat:`     | New feature or behavior             |
-| `fix:`      | Bug fix                             |
-| `chore:`    | Maintenance, dependency updates     |
-| `refactor:` | Code change without behavior change |
-| `docs:`     | Documentation only                  |
-| `style:`    | Formatting, no logic change         |
-| `ci:`       | CI/CD changes                       |
+| Prefix      | When to use                                |
+| ----------- | ------------------------------------------ |
+| `feat:`     | New feature or behavior                    |
+| `fix:`      | Bug fix                                    |
+| `perf:`     | Performance improvement                    |
+| `refactor:` | Code change without behavior change        |
+| `test:`     | Tests only                                 |
+| `docs:`     | Documentation only                         |
+| `style:`    | Formatting, no logic change                |
+| `build:`    | Build tooling and development dependencies |
+| `ci:`       | Workflows and CI configuration             |
+| `chore:`    | Maintenance that fits nothing above        |
 
 Breaking changes must include `BREAKING CHANGE:` in the commit footer.
 

@@ -7,5 +7,5 @@
     "types": ["vite/client", "node"],
     "lib": ["ES2017", "DOM"]
   },
-  "include": ["src", "./*.config.ts"]
+  "include": ["src", "tests", "./*.config.ts"]
 }
