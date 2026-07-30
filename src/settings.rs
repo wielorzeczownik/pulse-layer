@@ -92,3 +92,62 @@ impl Default for AppSettings {
     }
   }
 }
+
+#[cfg(test)]
+mod tests {
+  use super::{AppSettings, FALLBACK_COLOR, ZoneKind, color_to_hex, parse_hex_color};
+
+  const ZONES: [ZoneKind; 5] = [
+    ZoneKind::Calm,
+    ZoneKind::Normal,
+    ZoneKind::High,
+    ZoneKind::Fast,
+    ZoneKind::Alarm,
+  ];
+
+  #[test]
+  fn hex_survives_a_parse_and_format_round_trip() {
+    for hex in ["#52C27A", "#000000", "#FFFFFF", "#0A0A12"] {
+      assert_eq!(color_to_hex(parse_hex_color(hex)), hex);
+    }
+  }
+
+  #[test]
+  fn the_leading_hash_is_optional() {
+    assert_eq!(parse_hex_color("52C27A"), parse_hex_color("#52C27A"));
+  }
+
+  #[test]
+  fn lower_case_digits_parse_the_same_as_upper_case() {
+    assert_eq!(parse_hex_color("#abcdef"), parse_hex_color("#ABCDEF"));
+  }
+
+  #[test]
+  fn malformed_input_falls_back_instead_of_panicking() {
+    // "€abc" is six bytes but four characters: slicing it by byte index would
+    // split the euro sign and panic.
+    for hex in ["", "#", "12345", "1234567", "#GGGGGG", "€abc", "#€abc"] {
+      assert_eq!(parse_hex_color(hex), FALLBACK_COLOR);
+    }
+  }
+
+  #[test]
+  fn each_zone_reads_back_the_value_it_was_given() {
+    let mut settings = AppSettings::default();
+    for (index, zone) in ZONES.into_iter().enumerate() {
+      settings.set_zone_hex(zone, format!("#00000{index}"));
+    }
+    for (index, zone) in ZONES.into_iter().enumerate() {
+      assert_eq!(settings.zone_hex(zone), format!("#00000{index}"));
+    }
+  }
+
+  #[test]
+  fn defaults_are_all_parseable_colours() {
+    let settings = AppSettings::default();
+    for zone in ZONES {
+      assert_ne!(parse_hex_color(settings.zone_hex(zone)), FALLBACK_COLOR);
+    }
+    assert_ne!(parse_hex_color(&settings.panel_bg_hex), FALLBACK_COLOR);
+  }
+}

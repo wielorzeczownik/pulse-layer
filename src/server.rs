@@ -137,3 +137,62 @@ fn format_config(settings: &AppSettings) -> String {
   };
   serde_json::to_string(&frame).unwrap_or_default()
 }
+
+#[cfg(test)]
+mod tests {
+  use serde_json::Value;
+
+  use super::{format_config, format_hr};
+  use crate::settings::{AppSettings, OverlayStyle};
+
+  fn parse(frame: &str) -> Value {
+    serde_json::from_str(frame).expect("frame is valid JSON")
+  }
+
+  #[test]
+  fn heart_rate_frame_carries_the_reading() {
+    assert_eq!(parse(&format_hr(Some(72)))["bpm"], 72);
+  }
+
+  #[test]
+  fn absent_heart_rate_is_null_rather_than_missing() {
+    let frame = parse(&format_hr(None));
+    assert!(frame["bpm"].is_null());
+    assert!(frame.get("bpm").is_some());
+  }
+
+  #[test]
+  fn config_frame_reports_the_selected_style() {
+    let mut settings = AppSettings::default();
+    assert_eq!(parse(&format_config(&settings))["config"]["style"], "heart");
+    settings.overlay_style = OverlayStyle::Pulse;
+    assert_eq!(parse(&format_config(&settings))["config"]["style"], "pulse");
+  }
+
+  #[test]
+  fn config_frame_passes_every_colour_through_unchanged() {
+    let settings = AppSettings::default();
+    let frame = parse(&format_config(&settings));
+    let config = &frame["config"];
+    assert_eq!(config["calm"], settings.zone_calm_hex);
+    assert_eq!(config["normal"], settings.zone_normal_hex);
+    assert_eq!(config["high"], settings.zone_high_hex);
+    assert_eq!(config["fast"], settings.zone_fast_hex);
+    assert_eq!(config["alarm"], settings.zone_alarm_hex);
+    assert_eq!(config["panel_bg"], settings.panel_bg_hex);
+  }
+
+  #[test]
+  fn a_quote_in_a_colour_cannot_rewrite_the_frame() {
+    let hostile = r#"","style":"pulse","x":"#;
+    let settings = AppSettings {
+      zone_calm_hex: hostile.to_string(),
+      ..Default::default()
+    };
+
+    let frame = parse(&format_config(&settings));
+    assert_eq!(frame["config"]["calm"], hostile);
+    assert_eq!(frame["config"]["style"], "heart");
+    assert!(frame["config"].get("x").is_none());
+  }
+}

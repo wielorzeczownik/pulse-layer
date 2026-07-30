@@ -44,11 +44,34 @@ pub struct Strings {
   pub overlay_hint: &'static str,
 }
 
+pub fn for_locale(locale: &str) -> &'static Strings {
+  let language = locale
+    .split(['-', '_', '.'])
+    .next()
+    .unwrap_or_default()
+    .to_ascii_lowercase();
+  if language == "pl" { &pl::PL } else { &en::EN }
+}
+
 pub fn load() -> &'static Strings {
-  let locale = sys_locale::get_locale().unwrap_or_default();
-  if locale.starts_with("pl") {
-    &pl::PL
-  } else {
-    &en::EN
+  for_locale(&sys_locale::get_locale().unwrap_or_default())
+}
+
+#[cfg(test)]
+mod tests {
+  use super::{en, for_locale, pl};
+
+  #[test]
+  fn polish_locales_select_polish_strings() {
+    for locale in ["pl", "pl-PL", "pl_PL.UTF-8"] {
+      assert!(std::ptr::eq(for_locale(locale), &raw const pl::PL));
+    }
+  }
+
+  #[test]
+  fn everything_else_falls_back_to_english() {
+    for locale in ["en-US", "de-DE", "", "polski"] {
+      assert!(std::ptr::eq(for_locale(locale), &raw const en::EN));
+    }
   }
 }
