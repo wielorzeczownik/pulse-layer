@@ -5,9 +5,11 @@ fn main() {
   let overlay = root.join("overlay");
 
   println!("cargo:rerun-if-changed=overlay/index.html");
-  println!("cargo:rerun-if-changed=overlay/src/main.ts");
-  println!("cargo:rerun-if-changed=overlay/src/style.css");
-  println!("cargo:rerun-if-changed=overlay/vite.config.js");
+  println!("cargo:rerun-if-changed=overlay/src");
+  println!("cargo:rerun-if-changed=overlay/package.json");
+  println!("cargo:rerun-if-changed=overlay/package-lock.json");
+  println!("cargo:rerun-if-changed=overlay/tsconfig.json");
+  println!("cargo:rerun-if-changed=overlay/vite.config.ts");
 
   // On Windows npm is npm.cmd
   let npm = if cfg!(target_os = "windows") {
@@ -17,11 +19,11 @@ fn main() {
   };
 
   let install = Command::new(npm)
-    .args(["install", "--prefer-offline"])
+    .arg("ci")
     .current_dir(&overlay)
     .status()
-    .expect("npm install failed — is Node.js installed?");
-  assert!(install.success(), "npm install exited with error");
+    .expect("npm ci failed — is Node.js installed?");
+  assert!(install.success(), "npm ci exited with error");
 
   let build = Command::new(npm)
     .args(["run", "build"])
