@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.37](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.36...v0.2.37) - 2026-07-30
+
+### Build System
+
+- Update dependency @types/node to v26.1.2 ([915a669](https://github.com/wielorzeczownik/pulse-layer/commit/915a6694eb832ad522456be18a2aef3d43e67c8c))
+- Resolve audit advisories ([538461d](https://github.com/wielorzeczownik/pulse-layer/commit/538461d4b99ee0e7b4b5a5697c3399f3991e8154))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.85.0 ([ad18079](https://github.com/wielorzeczownik/pulse-layer/commit/ad1807981bc956811b94f304684bcdbe56cec3ef))
+
 ## [0.2.36](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.35...v0.2.36) - 2026-07-30
 
 ### CI/CD
