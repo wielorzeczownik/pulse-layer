@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.36](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.35...v0.2.36) - 2026-07-30
+
+### CI/CD
+
+- Split the audit into cargo and npm jobs ([1031c86](https://github.com/wielorzeczownik/pulse-layer/commit/1031c86c8ff91387787416aa61eb529e058f3450))
+
 ## [0.2.35](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.34...v0.2.35) - 2026-07-30
 
 ### Bug Fixes
