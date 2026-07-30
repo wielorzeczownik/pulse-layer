@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.33](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.32...v0.2.33) - 2026-07-30
+
+### Build System
+
+- Update dependency prettier to v3.9.6 ([21d410f](https://github.com/wielorzeczownik/pulse-layer/commit/21d410f7dd98dd54910c882dfc4a28ade50cd3eb))
+- Update dependency eslint to v10.8.0 ([95f9dfc](https://github.com/wielorzeczownik/pulse-layer/commit/95f9dfc65a9aa9387d27f27fdf1ef284032ef712))
+- Update dependency typescript-eslint to v8.65.0 ([b58315e](https://github.com/wielorzeczownik/pulse-layer/commit/b58315e311658a8e13ca6f8e798811d969e9d7da))
+
+### CI/CD
+
+- Fall back to a placeholder when a release has no user-facing commits ([b935e38](https://github.com/wielorzeczownik/pulse-layer/commit/b935e38e322e766f1108fe05b66760ce4e651638))
+
 ## [0.2.32](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.31...v0.2.32) - 2026-07-30
 
 ### Bug Fixes
