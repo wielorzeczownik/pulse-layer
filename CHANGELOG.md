@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.35](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.34...v0.2.35) - 2026-07-30
+
+### Bug Fixes
+
+- Disable cargo audit colour so the advisory report stays readable ([eaa1c38](https://github.com/wielorzeczownik/pulse-layer/commit/eaa1c38fb48fe1ee0c2f757274a53beab19047e5))
+
+### Build System
+
+- Resolve audit advisories ([793ce66](https://github.com/wielorzeczownik/pulse-layer/commit/793ce66a522b7e56c15132a3a6d1704bb7a81ad9))
+
 ## [0.2.34](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.33...v0.2.34) - 2026-07-30
 
 ### Dependencies
