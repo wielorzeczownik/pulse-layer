@@ -6,10 +6,18 @@ pub fn color_to_hex(color: iced::Color) -> String {
   format!("#{red:02X}{green:02X}{blue:02X}")
 }
 
+const FALLBACK_COLOR: Color = Color {
+  r: 0.6,
+  g: 0.6,
+  b: 0.65,
+  a: 1.0,
+};
+
 /// Parses "#RRGGBB" or "RRGGBB" into an iced Color. Falls back to gray on bad input.
 pub fn parse_hex_color(hex: &str) -> Color {
   let trimmed = hex.trim_start_matches('#');
   if trimmed.len() == 6
+    && trimmed.bytes().all(|byte| byte.is_ascii_hexdigit())
     && let (Ok(red), Ok(green), Ok(blue)) = (
       u8::from_str_radix(&trimmed[0..2], 16),
       u8::from_str_radix(&trimmed[2..4], 16),
@@ -18,12 +26,7 @@ pub fn parse_hex_color(hex: &str) -> Color {
   {
     return Color::from_rgb8(red, green, blue);
   }
-  Color {
-    r: 0.6,
-    g: 0.6,
-    b: 0.65,
-    a: 1.0,
-  }
+  FALLBACK_COLOR
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
