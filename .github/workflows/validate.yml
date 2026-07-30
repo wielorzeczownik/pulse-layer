@@ -35,8 +35,6 @@ jobs:
               - '.github/workflows/validate.yml'
               - 'overlay/**'
             rust:
-              # build.rs bundles the overlay into the binary, so an overlay-only
-              # change still has to rebuild and retest the Rust crate.
               - *overlay
               - 'src/**'
               - 'build.rs'
@@ -135,12 +133,11 @@ jobs:
       - name: Format check
         run: cargo fmt --check
 
-      # Clippy type-checks as a side effect, so there is no separate check job.
       - name: Clippy
         run: cargo clippy --all-targets --locked -- -D warnings
 
   overlay:
-    name: Overlay (lint, typecheck, build)
+    name: Overlay (lint, typecheck, test, build)
     needs: changes
     if: ${{ needs.changes.outputs.overlay == 'true' }}
     runs-on: ubuntu-24.04
@@ -172,6 +169,9 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npm run build
@@ -319,7 +319,6 @@ jobs:
         with:
           persist-credentials: false
 
-      # Exclusions live in .markdownlint-cli2.yaml so the local command matches.
       - name: Lint Markdown
         uses: DavidAnson/markdownlint-cli2-action@6bf21b07787794f89a243495939cd651942aeabe # v24.1.0
         with:

@@ -8,12 +8,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src index.html",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src index.html tests",
     "lint:css": "stylelint \"src/**/*.css\"",
-    "format": "prettier --write src index.html",
-    "format:check": "prettier --check src index.html",
+    "format": "prettier --write src index.html tests",
+    "format:check": "prettier --check src index.html tests",
     "typecheck": "tsc --noEmit",
-    "fix": "eslint --fix src index.html && stylelint --fix \"src/**/*.css\" && prettier --write src index.html"
+    "fix": "eslint --fix src index.html tests && stylelint --fix \"src/**/*.css\" && prettier --write src index.html tests"
   },
   "devDependencies": {
     "@html-eslint/eslint-plugin": "0.64.0",
@@ -36,6 +38,7 @@
     "typescript-eslint": "8.64.0",
     "vite": "8.1.5",
     "vite-plugin-html": "3.2.2",
-    "vite-plugin-singlefile": "2.3.3"
+    "vite-plugin-singlefile": "2.3.3",
+    "vitest": "4.1.10"
   }
 }
