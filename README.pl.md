@@ -140,6 +140,35 @@ Oba zmieniają kolor w zależności od strefy BPM. Wszystkie kolory są konfigur
 | Szybkie  | 101 – 130           | Pomarańczowy   |
 | Alarm    | 131+                | Czerwony       |
 
+## Konfiguracja
+
+PulseLayer nie korzysta ze zmiennych środowiskowych ani flag wiersza poleceń.
+Wszystko ustawiasz w panelu **Ustawienia**, a wartości trafiają do pliku
+`pulselayer/settings.json` w katalogu konfiguracyjnym systemu:
+
+| System  | Ścieżka                                                  |
+| ------- | -------------------------------------------------------- |
+| macOS   | `~/Library/Application Support/pulselayer/settings.json` |
+| Linux   | `~/.config/pulselayer/settings.json`                     |
+| Windows | `%APPDATA%\pulselayer\settings.json`                     |
+
+| Klucz             | Wymagany | Domyślnie | Znaczenie                                           |
+| ----------------- | -------- | --------- | --------------------------------------------------- |
+| `zone_calm_hex`   | tak      | `#52C27A` | Kolor strefy spokojnej (0 – 64 BPM)                 |
+| `zone_normal_hex` | tak      | `#5B9BD5` | Kolor strefy normalnej (65 – 80 BPM)                |
+| `zone_high_hex`   | tak      | `#E5B950` | Kolor strefy wysokiej (81 – 100 BPM)                |
+| `zone_fast_hex`   | tak      | `#E07A30` | Kolor strefy szybkiej (101 – 130 BPM)               |
+| `zone_alarm_hex`  | tak      | `#D94545` | Kolor strefy alarmowej (131+ BPM)                   |
+| `panel_bg_hex`    | tak      | `#0A0A12` | Tło panelu nakładki, rysowane z kryciem 82%         |
+| `overlay_style`   | tak      | `"Heart"` | Styl nakładki: `"Heart"` albo `"Pulse"` (linia EKG) |
+
+Każdy klucz jest wymagany w tym sensie, że plik bez któregokolwiek z nich – albo
+z niepoprawnym JSON-em – jest odrzucany w całości i wszystkie ustawienia wracają
+do wartości domyślnych. Wartość, która nie jest sześcioma cyframi szesnastkowymi,
+wyświetli się jako szara, zamiast przerwać działanie.
+
+Serwer nakładki zawsze nasłuchuje na `127.0.0.1:9000`; portu nie da się zmienić.
+
 ## Budowanie ze źródeł
 
 Wymagania: [Rust](https://rustup.rs) stable, [Node.js](https://nodejs.org) 24+.
