@@ -5,6 +5,38 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.32](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.31...v0.2.32) - 2026-07-30
+
+### Bug Fixes
+
+- Stop panicking on multi-byte input in the hex colour field ([8c839fa](https://github.com/wielorzeczownik/pulse-layer/commit/8c839fa34628fcfd7d38d661215e5a572cad377e))
+- Serialise overlay frames instead of interpolating them into json ([f8bff4f](https://github.com/wielorzeczownik/pulse-layer/commit/f8bff4fcc24b8021ca4cba9427f2ffec92dc1f01))
+
+### Documentation
+
+- Document the settings file and every check ci runs ([7d14994](https://github.com/wielorzeczownik/pulse-layer/commit/7d1499419565b085f237a24c11101e3234859fcb))
+
+### Testing
+
+- Extract the zone table and cover it with vitest ([4d8fbf8](https://github.com/wielorzeczownik/pulse-layer/commit/4d8fbf82626f917d9cea9ac523cc64420fd5cffe))
+- Cover the ble protocol, colour parsing, locale choice and overlay frames ([c1ec301](https://github.com/wielorzeczownik/pulse-layer/commit/c1ec30189b3b0b39c93e87cbe571ec69fdef42bd))
+
+### Styling
+
+- Group the release outputs into one redirect for shellcheck ([661c2ef](https://github.com/wielorzeczownik/pulse-layer/commit/661c2ef2e3ddff14b7d2703cbf738b2b1b2b88b3))
+
+### Build System
+
+- Install the overlay from the lockfile and track its real inputs ([d684cee](https://github.com/wielorzeczownik/pulse-layer/commit/d684ceec8e5dc33a4c7f66c70a69e9eca90bcb00))
+- Pin action digests and group related renovate updates ([a414af5](https://github.com/wielorzeczownik/pulse-layer/commit/a414af586d54c8d45cf2a6c8e41a6ed6547fc5c4))
+
+### CI/CD
+
+- Refresh the lockfile with cargo metadata instead of a full build ([7c8d7fe](https://github.com/wielorzeczownik/pulse-layer/commit/7c8d7fe6bb0b5a67df6f076eefe1423fb2859828))
+- Track unresolved advisories in an issue instead of failing silently ([04224d4](https://github.com/wielorzeczownik/pulse-layer/commit/04224d459aace392edc2bf46f304655546c72343))
+- Never cancel a release in flight and pin the build environment ([87fac32](https://github.com/wielorzeczownik/pulse-layer/commit/87fac3205e2141daae40fa1d640825101bf7f0aa))
+- Gate validate jobs on changed paths and pin every action ([8b191dc](https://github.com/wielorzeczownik/pulse-layer/commit/8b191dcf6935a25383431cf2d4d15b49ccfb5f0a))
+
 ## [0.2.31](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.30...v0.2.31) - 2026-07-23
 
 ### Dependencies
