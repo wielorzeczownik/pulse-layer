@@ -112,7 +112,7 @@ function connect(): void {
       if (message.config !== undefined) applyConfig(message.config);
       if (message.bpm !== undefined) applyBpm(message.bpm);
     } catch {
-      /* ignore malformed frames */
+      // ignore malformed frames
     }
   });
   ws.addEventListener('close', () => {
