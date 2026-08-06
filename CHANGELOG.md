@@ -5,6 +5,40 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.39](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.38...v0.2.39) - 2026-08-06
+
+### Bug Fixes
+
+- Link bot authors and pull requests in the release notes ([ad551fa](https://github.com/wielorzeczownik/pulse-layer/commit/ad551fa75912e00f27122aca147367bf5c148019))
+- Cover every dependency manifest in the label rules ([3e9fd17](https://github.com/wielorzeczownik/pulse-layer/commit/3e9fd17d0a2a6835615035e88eaebf6f4899859b))
+
+### Refactoring
+
+- Collapse the two assign steps into one ([6e0de55](https://github.com/wielorzeczownik/pulse-layer/commit/6e0de550f803305bb2033cf7d53c2c51d650dbaf))
+
+### Documentation
+
+- Drop the redundant comment above commit_preprocessors ([f595224](https://github.com/wielorzeczownik/pulse-layer/commit/f595224e1ec0df7585dd3d8af9f691f0d60707ee))
+
+### Styling
+
+- Drop the no-op whitespace trim inside the profile url ([f57baf7](https://github.com/wielorzeczownik/pulse-layer/commit/f57baf7158f7c0ac21c06a691ebf768f737655ac))
+
+### Build System
+
+- Update dependency typescript-eslint to v8.66.0 (#226) ([c10be13](https://github.com/wielorzeczownik/pulse-layer/commit/c10be13b17ff63268d736d151669bf4acb8057cd))
+- Resolve audit advisories ([9a70d26](https://github.com/wielorzeczownik/pulse-layer/commit/9a70d266539a65a4b3722c08b7ec2a740dbd0e4c))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.85.4 (#225) ([ab8b7c2](https://github.com/wielorzeczownik/pulse-layer/commit/ab8b7c2f244102f9a6cbf0596e4b25a8097ea42e))
+- Publish through a deployment environment ([e43b0be](https://github.com/wielorzeczownik/pulse-layer/commit/e43b0beac0b2caaf22a5a84dc95726fe157cc24d))
+- Update taiki-e/install-action action to v2.85.3 (#223) ([1f2e975](https://github.com/wielorzeczownik/pulse-layer/commit/1f2e97579c81afe5c493fccdf5813caada8c66fb))
+
+### Other
+
+- Ci/labels and automation (#224) ([ddf00f7](https://github.com/wielorzeczownik/pulse-layer/commit/ddf00f7850a63f84590d45228e5159ce7d3edab1))
+
 ## [0.2.38](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.37...v0.2.38) - 2026-08-02
 
 ### Build System
