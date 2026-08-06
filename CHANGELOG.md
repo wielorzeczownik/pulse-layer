@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.40](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.39...v0.2.40) - 2026-08-06
+
+### Bug Fixes
+
+- Restore plain @mentions for human authors so avatars render ([cdbe77b](https://github.com/wielorzeczownik/pulse-layer/commit/cdbe77bd4fcb628b07cff86b019e8aa64eaef2e3))
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v73 (#227) ([fe431f3](https://github.com/wielorzeczownik/pulse-layer/commit/fe431f3a26a6b20a8f9cb5906816e363622dff4c))
+
 ## [0.2.39](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.38...v0.2.39) - 2026-08-06
 
 ### Bug Fixes
