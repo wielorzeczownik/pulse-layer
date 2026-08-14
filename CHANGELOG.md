@@ -5,6 +5,27 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.41](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.40...v0.2.41) - 2026-08-14
+
+### Build System
+
+- Update dependency @types/node to v26.2.0 (#234) ([94b7d29](https://github.com/wielorzeczownik/pulse-layer/commit/94b7d29969cd675f6410b5215b3b307713ba356d))
+- Update dependency eslint to v10.8.1 (#233) ([c2338d5](https://github.com/wielorzeczownik/pulse-layer/commit/c2338d5b995d99b98240752b5f167234f9d9b629))
+- Update dependency vite to v8.2.1 (#231) ([36c68f1](https://github.com/wielorzeczownik/pulse-layer/commit/36c68f17fa53336efae6f58e245f28839b0fc9d4))
+- Resolve audit advisories ([c33f730](https://github.com/wielorzeczownik/pulse-layer/commit/c33f730c47978d083bbde2cc70821c9572d7fcb9))
+- Resolve audit advisories ([9a41127](https://github.com/wielorzeczownik/pulse-layer/commit/9a4112708da36bdbe563478b699288caac3051fd))
+
+### CI/CD
+
+- Update davidanson/markdownlint-cli2-action action to v24.2.0 (#232) ([20a6d29](https://github.com/wielorzeczownik/pulse-layer/commit/20a6d29d2dfa0601124932e3ed9db1f01a894352))
+- Update taiki-e/install-action action to v2.85.7 (#230) ([355fd63](https://github.com/wielorzeczownik/pulse-layer/commit/355fd63b206c77ec5170121e45776970fc3866d1))
+- Update taiki-e/install-action action to v2.85.6 (#229) ([7095189](https://github.com/wielorzeczownik/pulse-layer/commit/70951897ccf21f35f2f0acc213ce4cb0f862d819))
+- Update taiki-e/install-action action to v2.85.5 (#228) ([7dca08f](https://github.com/wielorzeczownik/pulse-layer/commit/7dca08f239191e97e88a23aa3d90f17778189c7b))
+
+### Dependencies
+
+- Update rust crate futures to v0.3.34 (#237) ([6edd945](https://github.com/wielorzeczownik/pulse-layer/commit/6edd945b701486f83d7edf4189a27709508a9b92))
+
 ## [0.2.40](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.39...v0.2.40) - 2026-08-06
 
 ### Bug Fixes
