@@ -5,6 +5,27 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.43](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.42...v0.2.43) - 2026-08-26
+
+### Build System
+
+- Update dependency eslint to v10.9.0 (#247) ([c44df8a](https://github.com/wielorzeczownik/pulse-layer/commit/c44df8a3a07d8d0a9e2519c6ca32bd2cad8cee89))
+- Update dependency vite to v8.2.2 (#245) ([9fafd0b](https://github.com/wielorzeczownik/pulse-layer/commit/9fafd0b1d97b33e321db6df255f37b1484f4f99d))
+- Update dependency vitest to v4.1.11 (#243) ([98cfed3](https://github.com/wielorzeczownik/pulse-layer/commit/98cfed357bccb92c0a5763d31dcd75a393ed88b8))
+- Update html-eslint monorepo to v0.65.0 (#241) ([1c04674](https://github.com/wielorzeczownik/pulse-layer/commit/1c0467427d777162169a091261006e5301bf5649))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.86.3 (#246) ([8816de3](https://github.com/wielorzeczownik/pulse-layer/commit/8816de3eee205b379e4769fc211ef9d3640de9d4))
+- Update taiki-e/install-action action to v2.86.1 (#244) ([0861e7e](https://github.com/wielorzeczownik/pulse-layer/commit/0861e7e8f996c6c9860cdf9b769fd8e493a39284))
+- Update taiki-e/install-action action to v2.85.13 (#242) ([614e432](https://github.com/wielorzeczownik/pulse-layer/commit/614e4324c4b4a89a6b7af279ecd480d14bc1ee81))
+- Update taiki-e/install-action action to v2.85.12 (#240) ([39608b8](https://github.com/wielorzeczownik/pulse-layer/commit/39608b8099ed928cad64975006208095c4329c0a))
+- Update github actions (#235) ([867dfd0](https://github.com/wielorzeczownik/pulse-layer/commit/867dfd034454f4edab96b5feb503ba6bb2eb705e))
+
+### Dependencies
+
+- Update rust crate uuid to v1.25.0 (#248) ([fadb778](https://github.com/wielorzeczownik/pulse-layer/commit/fadb778d83e9962667701b89a7dc9761f036f79b))
+
 ## [0.2.42](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.41...v0.2.42) - 2026-08-18
 
 ### Build System
