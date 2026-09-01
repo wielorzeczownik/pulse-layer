@@ -1,6 +1,6 @@
 [package]
 name = "pulse-layer"
-version = "0.2.43"
+version = "0.2.44"
 edition = "2024"
 rust-version = "1.88"
 description = "Real-time heart rate OBS overlay powered by a Bluetooth smart ring"

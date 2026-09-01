@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.44](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.43...v0.2.44) - 2026-09-01
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v74 (#256) ([4bb64aa](https://github.com/wielorzeczownik/pulse-layer/commit/4bb64aab06d4d10f48dbf4f0616e2d7b35521afc))
+- Update dependency @types/node to v26.4.0 (#253) ([9887d3d](https://github.com/wielorzeczownik/pulse-layer/commit/9887d3d7f005bcde209e17de87f1627048e67437))
+- Update dependency typescript-eslint to v8.68.0 (#252) ([2ac674b](https://github.com/wielorzeczownik/pulse-layer/commit/2ac674bae8bbfffc0d2f61dbd947a9c89dd0b852))
+- Update dependency @types/node to v26.3.0 (#251) ([045eacc](https://github.com/wielorzeczownik/pulse-layer/commit/045eaccf9b47466169da99f5bbb42cb9eff21aea))
+- Update dependency eslint to v10.9.1 (#250) ([96f9d1b](https://github.com/wielorzeczownik/pulse-layer/commit/96f9d1b46d1ab9c66a3d5217e02e7a91f6f263a8))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.86.7 (#255) ([3523d44](https://github.com/wielorzeczownik/pulse-layer/commit/3523d44e03c8067b4c51ea0c41697bf57c69cda0))
+- Update taiki-e/install-action action to v2.86.4 (#249) ([f38d145](https://github.com/wielorzeczownik/pulse-layer/commit/f38d145c18c89491568707908003c641056a9ded))
+
+### Dependencies
+
+- Update rust crate uuid to v1.26.0 (#254) ([683ca40](https://github.com/wielorzeczownik/pulse-layer/commit/683ca405253d1277efab840d50880e134fdeab91))
+
 ## [0.2.43](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.42...v0.2.43) - 2026-08-26
 
 ### Build System
