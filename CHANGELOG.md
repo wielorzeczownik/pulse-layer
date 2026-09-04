@@ -5,6 +5,21 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.45](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.44...v0.2.45) - 2026-09-04
+
+### Build System
+
+- Update dependency typescript-eslint to v8.69.0 (#259) ([980a07c](https://github.com/wielorzeczownik/pulse-layer/commit/980a07c78a4602bb7d6b80b9c03b23580890db2a))
+- Resolve audit advisories ([d7f0417](https://github.com/wielorzeczownik/pulse-layer/commit/d7f041752c5dc1d086ad7d457b9d52f2d6850b80))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.86.8 (#257) ([e00be55](https://github.com/wielorzeczownik/pulse-layer/commit/e00be55242c984de5328610e332771dfcec323ec))
+
+### Dependencies
+
+- Update rust crate btleplug to 0.13.0 (#258) ([a27117d](https://github.com/wielorzeczownik/pulse-layer/commit/a27117dad96e792b8c55dfe4dc702e5df0e01857))
+
 ## [0.2.44](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.43...v0.2.44) - 2026-09-01
 
 ### Build System
