@@ -5,6 +5,29 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.46](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.45...v0.2.46) - 2026-09-09
+
+### Build System
+
+- Resolve audit advisories ([9490b5e](https://github.com/wielorzeczownik/pulse-layer/commit/9490b5ee21c3dd534aaf27edfdf1b93ac5b41720))
+- Update dependency stylelint to v17.15.0 (#268) ([508cae5](https://github.com/wielorzeczownik/pulse-layer/commit/508cae5300d78c3c57bd0e3bb18f0bc97f0c676f))
+- Update dependency eslint to v10.10.0 (#267) ([7a3cc21](https://github.com/wielorzeczownik/pulse-layer/commit/7a3cc21d565bd41c225d0e169d246e251782b6dc))
+- Update dependency autoprefixer to v10.5.5 (#266) ([9b6afaf](https://github.com/wielorzeczownik/pulse-layer/commit/9b6afaf3ef071ce92491903db255090a3db4009b))
+- Update dependency @types/node to v26.4.1 (#261) ([b48468c](https://github.com/wielorzeczownik/pulse-layer/commit/b48468c87198c53446057ee65bbb1d5c669133ba))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.87.4 (#271) ([3c319ec](https://github.com/wielorzeczownik/pulse-layer/commit/3c319eca980c5482aa6e547b759a9eb115c9c186))
+- Update github actions (#269) ([6501474](https://github.com/wielorzeczownik/pulse-layer/commit/6501474319e101de6e1d3d1c53123c33013bd1c4))
+- Update taiki-e/install-action action to v2.87.2 (#265) ([3e1e939](https://github.com/wielorzeczownik/pulse-layer/commit/3e1e939c1419c434bee0551c676788f7f598aaea))
+- Update softprops/action-gh-release action to v3.0.3 (#263) ([2682f97](https://github.com/wielorzeczownik/pulse-layer/commit/2682f97eea64603c1c4cf1f195ae75009c780085))
+- Update taiki-e/install-action action to v2.87.1 (#262) ([ccff0a6](https://github.com/wielorzeczownik/pulse-layer/commit/ccff0a6ede8cbee7faf54790737fd74d4b8c8148))
+- Update taiki-e/install-action action to v2.87.0 (#260) ([0406ef4](https://github.com/wielorzeczownik/pulse-layer/commit/0406ef469f075ec5c004bdf6bf8179cebef01e21))
+
+### Dependencies
+
+- Update rust crate dirs to v7 (#270) ([4abddab](https://github.com/wielorzeczownik/pulse-layer/commit/4abddab329866f40b0f18a4161a8de85f8f15065))
+
 ## [0.2.45](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.44...v0.2.45) - 2026-09-04
 
 ### Build System
@@ -378,6 +401,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.15](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.14...v0.2.15) - 2026-07-09
 
+### Documentation
+
+- Add app and overlay screenshots to README ([60413ba](https://github.com/wielorzeczownik/pulse-layer/commit/60413ba0d15c5756f92c8020343446f5926cc05e))
+
 ### Build System
 
 - Update dependency eslint-plugin-unicorn to v71 ([b4adccd](https://github.com/wielorzeczownik/pulse-layer/commit/b4adccd23c3eac35cbe477123025eabba125ad9b))
@@ -411,10 +438,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Colocate constants/types and name magic values ([bbc3d30](https://github.com/wielorzeczownik/pulse-layer/commit/bbc3d304f44c9958594fa5136617a6461d6ae7f8))
 - Colocate constants and types ([4cb569d](https://github.com/wielorzeczownik/pulse-layer/commit/4cb569d336fa0adf3299657c0b9aba7ba9b382f9))
-
-### Documentation
-
-- Add app and overlay screenshots to README ([60413ba](https://github.com/wielorzeczownik/pulse-layer/commit/60413ba0d15c5756f92c8020343446f5926cc05e))
 
 ### Build System
 
@@ -636,6 +659,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update taiki-e/install-action action to v2.75.25 (#54) ([e8029f7](https://github.com/wielorzeczownik/pulse-layer/commit/e8029f76b9c171c9c017173b68ff25f6d44466b5))
 - Update taiki-e/install-action action to v2.75.24 (#53) ([3a77967](https://github.com/wielorzeczownik/pulse-layer/commit/3a7796700b7650acae4ec286e858d8574b995e0b))
 - Remove persist-credentials to allow audit workflow to push ([0f99367](https://github.com/wielorzeczownik/pulse-layer/commit/0f993670f35e55b5511a13ca3a6f741414a259b4))
+- Split validate into granular parallel jobs ([10dd1fc](https://github.com/wielorzeczownik/pulse-layer/commit/10dd1fcf23ea666c237e00f70bc5f09c23c09249))
 
 ### Dependencies
 
@@ -661,7 +685,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### CI/CD
 
-- Split validate into granular parallel jobs ([10dd1fc](https://github.com/wielorzeczownik/pulse-layer/commit/10dd1fcf23ea666c237e00f70bc5f09c23c09249))
 - Harden GitHub Actions security posture and pin action versions ([49fc343](https://github.com/wielorzeczownik/pulse-layer/commit/49fc3431efd7931517c664bf34ddfa846e228789))
 
 ### Miscellaneous
@@ -764,6 +787,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.20](https://github.com/wielorzeczownik/pulse-layer/compare/v0.1.19...v0.1.20) - 2026-04-04
 
+### Documentation
+
+- Remove dropped musl targets from download section ([808d4f8](https://github.com/wielorzeczownik/pulse-layer/commit/808d4f88508da7b2be60bf7d42f12916425d24aa))
+
 ### CI/CD
 
 - Drop aarch64-linux target; remove from download docs ([0e9b93f](https://github.com/wielorzeczownik/pulse-layer/commit/0e9b93fad1a08eeb3ccb5abb415dcac692d67979))
@@ -773,10 +800,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add package metadata to Cargo.toml ([892057f](https://github.com/wielorzeczownik/pulse-layer/commit/892057f5010908869edc059e9a8c5fbd053ae899))
 
 ## [0.1.19](https://github.com/wielorzeczownik/pulse-layer/compare/v0.1.18...v0.1.19) - 2026-04-04
-
-### Documentation
-
-- Remove dropped musl targets from download section ([808d4f8](https://github.com/wielorzeczownik/pulse-layer/commit/808d4f88508da7b2be60bf7d42f12916425d24aa))
 
 ### CI/CD
 
