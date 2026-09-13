@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.47](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.46...v0.2.47) - 2026-09-13
+
+### Build System
+
+- Update dependency @types/node to v26.5.1 (#275) ([9bcada2](https://github.com/wielorzeczownik/pulse-layer/commit/9bcada24a2c3301bd425f0ef3cecc86753f2d72a))
+- Update dependency typescript-eslint to v8.70.0 (#274) ([fb9dfe6](https://github.com/wielorzeczownik/pulse-layer/commit/fb9dfe683c7e1b113b45d4f4c2576fdd13f080f2))
+- Update dependency @types/node to v26.5.0 (#273) ([02f21b2](https://github.com/wielorzeczownik/pulse-layer/commit/02f21b2e750c98f5cc1cac6b4373e66ec05c4462))
+
+### Dependencies
+
+- Update rust crate uuid to v1.26.1 (#276) ([2566825](https://github.com/wielorzeczownik/pulse-layer/commit/2566825d1d26680e08c078f79f475e978fac907d))
+
 ## [0.2.46](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.45...v0.2.46) - 2026-09-09
 
 ### Build System
