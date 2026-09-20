@@ -54,10 +54,12 @@ function applyConfig(config: Config): void {
   };
   for (const [key, property] of Object.entries(zoneMap)) {
     const value = config[key as keyof Config];
-    if (value) {
-      colors[key] = value;
-      root.style.setProperty(property, value);
+    if (!value) {
+      continue;
     }
+
+    colors[key] = value;
+    root.style.setProperty(property, value);
   }
   if (config.panel_bg) {
     root.style.setProperty('--panel-bg', hexToRgba(config.panel_bg, 0.82));
