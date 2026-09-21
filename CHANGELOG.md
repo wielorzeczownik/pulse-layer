@@ -5,6 +5,27 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.48](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.47...v0.2.48) - 2026-09-21
+
+### Build System
+
+- Update dependency prettier to v3.9.8 (#287) ([0410506](https://github.com/wielorzeczownik/pulse-layer/commit/0410506e3c28b62ee43c777d5019d22202425261))
+- Update dependency eslint-plugin-unicorn to v75 (#285) ([7f8734f](https://github.com/wielorzeczownik/pulse-layer/commit/7f8734f7d0ef01e91d2a29c1ce34d08a14b761bb))
+- Update dependency vitest to v5 (#264) ([7f4a587](https://github.com/wielorzeczownik/pulse-layer/commit/7f4a587a3890be5299fbe4cc6e09e0b51e16eb7d))
+- Update html-eslint monorepo to v0.66.1 (#286) ([a3d4678](https://github.com/wielorzeczownik/pulse-layer/commit/a3d4678754f3b816534bf16c5f89e7f6bb0f6372))
+- Update dependency prettier to v3.9.7 (#284) ([4d4fce3](https://github.com/wielorzeczownik/pulse-layer/commit/4d4fce3ed91952994b5ee7f2a30e6e8ab0bf6655))
+- Update dependency @types/node to v26.6.1 (#283) ([d0ac193](https://github.com/wielorzeczownik/pulse-layer/commit/d0ac19353a7923568fbc9c682c969b67971e3396))
+- Update dependency eslint-plugin-sonarjs to v4.2.1 (#282) ([c9ee679](https://github.com/wielorzeczownik/pulse-layer/commit/c9ee679e3a94f35ab45b686ce3847d11caaf4ca8))
+- Update dependency autoprefixer to v10.6.1 (#281) ([a70e579](https://github.com/wielorzeczownik/pulse-layer/commit/a70e579a54f60f4bac8ee62bd7d4e3ea1f0d46ca))
+- Update html-eslint monorepo to v0.66.0 (#280) ([aafa64f](https://github.com/wielorzeczownik/pulse-layer/commit/aafa64f0bbeb55247930e1bb4d84fa110abb01cf))
+- Update dependency autoprefixer to v10.6.0 (#279) ([cba285d](https://github.com/wielorzeczownik/pulse-layer/commit/cba285d6bd0b7b5af0fa1e0d03082f5bbcc89f76))
+- Update dependency vite to v8.3.0 (#278) ([22855ec](https://github.com/wielorzeczownik/pulse-layer/commit/22855ec5ba9805df2e59a3368a190321b5cefa9d))
+- Update dependency autoprefixer to v10.5.6 (#277) ([f129ec1](https://github.com/wielorzeczownik/pulse-layer/commit/f129ec1b425066da188999aaaf305fca17e86729))
+
+### Dependencies
+
+- Update rust crate btleplug to v0.13.1 (#288) ([29f3081](https://github.com/wielorzeczownik/pulse-layer/commit/29f3081514cf3f0d1fe4780aa7785c9381ada7b8))
+
 ## [0.2.47](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.46...v0.2.47) - 2026-09-13
 
 ### Build System
