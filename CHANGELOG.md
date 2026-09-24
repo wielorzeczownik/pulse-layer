@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.49](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.48...v0.2.49) - 2026-09-24
+
+### Build System
+
+- Update dependency eslint to v10.11.0 (#290) ([a54596a](https://github.com/wielorzeczownik/pulse-layer/commit/a54596a6dacc9c8eb20eab49cbe281f90a2def33))
+- Update dependency @types/node to v26.6.2 (#289) ([d343630](https://github.com/wielorzeczownik/pulse-layer/commit/d3436301621c21e6430bccc18cd048ee1573716f))
+
+### Dependencies
+
+- Update rust crate btleplug to v0.13.2 (#292) ([233fdad](https://github.com/wielorzeczownik/pulse-layer/commit/233fdad6be8040bff1616fed40ec0b9b9513029b))
+
 ## [0.2.48](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.47...v0.2.48) - 2026-09-21
 
 ### Build System
