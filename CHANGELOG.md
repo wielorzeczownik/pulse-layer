@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.50](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.49...v0.2.50) - 2026-09-29
+
+### Bug Fixes
+
+- Cap typescript instead of grouping (#298) ([8fccde1](https://github.com/wielorzeczownik/pulse-layer/commit/8fccde15b316d7f09ebfc4362ff260f8471980e0))
+
+### Build System
+
+- Update dependency @types/node to v26.6.3 (#300) ([95c6a30](https://github.com/wielorzeczownik/pulse-layer/commit/95c6a303c2e63ce8ef61d018c873045369c0b5a1))
+- Update dependency vite to v8.3.1 (#295) ([8c4b283](https://github.com/wielorzeczownik/pulse-layer/commit/8c4b283532ca8aec6eebfce182e6458edf4f53a2))
+- Update dependency prettier to v3.9.9 (#294) ([1867f1e](https://github.com/wielorzeczownik/pulse-layer/commit/1867f1e19ceb92c1eb05ba0d7917ecda024492b5))
+- Update dependency typescript-eslint to v8.70.1 (#293) ([8cd223b](https://github.com/wielorzeczownik/pulse-layer/commit/8cd223b44586c3374018c20c81bc9038b322fc4f))
+- Update dependency eslint-plugin-unicorn to v76 (#291) ([0ee6278](https://github.com/wielorzeczownik/pulse-layer/commit/0ee627878c42e217e5f16100c49cda02ec21bc00))
+
+### Miscellaneous
+
+- Group typescript+typescript-eslint (#297) ([effc3ad](https://github.com/wielorzeczownik/pulse-layer/commit/effc3ad12ac9c8827f53f4a735a66dad79cfcfce))
+- Enable vulnerabilityAlerts (#296) ([8c5108c](https://github.com/wielorzeczownik/pulse-layer/commit/8c5108cc38c01fa53bc729d94273043a37d182d9))
+
 ## [0.2.49](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.48...v0.2.49) - 2026-09-24
 
 ### Build System
