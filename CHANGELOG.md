@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.51](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.50...v0.2.51) - 2026-10-01
+
+### Build System
+
+- Update dependency eslint-plugin-sonarjs to v4.2.2 (#302) ([d442fb5](https://github.com/wielorzeczownik/pulse-layer/commit/d442fb5676a8c44694a2b2d7e1565e09e1ef5053))
+- Resolve audit advisories ([522188d](https://github.com/wielorzeczownik/pulse-layer/commit/522188d30f7f1acfb9841d78e74f4ebdba92862c))
+- Update dependency vitest to v5.0.2 (#301) ([dd27a65](https://github.com/wielorzeczownik/pulse-layer/commit/dd27a6570dca6c39482a1d79192555c23206cc5c))
+
+### Dependencies
+
+- Update rust crate btleplug to v0.13.3 (#303) ([f0f3916](https://github.com/wielorzeczownik/pulse-layer/commit/f0f39168366cfdc70464f1ef1458ff8505df9a0e))
+
 ## [0.2.50](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.49...v0.2.50) - 2026-09-29
 
 ### Bug Fixes
