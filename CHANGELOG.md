@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.52](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.51...v0.2.52) - 2026-10-06
+
+### Build System
+
+- Update dependency eslint to v10.12.0 (#310) ([99c31cf](https://github.com/wielorzeczownik/pulse-layer/commit/99c31cf57a0b0c19a2d4b8c373fedb01abd6a0cd))
+- Update dependency @types/node to v26.6.4 (#309) ([0b2a152](https://github.com/wielorzeczownik/pulse-layer/commit/0b2a15268096f92cd7668aa8655387e7123a4b24))
+- Update dependency stylelint to v17.16.0 (#308) ([682510f](https://github.com/wielorzeczownik/pulse-layer/commit/682510f58ce117678f8dbb312dc29b111d25ca9a))
+- Update dependency vite to v8.3.2 (#307) ([4ed8f5b](https://github.com/wielorzeczownik/pulse-layer/commit/4ed8f5b741a34790a0fbf61117af328fbfd957f8))
+- Update dependency vitest to v5.0.3 (#306) ([9593cc9](https://github.com/wielorzeczownik/pulse-layer/commit/9593cc9354da79e42ef7f5b233cb2aaaf94be510))
+- Update dependency typescript-eslint to v8.71.0 (#304) ([d6db027](https://github.com/wielorzeczownik/pulse-layer/commit/d6db0278312fdefe54c76c3ce109f9e6cbf43817))
+
+### CI/CD
+
+- Update github actions (#272) ([4ecdfe4](https://github.com/wielorzeczownik/pulse-layer/commit/4ecdfe4fef1140068153ceb339b8199798d1d6a9))
+
+### Dependencies
+
+- Update rust crate uuid to v1.27.0 (#312) ([8aa5f99](https://github.com/wielorzeczownik/pulse-layer/commit/8aa5f99ad4c9b9686aea27b937f231eaa8439412))
+
 ## [0.2.51](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.50...v0.2.51) - 2026-10-01
 
 ### Build System
