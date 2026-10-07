@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.54](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.53...v0.2.54) - 2026-10-07
+
+### Dependencies
+
+- Update rust crate btleplug to v0.13.4 (#315) ([60e14ce](https://github.com/wielorzeczownik/pulse-layer/commit/60e14ce1cdd318d4002502fa2d6dd00fdbb6a0a6))
+
 ## [0.2.53](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.52...v0.2.53) - 2026-10-07
 
 ### Build System
