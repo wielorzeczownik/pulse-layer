@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.53](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.52...v0.2.53) - 2026-10-07
+
+### Build System
+
+- Resolve audit advisories ([6cd6bc6](https://github.com/wielorzeczownik/pulse-layer/commit/6cd6bc6fa424597525b4068e7b6d4d3495044d4e))
+
+### CI/CD
+
+- Update codelytv/pr-size-labeler action to v1.11.1 (#311) ([536aec5](https://github.com/wielorzeczownik/pulse-layer/commit/536aec587cc8cadf6d3aed937efe106dd1534a85))
+
+### Dependencies
+
+- Update rust crate tokio to v1.53.2 (#313) ([5be30e0](https://github.com/wielorzeczownik/pulse-layer/commit/5be30e03ce0c9eb7834c070236789ff53b142e86))
+
 ## [0.2.52](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.51...v0.2.52) - 2026-10-06
 
 ### Build System
