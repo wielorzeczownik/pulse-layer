@@ -5,6 +5,26 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.55](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.54...v0.2.55) - 2026-10-13
+
+### Build System
+
+- Update dependency @types/node to v26.6.5 (#321) ([b229e92](https://github.com/wielorzeczownik/pulse-layer/commit/b229e9251149cb206f0b85d15dc2b2085646a829))
+- Update dependency vite to v8.3.4 (#320) ([a13338f](https://github.com/wielorzeczownik/pulse-layer/commit/a13338fabe234873600770cdb138f7d28dca3793))
+- Resolve audit advisories ([b61f5db](https://github.com/wielorzeczownik/pulse-layer/commit/b61f5db2e767ebdb0e1cc3312dac1239289a2b69))
+- Update dependency vite to v8.3.3 (#319) ([9747cb5](https://github.com/wielorzeczownik/pulse-layer/commit/9747cb5927f47a7d04c5035448bbc93e7da929f7))
+- Update dependency typescript-eslint to v8.71.1 (#317) ([dd24526](https://github.com/wielorzeczownik/pulse-layer/commit/dd24526225b358bd390f761b1d73f8733af810e3))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.87.25 (#322) ([a938006](https://github.com/wielorzeczownik/pulse-layer/commit/a938006ed63d5b36933629fb4b29d29ef909c43e))
+- Update github actions (#318) ([c95016e](https://github.com/wielorzeczownik/pulse-layer/commit/c95016e1bc8a7ee48005b82980f2b882af642ec8))
+- Update taiki-e/install-action action to v2.87.22 (#316) ([166a123](https://github.com/wielorzeczownik/pulse-layer/commit/166a12339a964afeb70291a2adf6a6f8617cd28c))
+
+### Dependencies
+
+- Update rust crate uuid to v1.28.0 (#323) ([f94dc75](https://github.com/wielorzeczownik/pulse-layer/commit/f94dc756c25062c4eb923c3d0e7a7abdd1fe36b5))
+
 ## [0.2.54](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.53...v0.2.54) - 2026-10-07
 
 ### Dependencies
