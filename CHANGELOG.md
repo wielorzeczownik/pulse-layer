@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.56](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.55...v0.2.56) - 2026-10-14
+
+### Build System
+
+- Update dependency prettier to v3.9.10 (#324) ([f09b0ef](https://github.com/wielorzeczownik/pulse-layer/commit/f09b0ef0b7ad60c46a946c491b236e2ada3e56a5))
+
+### Dependencies
+
+- Update rust crate btleplug to v0.13.5 (#326) ([082497b](https://github.com/wielorzeczownik/pulse-layer/commit/082497bb1d6e8ec9a34e2360d4bd70014f9e4578))
+
 ## [0.2.55](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.54...v0.2.55) - 2026-10-13
 
 ### Build System
