@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.57](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.56...v0.2.57) - 2026-10-14
+
+### Dependencies
+
+- Update rust crate serde_json to v1.0.152 (#325) ([a41cdd9](https://github.com/wielorzeczownik/pulse-layer/commit/a41cdd9669ccf29316dade4e760396657d388138))
+
 ## [0.2.56](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.55...v0.2.56) - 2026-10-14
 
 ### Build System
