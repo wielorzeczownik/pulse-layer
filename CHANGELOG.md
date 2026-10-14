@@ -5,6 +5,21 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.58](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.57...v0.2.58) - 2026-10-14
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v77 (#314) ([b0a3d98](https://github.com/wielorzeczownik/pulse-layer/commit/b0a3d982f872ce5b84438759e7e83a2a9cfbdbae))
+
+### CI/CD
+
+- Update artifact actions (#329) ([a9403ae](https://github.com/wielorzeczownik/pulse-layer/commit/a9403ae4ad10e4841ccdb6c4aea6c030dc037d1d))
+- Update taiki-e/install-action action to v2.87.26 (#327) ([f440e99](https://github.com/wielorzeczownik/pulse-layer/commit/f440e99142d086dca8e51ff46bbe4a8542ae98b6))
+
+### Dependencies
+
+- Update rust crate serde_json to v1.0.154 (#328) ([cae1a18](https://github.com/wielorzeczownik/pulse-layer/commit/cae1a182aa9e3eb12b50221c3927fbf842f9d08f))
+
 ## [0.2.57](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.56...v0.2.57) - 2026-10-14
 
 ### Dependencies
