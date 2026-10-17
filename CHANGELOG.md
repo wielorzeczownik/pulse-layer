@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.59](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.58...v0.2.59) - 2026-10-17
+
+### Build System
+
+- Update dependency eslint-plugin-unicorn to v78 (#333) ([8b5b26a](https://github.com/wielorzeczownik/pulse-layer/commit/8b5b26ad12b511f2b50a7d2d5e87d5a4fbc60c2f))
+- Update dependency typescript-eslint to v8.71.2 (#332) ([1de03cc](https://github.com/wielorzeczownik/pulse-layer/commit/1de03ccd3e393257de793f2292d535685780cf04))
+- Update dependency vitest to v5.0.4 (#331) ([63a53fe](https://github.com/wielorzeczownik/pulse-layer/commit/63a53fe1aa348fe526d7bbd360a1facb2e0a2664))
+
+### CI/CD
+
+- Update actions/setup-node action to v7.1.0 (#330) ([a448272](https://github.com/wielorzeczownik/pulse-layer/commit/a448272a9564db33ddf24490ea2fff212574ac74))
+
+### Dependencies
+
+- Update rust crate tokio to v1.53.3 (#334) ([3255447](https://github.com/wielorzeczownik/pulse-layer/commit/325544778a01ebfc1e739b4d4032e74d033abbec))
+
 ## [0.2.58](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.57...v0.2.58) - 2026-10-14
 
 ### Build System
