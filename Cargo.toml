@@ -53,3 +53,20 @@ panic = "abort"
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }
 min_ident_chars = "warn"
+
+[package.metadata.packager]
+product-name = "PulseLayer"
+identifier = "com.pulselayer.app"
+category = "Utility"
+icons = [
+  "assets/icons/32x32.png",
+  "assets/icons/128x128.png",
+  "assets/icons/256x256.png",
+  "assets/icons/512x512.png",
+  "assets/icons/icon.icns",
+  "assets/icons/icon.ico",
+]
+
+[package.metadata.packager.macos]
+info-plist-path = "macos/Info.plist"
+signing-identity = "-"
