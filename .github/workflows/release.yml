@@ -268,6 +268,18 @@ jobs:
             -czf "dist/pulse-layer-${TARGET}.tar.gz" \
             pulse-layer
 
+      - name: Package Linux installers
+        if: ${{ runner.os == 'Linux' }}
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          cargo packager --release --target "$TARGET" --formats deb,appimage
+          out="target/${TARGET}/release"
+          cp "$out"/*.deb "dist/pulse-layer-${TARGET}.deb"
+          cp "$out"/*.AppImage "dist/pulse-layer-${TARGET}.AppImage"
+
       - name: Upload artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
