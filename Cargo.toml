@@ -62,6 +62,7 @@ min_ident_chars = "warn"
 
 [package.metadata.packager]
 product-name = "PulseLayer"
+authors = ["wielorzeczownik"]
 identifier = "com.pulselayer.app"
 category = "Utility"
 icons = [
