@@ -39,8 +39,7 @@ Pobierz archiwum dla swojej platformy:
 
 **macOS:**
 
-- [pulse-layer-x86_64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-apple-darwin.tar.gz) – macOS na Intel
-- [pulse-layer-aarch64-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-apple-darwin.tar.gz) – macOS na Apple Silicon (M1/M2/M3/M4)
+- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – macOS (Intel i Apple Silicon)
 
 **Windows:**
 
