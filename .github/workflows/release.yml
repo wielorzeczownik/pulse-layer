@@ -319,7 +319,7 @@ jobs:
         run: |
           set -euo pipefail
           cd dist
-          sha256sum -- *.tar.gz *.zip | sort -k2 >SHA256SUMS
+          sha256sum -- *.tar.gz *.zip *.dmg *.exe *.deb *.AppImage | sort -k2 >SHA256SUMS
           cat SHA256SUMS
 
       - name: Download release notes
