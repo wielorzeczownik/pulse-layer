@@ -8,6 +8,10 @@
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/logo.png" alt="PulseLayer logo" width="300" />
+</p>
+
 <p align="center">🇬🇧 English | 🇵🇱 <a href="README.pl.md">Polski</a></p>
 
 A real-time **heart rate OBS overlay** that reads live BPM from a Bluetooth smart ring and serves a browser widget directly to your stream. No subscriptions, no cloud – runs entirely on your machine.
