@@ -5,6 +5,24 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.59...v0.3.0) - 2026-10-18
+
+### Features
+
+- Ship installers for macOS, Windows and Linux (#340) ([d790d6a](https://github.com/wielorzeczownik/pulse-layer/commit/d790d6ac0427a447336518d838e3d134948f1399))
+
+### Documentation
+
+- Add the app icon and show it as the README logo (#339) ([f568155](https://github.com/wielorzeczownik/pulse-layer/commit/f568155ab14331488897de9355b1942c95c13b23))
+
+### CI/CD
+
+- Ship a universal macOS app and skip tool installs on empty runs (#338) ([327dec3](https://github.com/wielorzeczownik/pulse-layer/commit/327dec3e48bce2b6194143304e8edb6d80cc3bf0))
+- Hand dependency fixes to renovate (#337) ([30510b0](https://github.com/wielorzeczownik/pulse-layer/commit/30510b06c92833cd6a8cb0c7601be1398385b5a9))
+- Merge light checks into one job and render audit reports ([687b1fb](https://github.com/wielorzeczownik/pulse-layer/commit/687b1fb41a5a6f326b1e32ffce18af7651c0ba87))
+- Batch updates weekly and skip bot PRs in label/assign ([0415b4d](https://github.com/wielorzeczownik/pulse-layer/commit/0415b4d6b264bbba7e6b33e31d6339352292aa84))
+- Update taiki-e/install-action action to v2.87.27 (#335) ([de37f6d](https://github.com/wielorzeczownik/pulse-layer/commit/de37f6de8b8258923da1c56c236a5509b76c2205))
+
 ## [0.2.59](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.58...v0.2.59) - 2026-10-17
 
 ### Build System
