@@ -8,6 +8,10 @@
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/logo.png" alt="PulseLayer logo" width="300" />
+</p>
+
 <p align="center">🇬🇧 <a href="README.md">English</a> | 🇵🇱 Polski</p>
 
 Nakładka na OBS wyświetlająca **tętno w czasie rzeczywistym** – odczytuje BPM z pierścienia Bluetooth i serwuje widget przeglądarki bezpośrednio na stream. Bez subskrypcji, bez chmury – działa w całości lokalnie.
