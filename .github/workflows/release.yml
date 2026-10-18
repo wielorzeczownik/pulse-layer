@@ -246,6 +246,16 @@ jobs:
         env:
           TARGET: ${{ matrix.target }}
 
+      - name: Package Windows installer
+        if: ${{ runner.os == 'Windows' }}
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          cargo packager --release --target "$TARGET" --formats nsis
+          cp target/"$TARGET"/release/PulseLayer_*-setup.exe "dist/pulse-layer-${TARGET}-setup.exe"
+
       - name: Package Linux binary
         if: ${{ runner.os == 'Linux' }}
         shell: bash
