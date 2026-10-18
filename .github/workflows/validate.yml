@@ -42,14 +42,6 @@ jobs:
               - 'Cargo.lock'
               - 'rustfmt.toml'
               - '.clippy.toml'
-            deps:
-              - '.github/workflows/validate.yml'
-              - 'Cargo.toml'
-              - 'Cargo.lock'
-              - 'overlay/package.json'
-              - 'overlay/package-lock.json'
-              - 'scripts/cargo-audit-report.sh'
-              - 'scripts/npm-audit-report.sh'
             shell:
               - '.github/workflows/validate.yml'
               - 'scripts/**'
@@ -70,24 +62,6 @@ jobs:
               - '**/*.ts'
               - '**/*.html'
               - '**/*.css'
-
-      - name: Install cargo-audit
-        id: install
-        if: ${{ steps.filter.outputs.deps == 'true' }}
-        uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
-        with:
-          tool: cargo-audit
-
-      - name: Cargo audit
-        if: ${{ !cancelled() && steps.install.outcome == 'success' && steps.filter.outputs.deps == 'true' }}
-        shell: bash
-        run: bash scripts/cargo-audit-report.sh >>"$GITHUB_STEP_SUMMARY" || echo "::warning title=cargo audit::Advisories found or audit failed, see the job summary. Not blocking this pull request."
-
-      - name: npm audit
-        if: ${{ !cancelled() && steps.filter.outputs.deps == 'true' }}
-        shell: bash
-        working-directory: overlay
-        run: bash ../scripts/npm-audit-report.sh >>"$GITHUB_STEP_SUMMARY" || echo "::warning title=npm audit::Advisories found or audit failed, see the job summary. Not blocking this pull request."
 
       - name: Install shfmt and shellcheck
         if: ${{ !cancelled() && steps.filter.outputs.shell == 'true' }}

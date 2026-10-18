@@ -17,9 +17,7 @@ A macOS application that reads data from BLE smart rings and displays it in an o
 ├── macos/                      macOS app bundle metadata
 └── scripts/
     ├── bump-version.sh         determines the next release version and bumps Cargo.toml
-    ├── cargo-audit.sh          runs cargo audit, attempts a fix, drives its tracking issue
     ├── install-linux-deps.sh   apt packages the Linux build needs
-    ├── npm-audit.sh            runs npm audit for the overlay, same contract
     └── package-macos.sh        assembles and signs PulseLayer.app for a release
 ```
 
@@ -44,7 +42,6 @@ CI runs exactly these commands. Anything that passes here passes there.
 cargo fmt --check
 cargo clippy --all-targets --locked -- -D warnings
 cargo test --locked
-cargo audit                          # reported, never blocking
 
 # Overlay
 cd overlay
@@ -54,7 +51,6 @@ npm run lint:css                     # stylelint
 npm run typecheck                    # tsc --noEmit
 npm test                             # vitest run
 npm run build
-npm audit                            # reported, never blocking
 cd ..
 
 # Formatting (whole repo, honours .prettierignore)
