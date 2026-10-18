@@ -47,25 +47,31 @@ Tested on **Smartring COLMI R12**. Older COLMI models and other rings using the 
 
 Latest release: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest)
 
-Download the latest release asset for your platform:
+Download the installer for your platform, or the portable archive if you prefer not to install anything:
 
 **Linux:**
 
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-x86_64-unknown-linux-gnu.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb) – Debian, Ubuntu and derivatives (installer)
+- [pulse-layer-x86_64-unknown-linux-gnu.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage) – any distribution, run directly
+- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – portable binary (Intel/AMD 64-bit)
 
 **macOS:**
 
-- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – macOS (Intel and Apple Silicon)
+- [pulse-layer-universal-apple-darwin.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) – disk image, Intel and Apple Silicon
+- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – portable app, Intel and Apple Silicon
 
 **Windows:**
 
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
-- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
+- [pulse-layer-x86_64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe) – installer, 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe) – installer, ARM64
+- [pulse-layer-i686-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) – installer, 32-bit (x86)
+- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – portable, 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – portable, ARM64
+- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – portable, 32-bit (x86)
 
 ### macOS
 
-Extract the archive and you'll get `PulseLayer.app`. On first launch macOS will block it because the app isn't signed with a paid Apple certificate. To get past that:
+Open the `.dmg` and drag `PulseLayer.app` into **Applications** (or extract the portable archive). On first launch macOS will block it because the app isn't signed with a paid Apple certificate. To get past that:
 
 **Option A – right-click:**
 
@@ -81,11 +87,19 @@ open PulseLayer.app
 
 ### Windows
 
-Extract the zip and run `pulse-layer.exe`. No installer needed.
+Run the `-setup.exe` installer. It installs for your user only and adds a Start menu shortcut and an uninstaller. Windows SmartScreen may warn about an unknown publisher because the installer isn't signed: click **More info** and then **Run anyway**. The portable zip needs no installation, extract it and run `pulse-layer.exe`.
 
 ### Linux
 
 ```bash
+# Debian / Ubuntu
+sudo apt install ./pulse-layer-x86_64-unknown-linux-gnu.deb
+
+# AppImage
+chmod +x pulse-layer-x86_64-unknown-linux-gnu.AppImage
+./pulse-layer-x86_64-unknown-linux-gnu.AppImage
+
+# Portable binary
 tar -xzf pulse-layer-*.tar.gz
 ./pulse-layer
 ```
@@ -211,7 +225,7 @@ The overlay frontend is compiled by Vite as part of `cargo build` and embedded i
 ./run_macos.sh
 ```
 
-Builds a `.app` bundle under `target/`, signs it ad-hoc, and opens it.
+Builds a `.app` bundle under `target/` with [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), signs it ad-hoc, and opens it.
 
 ### Linux system dependencies
 

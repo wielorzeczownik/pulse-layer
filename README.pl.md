@@ -35,25 +35,31 @@ Testowane na **Smartring COLMI R12**. Starsze modele COLMI i inne pierścienie k
 
 Najnowsze wydanie: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest)
 
-Pobierz archiwum dla swojej platformy:
+Pobierz instalator dla swojej platformy albo wersję przenośną, jeśli nie chcesz niczego instalować:
 
 **Linux:**
 
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – Linux (Intel/AMD 64-bit)
+- [pulse-layer-x86_64-unknown-linux-gnu.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb) – Debian, Ubuntu i pochodne (instalator)
+- [pulse-layer-x86_64-unknown-linux-gnu.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage) – dowolna dystrybucja, uruchamiasz bezpośrednio
+- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – wersja przenośna (Intel/AMD 64-bit)
 
 **macOS:**
 
-- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – macOS (Intel i Apple Silicon)
+- [pulse-layer-universal-apple-darwin.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) – obraz dysku, Intel i Apple Silicon
+- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – wersja przenośna, Intel i Apple Silicon
 
 **Windows:**
 
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – Windows 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – Windows ARM64
-- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – Windows 32-bit (x86)
+- [pulse-layer-x86_64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe) – instalator, 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe) – instalator, ARM64
+- [pulse-layer-i686-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) – instalator, 32-bit (x86)
+- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – wersja przenośna, 64-bit (x86_64)
+- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – wersja przenośna, ARM64
+- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – wersja przenośna, 32-bit (x86)
 
 ### macOS
 
-Po rozpakowaniu archiwum otrzymasz `PulseLayer.app`. Przy pierwszym uruchomieniu macOS zablokuje aplikację, bo nie jest podpisana płatnym certyfikatem Apple. Żeby to obejść:
+Otwórz plik `.dmg` i przeciągnij `PulseLayer.app` do **Aplikacji** (albo rozpakuj wersję przenośną). Przy pierwszym uruchomieniu macOS zablokuje aplikację, bo nie jest podpisana płatnym certyfikatem Apple. Żeby to obejść:
 
 **Opcja A – prawy przycisk myszy:**
 
@@ -69,11 +75,19 @@ open PulseLayer.app
 
 ### Windows
 
-Rozpakuj archiwum i uruchom `pulse-layer.exe`. Instalator nie jest potrzebny.
+Uruchom instalator `-setup.exe`. Instaluje aplikację tylko dla Twojego użytkownika, dodaje skrót w menu Start i deinstalator. Windows SmartScreen może ostrzec o nieznanym wydawcy, bo instalator nie jest podpisany: kliknij **Więcej informacji**, a potem **Uruchom mimo to**. Wersja przenośna (zip) nie wymaga instalacji, wystarczy ją rozpakować i uruchomić `pulse-layer.exe`.
 
 ### Linux
 
 ```bash
+# Debian / Ubuntu
+sudo apt install ./pulse-layer-x86_64-unknown-linux-gnu.deb
+
+# AppImage
+chmod +x pulse-layer-x86_64-unknown-linux-gnu.AppImage
+./pulse-layer-x86_64-unknown-linux-gnu.AppImage
+
+# Wersja przenośna
 tar -xzf pulse-layer-*.tar.gz
 ./pulse-layer
 ```
@@ -190,7 +204,7 @@ Frontend nakładki jest kompilowany przez Vite w ramach `cargo build` i wbudowan
 ./run_macos.sh
 ```
 
-Buduje bundle `.app` w `target/`, podpisuje go ad-hoc i otwiera.
+Buduje bundle `.app` w `target/` przez [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), podpisuje go ad-hoc i otwiera.
 
 ### Zależności systemowe na Linuxie
 

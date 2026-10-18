@@ -17,8 +17,7 @@ A macOS application that reads data from BLE smart rings and displays it in an o
 ├── macos/                      macOS app bundle metadata
 └── scripts/
     ├── bump-version.sh         determines the next release version and bumps Cargo.toml
-    ├── install-linux-deps.sh   apt packages the Linux build needs
-    └── package-macos.sh        assembles and signs PulseLayer.app for a release
+    └── install-linux-deps.sh   apt packages the Linux build needs
 ```
 
 ## Development setup

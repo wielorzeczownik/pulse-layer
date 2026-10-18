@@ -216,13 +216,24 @@ jobs:
             target/aarch64-apple-darwin/release/pulse-layer \
             target/x86_64-apple-darwin/release/pulse-layer
 
-      - name: Package macOS app bundle
+      - name: Install cargo-packager
+        uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
+        with:
+          # renovate: datasource=crate depName=cargo-packager
+          tool: cargo-packager@0.11.8
+
+      - name: Package macOS app
         if: ${{ runner.os == 'macOS' }}
         shell: bash
         env:
           TARGET: ${{ matrix.target }}
-          VERSION: ${{ needs.prepare-release.outputs.version }}
-        run: bash scripts/package-macos.sh
+        run: |
+          set -euo pipefail
+          cargo packager --release --target "$TARGET" --formats app,dmg
+          out="target/${TARGET}/release"
+          mkdir -p dist
+          tar -C "$out" -czf "dist/pulse-layer-${TARGET}.tar.gz" PulseLayer.app
+          cp "$out"/PulseLayer_*.dmg "dist/pulse-layer-${TARGET}.dmg"
 
       - name: Package Windows exe
         if: ${{ runner.os == 'Windows' }}
@@ -235,6 +246,16 @@ jobs:
         env:
           TARGET: ${{ matrix.target }}
 
+      - name: Package Windows installer
+        if: ${{ runner.os == 'Windows' }}
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          cargo packager --release --target "$TARGET" --formats nsis
+          cp target/"$TARGET"/release/*-setup.exe "dist/pulse-layer-${TARGET}-setup.exe"
+
       - name: Package Linux binary
         if: ${{ runner.os == 'Linux' }}
         shell: bash
@@ -246,6 +267,18 @@ jobs:
           tar -C "target/${TARGET}/release" \
             -czf "dist/pulse-layer-${TARGET}.tar.gz" \
             pulse-layer
+
+      - name: Package Linux installers
+        if: ${{ runner.os == 'Linux' }}
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          cargo packager --release --target "$TARGET" --formats deb,appimage
+          out="target/${TARGET}/release"
+          cp "$out"/*.deb "dist/pulse-layer-${TARGET}.deb"
+          cp "$out"/*.AppImage "dist/pulse-layer-${TARGET}.AppImage"
 
       - name: Upload artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -286,7 +319,7 @@ jobs:
         run: |
           set -euo pipefail
           cd dist
-          sha256sum -- *.tar.gz *.zip | sort -k2 >SHA256SUMS
+          sha256sum -- *.tar.gz *.zip *.dmg *.exe *.deb *.AppImage | sort -k2 >SHA256SUMS
           cat SHA256SUMS
 
       - name: Download release notes
