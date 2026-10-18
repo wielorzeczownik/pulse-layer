@@ -190,7 +190,7 @@ Frontend nakładki jest kompilowany przez Vite w ramach `cargo build` i wbudowan
 ./run_macos.sh
 ```
 
-Buduje bundle `.app` w `target/`, podpisuje go ad-hoc i otwiera.
+Buduje bundle `.app` w `target/` przez [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), podpisuje go ad-hoc i otwiera.
 
 ### Zależności systemowe na Linuxie
 

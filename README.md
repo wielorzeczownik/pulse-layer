@@ -211,7 +211,7 @@ The overlay frontend is compiled by Vite as part of `cargo build` and embedded i
 ./run_macos.sh
 ```
 
-Builds a `.app` bundle under `target/`, signs it ad-hoc, and opens it.
+Builds a `.app` bundle under `target/` with [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), signs it ad-hoc, and opens it.
 
 ### Linux system dependencies
 
