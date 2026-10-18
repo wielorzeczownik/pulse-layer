@@ -146,7 +146,7 @@ jobs:
           path: release-notes.md
 
   build-artifacts:
-    name: Build binaries (${{ matrix.target }})
+    name: Build ${{ matrix.target }}
     needs: prepare-release
     if: ${{ needs.prepare-release.outputs.released == 'true' }}
     runs-on: ${{ matrix.os }}
@@ -244,7 +244,7 @@ jobs:
           path: dist/*
 
   publish-release:
-    name: Publish GitHub release
+    name: Release
     environment:
       name: release
       url: https://github.com/${{ github.repository }}/releases/tag/${{ needs.prepare-release.outputs.tag }}
