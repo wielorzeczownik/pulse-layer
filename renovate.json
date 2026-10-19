@@ -13,17 +13,9 @@
   ],
   "packageRules": [
     {
-      "matchDepTypes": ["buildDependencies", "devDependencies"],
-      "semanticCommitType": "build"
-    },
-    {
       "matchManagers": ["cargo"],
       "matchPackageNames": ["serde", "serde_json"],
       "groupName": "serde"
-    },
-    {
-      "matchPackageNames": ["typescript"],
-      "allowedVersions": "<6.1.0"
     }
   ]
 }
