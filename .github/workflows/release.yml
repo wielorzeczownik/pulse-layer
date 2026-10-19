@@ -22,6 +22,10 @@ concurrency:
 
 permissions: {}
 
+env:
+  # renovate: datasource=crate depName=cargo-packager
+  CARGO_PACKAGER_VERSION: 0.11.8
+
 jobs:
   prepare-release:
     name: Prepare release
@@ -219,8 +223,7 @@ jobs:
       - name: Install cargo-packager
         uses: taiki-e/install-action@ab6895351a88b908e96a4697860d4ffea5e57dbe # v2.87.27
         with:
-          # renovate: datasource=crate depName=cargo-packager
-          tool: cargo-packager@0.11.8
+          tool: cargo-packager@${{ env.CARGO_PACKAGER_VERSION }}
 
       - name: Package macOS app
         if: ${{ runner.os == 'macOS' }}
