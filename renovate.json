@@ -1,16 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>wielorzeczownik/.github"],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.yml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+tool: \\S+@(?<currentValue>\\S+)"
-      ],
-      "versioningTemplate": "semver"
-    }
-  ],
   "packageRules": [
     {
       "matchManagers": ["cargo"],
