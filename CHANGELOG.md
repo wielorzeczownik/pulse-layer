@@ -5,6 +5,36 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.0...v0.3.1) - 2026-10-21
+
+### Bug Fixes
+
+- Match breaking changes by field so they get their own section ([3071845](https://github.com/wielorzeczownik/pulse-layer/commit/3071845bdebd9de4e0dbb45fecf8e8f64f35263d))
+- Group fix(deps) updates under dependencies ([5c7fcba](https://github.com/wielorzeczownik/pulse-layer/commit/5c7fcbad0c824e5e7ef3151f025a627daa34a301))
+
+### Documentation
+
+- Explain how to verify attestations in release notes ([192b698](https://github.com/wielorzeczownik/pulse-layer/commit/192b69862f072ea0464cd4a098e089cbe55ee5a4))
+- Use shared pull request template from .github ([e1202b1](https://github.com/wielorzeczownik/pulse-layer/commit/e1202b1e142c93192f46e24252e318c7875e67d0))
+- Use shared code of conduct from .github ([f4b0f2f](https://github.com/wielorzeczownik/pulse-layer/commit/f4b0f2f577a788507d56322c27fd55dd0f4b31fb))
+
+### Build System
+
+- Use built-in manager for workflow tool versions ([f76f502](https://github.com/wielorzeczownik/pulse-layer/commit/f76f5025e668dac4d6baf3a6dfb32c409cf2df74))
+- Drop rules covered by shared preset ([983058d](https://github.com/wielorzeczownik/pulse-layer/commit/983058dbbfac9d9dae33af0f31ff7ededdfdde45))
+- Extend shared preset from .github ([5533690](https://github.com/wielorzeczownik/pulse-layer/commit/55336902f796ab87b4ea6425d4a628f54348b0c0))
+- Open one pull request per dependency (#343) ([5dbbb5a](https://github.com/wielorzeczownik/pulse-layer/commit/5dbbb5a501212e2c4743324d7522f5f840890731))
+- Update all non-major (#341) ([b6f1069](https://github.com/wielorzeczownik/pulse-layer/commit/b6f1069da79ebc6302f8af73fd85d896b8974b7b))
+
+### CI/CD
+
+- Attach an spdx sbom to releases ([19872a8](https://github.com/wielorzeczownik/pulse-layer/commit/19872a8c5801a6d7257da4cc96be9381757ddfa6))
+- Move pinned tool versions to workflow env ([5c3c3c6](https://github.com/wielorzeczownik/pulse-layer/commit/5c3c3c6f80b87ed2b75f413c3a9f6dfc8d805b63))
+
+### Dependencies
+
+- Lock file maintenance (#342) ([9dc9563](https://github.com/wielorzeczownik/pulse-layer/commit/9dc956317d2b81c02a3b1abc701d9d51222d61cf))
+
 ## [0.3.0](https://github.com/wielorzeczownik/pulse-layer/compare/v0.2.59...v0.3.0) - 2026-10-18
 
 ### Features
@@ -1025,10 +1055,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.17](https://github.com/wielorzeczownik/pulse-layer/compare/v0.1.16...v0.1.17) - 2026-04-04
 
-### Bug Fixes
-
-- Resolve JS audit advisories [skip ci] ([b5bc7b7](https://github.com/wielorzeczownik/pulse-layer/commit/b5bc7b748740c3c067bf1a436cfb79315a27f42d))
-
 ### Documentation
 
 - Improve README with SEO improvements and add Polish translation ([8ccbc58](https://github.com/wielorzeczownik/pulse-layer/commit/8ccbc581f7956fab35b2bf833b9230aecaf5de55))
@@ -1047,6 +1073,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Dependencies
 
+- Resolve JS audit advisories [skip ci] ([b5bc7b7](https://github.com/wielorzeczownik/pulse-layer/commit/b5bc7b748740c3c067bf1a436cfb79315a27f42d))
 - Update dependency @types/node to v25.5.2 [skip release] (#19) ([e918c70](https://github.com/wielorzeczownik/pulse-layer/commit/e918c70652ec0da393e0049b28fff67caee1315b))
 
 ## [0.1.16](https://github.com/wielorzeczownik/pulse-layer/compare/v0.1.15...v0.1.16) - 2026-04-03
