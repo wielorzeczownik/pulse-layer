@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.1...v0.3.2) - 2026-10-26
+
+### Security
+
+- Update rust crate tokio to v1.54.1 [security] (#345) ([5fefe7a](https://github.com/wielorzeczownik/pulse-layer/commit/5fefe7ac1a3ae55b84bff537d40c9594b666013f))
+
+### Bug Fixes
+
+- Draft releases before uploading assets (#347) ([28fee75](https://github.com/wielorzeczownik/pulse-layer/commit/28fee756d8a4939b8276dba9fc793a430d987537))
+
+### CI/CD
+
+- Update dtolnay/rust-toolchain digest to b725eda (#348) ([630a7d3](https://github.com/wielorzeczownik/pulse-layer/commit/630a7d39c791b9f4f47cb6d101fccbe9047c29b2))
+- Cut release candidates on push and stable releases weekly (#346) ([68a7331](https://github.com/wielorzeczownik/pulse-layer/commit/68a7331ba2616c88e0482a45ec25773873a7606f))
+
+### Dependencies
+
+- Update dependency stylelint-config-recess-order to v7.8.2 (#349) ([f6d04ed](https://github.com/wielorzeczownik/pulse-layer/commit/f6d04ed94add806bc8f7e1cb2d680ffae8809b99))
+
 ## [0.3.1](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.0...v0.3.1) - 2026-10-21
 
 ### Bug Fixes
