@@ -5,6 +5,44 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.2...v0.3.3) - 2026-11-16
+
+### Build System
+
+- Drop autoprefixer ([7c5d4e0](https://github.com/wielorzeczownik/pulse-layer/commit/7c5d4e0fc47ccda8b1e891b6557797245e8484d9))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.89.1 (#372) ([3301099](https://github.com/wielorzeczownik/pulse-layer/commit/3301099f692434170fadb49de351151ca6064c62))
+- Create lightweight tags ([a2eaf48](https://github.com/wielorzeczownik/pulse-layer/commit/a2eaf48ad3e565a90ac6359f8b07da3034bd865f))
+- Update swatinem/rust-cache action to v2.9.3 (#362) ([5083e82](https://github.com/wielorzeczownik/pulse-layer/commit/5083e82dda6742b3fbd158e7d35f345cc51d3fa2))
+- Update taiki-e/install-action action to v2.87.31 (#363) ([89618ea](https://github.com/wielorzeczownik/pulse-layer/commit/89618ead0d4b006cc6630a761fc9f94ac02d8a42))
+- Update pozil/auto-assign-issue action to v4.1.0 (#364) ([2e4d4ac](https://github.com/wielorzeczownik/pulse-layer/commit/2e4d4ac85e42a089bc33f561f3f8f061f7be28ea))
+- Update davidanson/markdownlint-cli2-action action to v25 (#366) ([5b21aca](https://github.com/wielorzeczownik/pulse-layer/commit/5b21aca377a07b11f32bb25c4845f2a925cb4e1c))
+- Update taiki-e/install-action action to v2.87.29 (#352) ([3d86c9c](https://github.com/wielorzeczownik/pulse-layer/commit/3d86c9ce9b5cc3fc686d4493ace65f39311fc1c4))
+
+### Dependencies
+
+- Update dependency vite to v8.3.8 (#377) ([b8ce12f](https://github.com/wielorzeczownik/pulse-layer/commit/b8ce12f0df59a151e617795ba121b6ccf38ffb43))
+- Update dependency typescript-eslint to v8.72.2 (#376) ([e47e8e8](https://github.com/wielorzeczownik/pulse-layer/commit/e47e8e86488d5d5c111d18d6594302753f7f54e3))
+- Update rust crate uuid to v1.29.1 (#371) ([5b9ec47](https://github.com/wielorzeczownik/pulse-layer/commit/5b9ec47747852b2790e970219a096c82ea4dccd9))
+- Lock file maintenance (#375) ([16a73f5](https://github.com/wielorzeczownik/pulse-layer/commit/16a73f5a541250bba59d21c500344fa3f3ba298c))
+- Update dependency vitest to v5.1.0 (#370) ([b1f5c24](https://github.com/wielorzeczownik/pulse-layer/commit/b1f5c24076df4a72ce99c3b440a7635c228ef3a8))
+- Update dependency stylelint-config-recess-order to v7.10.0 (#369) ([1bf522f](https://github.com/wielorzeczownik/pulse-layer/commit/1bf522ffb77566509ceb2c1055db4c481d19e7c2))
+- Update dependency eslint to v10.14.0 (#368) ([b560a3f](https://github.com/wielorzeczownik/pulse-layer/commit/b560a3f821de14cf2f4929592b2e1c3a89389d30))
+- Update dependency vite to v8.3.6 (#367) ([a1eb967](https://github.com/wielorzeczownik/pulse-layer/commit/a1eb9673aee73fa0de907a15e479851a84c48143))
+- Lock file maintenance (#359) ([b8dfef4](https://github.com/wielorzeczownik/pulse-layer/commit/b8dfef4f997ecbcfbb58f237efa7f2c297e6c68e))
+- Update node.js to v26 (#365) ([060b6c0](https://github.com/wielorzeczownik/pulse-layer/commit/060b6c069971fc515dbc38c48472215966b8beb5))
+- Update dependency typescript-eslint to v8.72.1 (#361) ([4e4756f](https://github.com/wielorzeczownik/pulse-layer/commit/4e4756f7bd3a87be2832f70464f8bfd7802562ad))
+- Update dependency autoprefixer to v10.6.2 (#360) ([5f5f4c1](https://github.com/wielorzeczownik/pulse-layer/commit/5f5f4c1e129882a914e701121a8555c547dbece3))
+- Update dependency typescript-eslint to v8.72.0 (#355) ([26fae82](https://github.com/wielorzeczownik/pulse-layer/commit/26fae8260edc014bf88c3e99339d575653887bd2))
+- Update rust crate uuid to v1.29.0 (#356) ([469bb06](https://github.com/wielorzeczownik/pulse-layer/commit/469bb064621b0622b6fcd641b84ccfa07f1c5929))
+- Update dependency stylelint-config-recess-order to v7.9.0 (#354) ([6847b2e](https://github.com/wielorzeczownik/pulse-layer/commit/6847b2eb564caa5731376ccd304f5609a6297d40))
+- Update dependency eslint-plugin-unicorn to v79 (#357) ([395afb4](https://github.com/wielorzeczownik/pulse-layer/commit/395afb4dcc94f839bcf092f41f0997e4596b3778))
+- Update dependency eslint to v10.13.0 (#353) ([2952388](https://github.com/wielorzeczownik/pulse-layer/commit/29523885401bd5edf588af725ed1508f7e4d4d21))
+- Update dependency vite-plugin-singlefile to v2.3.4 (#351) ([5eb28ea](https://github.com/wielorzeczownik/pulse-layer/commit/5eb28ea727fc863498b10f1c239eddd4af47b5a4))
+- Update dependency vite to v8.3.5 (#350) ([fa0c8a3](https://github.com/wielorzeczownik/pulse-layer/commit/fa0c8a3fb403bacf56ac29cc770ab398c6e5655b))
+
 ## [0.3.2](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.1...v0.3.2) - 2026-10-26
 
 ### Security
