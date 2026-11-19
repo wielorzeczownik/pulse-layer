@@ -9,186 +9,134 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/logo.png" alt="PulseLayer logo" width="300" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/icon.svg" alt="PulseLayer logo" width="200" />
 </p>
 
 <p align="center">🇬🇧 <a href="README.md">English</a> | 🇵🇱 Polski</p>
 
-Nakładka na OBS wyświetlająca **tętno w czasie rzeczywistym** – odczytuje BPM z pierścienia Bluetooth i serwuje widget przeglądarki bezpośrednio na stream. Bez subskrypcji, bez chmury – działa w całości lokalnie.
+Nakładka do [OBS Studio](https://obsproject.com) z tętnem odczytywanym z pierścienia Bluetooth.
 
-Stworzona dla VTuberów i streamerów, którzy chcą pokazywać tętno na streamie bez niczego więcej niż tani pierścień i OBS. Pierwotnie zrobiona dla **[KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu)**.
+W OBS dodaje się ją jako źródło przeglądarki. Wszystko działa lokalnie, bez chmury i kont.
 
-## Funkcje
+Pierwotnie powstała dla [KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu).
 
-- Tętno na żywo z kolorowymi strefami (spokój → alarm)
-- Dwa style nakładki: **serce** lub **EKG**
-- Własne kolory hex dla każdej strefy
+<div align="center">
+<table>
+<tr>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-connected.png" alt="Tętno na żywo w aplikacji"/><br/><sub><b>BPM na żywo</b></sub></td>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-settings.png" alt="Ustawienia wyglądu"/><br/><sub><b>Ustawienia</b></sub></td>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-scan.png" alt="Wyszukiwanie pierścieni w pobliżu"/><br/><sub><b>Skanowanie</b></sub></td>
+</tr>
+</table>
+</div>
 
-## Kompatybilność
+## Obsługiwane pierścienie
 
-Testowane na **Smartring COLMI R12**. Starsze modele COLMI i inne pierścienie korzystające z tego samego protokołu BLE powinny też działać.
+Testowane na COLMI R12. Pierścienie z aplikacji Qring też powinny działać, bo mają ten sam protokół BLE. Innych marek nie ma. Jak będzie dużo chętnych, może dodam.
 
-> [!NOTE]
-> Aktualnie obsługiwane są tylko pierścienie z aplikacji Qring. Dodanie innych marek nie jest planowane, ale jeśli będzie zainteresowanie – jestem otwarty.
+## Pobieranie
 
-## Pobieranie i instalacja
+Pobierz plik dla swojego systemu z [Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest).
 
-Najnowsze wydanie: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest)
-
-Pobierz instalator dla swojej platformy albo wersję przenośną, jeśli nie chcesz niczego instalować:
-
-**Linux:**
-
-- [pulse-layer-x86_64-unknown-linux-gnu.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb) – Debian, Ubuntu i pochodne (instalator)
-- [pulse-layer-x86_64-unknown-linux-gnu.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage) – dowolna dystrybucja, uruchamiasz bezpośrednio
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – wersja przenośna (Intel/AMD 64-bit)
-
-**macOS:**
-
-- [pulse-layer-universal-apple-darwin.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) – obraz dysku, Intel i Apple Silicon
-- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – wersja przenośna, Intel i Apple Silicon
-
-**Windows:**
-
-- [pulse-layer-x86_64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe) – instalator, 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe) – instalator, ARM64
-- [pulse-layer-i686-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) – instalator, 32-bit (x86)
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – wersja przenośna, 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – wersja przenośna, ARM64
-- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – wersja przenośna, 32-bit (x86)
-
-### macOS
-
-Otwórz plik `.dmg` i przeciągnij `PulseLayer.app` do **Aplikacji** (albo rozpakuj wersję przenośną). Przy pierwszym uruchomieniu macOS zablokuje aplikację, bo nie jest podpisana płatnym certyfikatem Apple. Żeby to obejść:
-
-**Opcja A – prawy przycisk myszy:**
-
-1. Kliknij prawym przyciskiem na `PulseLayer.app` → **Otwórz**
-2. Kliknij **Otwórz** w oknie dialogowym
-
-**Opcja B – terminal (jednorazowo):**
-
-```bash
-xattr -cr PulseLayer.app
-open PulseLayer.app
-```
+| System  | Instalator                                                                                                                                                                                                                                                                                                                                                                             | Bez instalacji                                                                                                                                                                                                                                                                                                                                                       |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows | [x64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe), [ARM64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe), [x86](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) | [x64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip), [ARM64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip), [x86](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) |
+| macOS   | [.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) (Intel i Apple Silicon)                                                                                                                                                                                                                                         | [.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz)                                                                                                                                                                                                                                         |
+| Linux   | [.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb), [.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage)                                                                                                                           | [.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz)                                                                                                                                                                                                                                       |
 
 ### Windows
 
-Uruchom instalator `-setup.exe`. Instaluje aplikację tylko dla Twojego użytkownika, dodaje skrót w menu Start i deinstalator. Windows SmartScreen może ostrzec o nieznanym wydawcy, bo instalator nie jest podpisany: kliknij **Więcej informacji**, a potem **Uruchom mimo to**. Wersja przenośna (zip) nie wymaga instalacji, wystarczy ją rozpakować i uruchomić `pulse-layer.exe`.
+Instalator nie jest podpisany, więc SmartScreen ostrzeże o nieznanym wydawcy. Kliknij **Więcej informacji**, potem **Uruchom mimo to**.
 
-### Linux
+### macOS
+
+Aplikacja nie ma płatnego certyfikatu Apple, więc macOS zablokuje pierwsze uruchomienie. Kliknij ją prawym przyciskiem i wybierz **Otwórz** albo odpal raz:
 
 ```bash
-# Debian / Ubuntu
-sudo apt install ./pulse-layer-x86_64-unknown-linux-gnu.deb
-
-# AppImage
-chmod +x pulse-layer-x86_64-unknown-linux-gnu.AppImage
-./pulse-layer-x86_64-unknown-linux-gnu.AppImage
-
-# Wersja przenośna
-tar -xzf pulse-layer-*.tar.gz
-./pulse-layer
+xattr -cr /Applications/PulseLayer.app
 ```
 
 ## Łączenie z pierścieniem
 
-### Pierwsze parowanie
+Naładuj pierścień, otwórz PulseLayer, kliknij **Skanuj pierścienie**, a potem **Połącz** przy swoim pierścieniu.
 
-1. Upewnij się, że pierścień jest naładowany i w pobliżu.
-2. Uruchom PulseLayer i kliknij **Scan**.
-3. Pierścień pojawi się na liście – kliknij **Connect**.
+Pierścień gada naraz tylko z jednym urządzeniem. Jeśli jest połączony z aplikacją Qring na telefonie, PulseLayer go nie znajdzie, więc najpierw wyłącz Bluetooth w telefonie.
 
-### Pierścień jest już sparowany z telefonem
+Żeby potem wrócić do telefonu, pierścień trzeba zapomnieć po obu stronach:
 
-Pierścień może rozmawiać tylko z jednym urządzeniem na raz. Jeśli jest połączony z aplikacją Qring na telefonie, PulseLayer go nie zobaczy.
-
-Rozwiązanie: **wyłącz Bluetooth na telefonie** przed skanowaniem. PulseLayer wykryje pierścień normalnie.
-
-### Powrót do telefonu po użyciu PulseLayer
-
-Pierścień pamięta parowanie. Żeby sparować go z telefonem od nowa, trzeba usunąć parowanie z obu stron:
-
-1. W PulseLayer – kliknij **Disconnect**.
-2. Na komputerze – ustawienia Bluetooth, znajdź pierścień, kliknij **Zapomnij / Usuń urządzenie**.
-3. Na telefonie – też zapomnij pierścień.
-4. Sparuj od nowa przez aplikację Qring.
+1. Kliknij **Rozłącz** w PulseLayer.
+2. Usuń pierścień w ustawieniach Bluetooth komputera.
+3. Usuń go też w telefonie.
+4. Sparuj go od nowa w aplikacji Qring.
 
 > [!IMPORTANT]
-> Pominięcie kroku 2 lub 3 spowoduje błąd parowania po stronie telefonu. Oba urządzenia muszą najpierw zapomnieć pierścień.
+> Bez kroku 2 lub 3 parowanie na telefonie się nie uda.
 
-## Konfiguracja OBS
+## OBS
 
-Nakładka działa jako lokalna strona przeglądarki serwowana przez PulseLayer. Zewnętrzny hosting nie jest potrzebny.
+Dopóki PulseLayer jest otwarty, nakładka jest pod `http://localhost:9000`.
 
-1. **Uruchom PulseLayer** i połącz się z pierścieniem – serwer startuje na porcie `9000`.
-2. W OBS kliknij **+** w panelu Źródła → **Przeglądarka**.
-3. Ustaw URL na:
+1. W OBS dodaj nowe źródło **Przeglądarka**.
+2. Ustaw URL na `http://localhost:9000`, szerokość `400` i wysokość `300`.
+3. Opcjonalnie zaznacz **Odśwież przeglądarkę, gdy scena staje się aktywna**.
 
-   ```text
-   http://localhost:9000
-   ```
-
-4. Ustaw **Szerokość** na `400` i **Wysokość** na `300` (możesz dowolnie zmieniać rozmiar i przycinać w OBS).
-5. Zaznacz **Odśwież przeglądarkę gdy scena staje się aktywna**, jeśli chcesz automatycznego ponownego połączenia.
-6. Kliknij **OK** – widget pojawi się na scenie. Użyj **Edytuj transformację**, żeby umieścić go gdzie chcesz.
-
-> [!TIP]
-> Widget jest zakotwiczony do lewego dolnego rogu ramki przeglądarki. Przytnij źródło przeglądarki ciasno, a możesz umieścić je w dowolnym miejscu na scenie.
-
-Nakładka sama się reconnectuje po restarcie PulseLayer – nie musisz dotykać źródła przeglądarki.
+Widget siedzi w lewym dolnym rogu źródła, więc przytnij źródło i przesuń je gdzie chcesz. Po restarcie PulseLayer nakładka połączy się sama.
 
 ## Style nakładki
 
-Przełączaj między stylami w panelu **Settings** w PulseLayer.
+Styl zmienia się w panelu **Wygląd** w PulseLayer. **Serce** to bijące serce z BPM obok. **Linia EKG** rysuje się raz na uderzenie, z BPM pod spodem.
 
-**Serce** – bijąca ikona serca z dużą liczbą BPM. Proste i czytelne.
+<div align="center">
+<table>
+<tr>
+<td align="center" width="50%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/overlay-heart.png" width="219" alt="Nakładka w stylu serca"/><br/><sub><b>Serce</b></sub></td>
+<td align="center" width="50%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/overlay-ecg.png" width="295" alt="Nakładka w stylu EKG"/><br/><sub><b>Linia EKG</b></sub></td>
+</tr>
+</table>
+</div>
 
-**EKG** – animowana linia EKG rysująca się raz na uderzenie serca, z BPM poniżej. Lepsze dla bardziej technicznego wyglądu.
+Kolor zależy od poziomu tętna. Każdy kolor da się zmienić w panelu **Wygląd**.
 
-Oba zmieniają kolor w zależności od strefy BPM. Wszystkie kolory są konfigurowalne.
+| Poziom      | BPM     | Domyślny kolor |
+| ----------- | ------- | -------------- |
+| Spokojny    | 0-64    | zielony        |
+| Umiarkowany | 65-80   | niebieski      |
+| Podwyższony | 81-100  | żółty          |
+| Intensywny  | 101-130 | pomarańczowy   |
+| Ekstremalny | 131+    | czerwony       |
 
-| Strefa   | Domyślny zakres BPM | Domyślny kolor |
-| -------- | ------------------- | -------------- |
-| Spokój   | 0 – 64              | Zielony        |
-| Normalne | 65 – 80             | Niebieski      |
-| Wysokie  | 81 – 100            | Żółty          |
-| Szybkie  | 101 – 130           | Pomarańczowy   |
-| Alarm    | 131+                | Czerwony       |
+## Plik ustawień
 
-## Konfiguracja
-
-PulseLayer nie korzysta ze zmiennych środowiskowych ani flag wiersza poleceń.
-Wszystko ustawiasz w panelu **Ustawienia**, a wartości trafiają do pliku
-`pulselayer/settings.json` w katalogu konfiguracyjnym systemu:
+Nie ma flag wiersza poleceń ani zmiennych środowiskowych. Ustawienia lądują w `settings.json`:
 
 | System  | Ścieżka                                                  |
 | ------- | -------------------------------------------------------- |
+| Windows | `%APPDATA%\pulselayer\settings.json`                     |
 | macOS   | `~/Library/Application Support/pulselayer/settings.json` |
 | Linux   | `~/.config/pulselayer/settings.json`                     |
-| Windows | `%APPDATA%\pulselayer\settings.json`                     |
 
-| Klucz             | Wymagany | Domyślnie | Znaczenie                                           |
-| ----------------- | -------- | --------- | --------------------------------------------------- |
-| `zone_calm_hex`   | tak      | `#52C27A` | Kolor strefy spokojnej (0 – 64 BPM)                 |
-| `zone_normal_hex` | tak      | `#5B9BD5` | Kolor strefy normalnej (65 – 80 BPM)                |
-| `zone_high_hex`   | tak      | `#E5B950` | Kolor strefy wysokiej (81 – 100 BPM)                |
-| `zone_fast_hex`   | tak      | `#E07A30` | Kolor strefy szybkiej (101 – 130 BPM)               |
-| `zone_alarm_hex`  | tak      | `#D94545` | Kolor strefy alarmowej (131+ BPM)                   |
-| `panel_bg_hex`    | tak      | `#0A0A12` | Tło panelu nakładki, rysowane z kryciem 82%         |
-| `overlay_style`   | tak      | `"Heart"` | Styl nakładki: `"Heart"` albo `"Pulse"` (linia EKG) |
+<details>
+<summary>Wszystkie klucze</summary>
 
-Każdy klucz jest wymagany w tym sensie, że plik bez któregokolwiek z nich – albo
-z niepoprawnym JSON-em – jest odrzucany w całości i wszystkie ustawienia wracają
-do wartości domyślnych. Wartość, która nie jest sześcioma cyframi szesnastkowymi,
-wyświetli się jako szara, zamiast przerwać działanie.
+| Klucz             | Domyślnie | Znaczenie                            |
+| ----------------- | --------- | ------------------------------------ |
+| `zone_calm_hex`   | `#52C27A` | kolor poziomu Spokojny               |
+| `zone_normal_hex` | `#5B9BD5` | kolor poziomu Umiarkowany            |
+| `zone_high_hex`   | `#E5B950` | kolor poziomu Podwyższony            |
+| `zone_fast_hex`   | `#E07A30` | kolor poziomu Intensywny             |
+| `zone_alarm_hex`  | `#D94545` | kolor poziomu Ekstremalny            |
+| `panel_bg_hex`    | `#0A0A12` | tło nakładki, rysowane z kryciem 82% |
+| `overlay_style`   | `"Heart"` | `"Heart"` albo `"Pulse"` (linia EKG) |
 
-Serwer nakładki zawsze nasłuchuje na `127.0.0.1:9000`; portu nie da się zmienić.
+Jeśli brakuje któregoś klucza albo JSON jest zepsuty, cały plik jest ignorowany i wszystko wraca do domyślnych. Kolor, który nie jest sześcioma cyframi hex, wyświetli się na szaro.
+
+</details>
+
+Port to zawsze `9000` i nie da się go zmienić.
 
 ## Budowanie ze źródeł
 
-Wymagania: [Rust](https://rustup.rs) stable, [Node.js](https://nodejs.org) 24+.
+Potrzebujesz [Rusta](https://rustup.rs) stable i [Node.js](https://nodejs.org) 24+.
 
 ```bash
 git clone https://github.com/wielorzeczownik/pulse-layer
@@ -196,24 +144,17 @@ cd pulse-layer
 cargo build --release
 ```
 
-Frontend nakładki jest kompilowany przez Vite w ramach `cargo build` i wbudowany w binarny plik – nie ma osobnego kroku budowania.
+`cargo build` buduje też nakładkę przez Vite i wkleja ją do binarki.
 
-**Szybkie uruchomienie na macOS (build debug):**
-
-```bash
-./run_macos.sh
-```
-
-Buduje bundle `.app` w `target/` przez [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), podpisuje go ad-hoc i otwiera.
-
-### Zależności systemowe na Linuxie
+Na Linuxie potrzebujesz jeszcze:
 
 ```bash
-# Ubuntu / Debian
 sudo apt-get install libdbus-1-dev pkg-config libxkbcommon-dev \
   libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev
 ```
 
+Na macOS `./run_macos.sh` buduje debugowe `.app`, podpisuje je ad-hoc i otwiera. Wymaga [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`).
+
 ## Zastrzeżenie
 
-Nieoficjalny projekt, niezwiązany z COLMI ani żadnym producentem pierścieni. Może przestać działać, jeśli firmware pierścienia zmieni protokół BLE.
+Projekt nieoficjalny, niezwiązany z COLMI ani innym producentem pierścieni. Jeśli aktualizacja firmware pierścienia zmieni protokół BLE, PulseLayer może przestać działać.

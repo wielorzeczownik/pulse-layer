@@ -9,207 +9,134 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/logo.png" alt="PulseLayer logo" width="300" />
+  <img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/icon.svg" alt="PulseLayer logo" width="200" />
 </p>
 
 <p align="center">🇬🇧 English | 🇵🇱 <a href="README.pl.md">Polski</a></p>
 
-A real-time **heart rate OBS overlay** that reads live BPM from a Bluetooth smart ring and serves a browser widget directly to your stream. No subscriptions, no cloud – runs entirely on your machine.
+A heart rate overlay for [OBS Studio](https://obsproject.com), fed by a Bluetooth smart ring.
 
-Made for VTubers and streamers who want to show live heart rate on stream with nothing more than a cheap smart ring and OBS. Originally built for **[KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu)**.
+It goes into OBS as a browser source. Everything runs locally, with no cloud and no accounts.
 
-## Screenshots
+Originally made for [KitsuneTsuyu](https://www.twitch.tv/kitsunetsuyu).
 
 <div align="center">
 <table>
 <tr>
-<td align="center" width="33%"><img src="assets/app-connected.png" alt="Live heart rate in the app"/><br/><sub><b>Live BPM</b> · color-coded zones</sub></td>
-<td align="center" width="33%"><img src="assets/app-settings.png" alt="Appearance settings"/><br/><sub><b>Appearance</b> · style &amp; zone colors</sub></td>
-<td align="center" width="33%"><img src="assets/app-scan.png" alt="Scanning for nearby rings"/><br/><sub><b>Scan &amp; connect</b> · find your ring</sub></td>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-connected.png" alt="Live heart rate in the app"/><br/><sub><b>Live BPM</b></sub></td>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-settings.png" alt="Appearance settings"/><br/><sub><b>Settings</b></sub></td>
+<td align="center" width="33%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/app-scan.png" alt="Scanning for nearby rings"/><br/><sub><b>Scan</b></sub></td>
 </tr>
 </table>
 </div>
 
-## Features
+## Supported rings
 
-- Live BPM with color-coded zones (calm → alarm)
-- Two overlay styles: **heart** or **ECG**
-- Custom hex colors per zone
+Tested on the COLMI R12. Rings that use the Qring app should work too, since they speak the same BLE protocol. Other brands aren't supported. If enough people ask, I might add them.
 
-## Compatibility
+## Download
 
-Tested on **Smartring COLMI R12**. Older COLMI models and other rings using the same BLE protocol should work too.
+Grab the file for your system from [Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest).
 
-> [!NOTE]
-> Only Qring App rings are supported right now. Adding other brands isn't planned, but if there's enough interest I'm open to it.
-
-## Download & Install
-
-Latest release: [GitHub Releases](https://github.com/wielorzeczownik/pulse-layer/releases/latest)
-
-Download the installer for your platform, or the portable archive if you prefer not to install anything:
-
-**Linux:**
-
-- [pulse-layer-x86_64-unknown-linux-gnu.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb) – Debian, Ubuntu and derivatives (installer)
-- [pulse-layer-x86_64-unknown-linux-gnu.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage) – any distribution, run directly
-- [pulse-layer-x86_64-unknown-linux-gnu.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz) – portable binary (Intel/AMD 64-bit)
-
-**macOS:**
-
-- [pulse-layer-universal-apple-darwin.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) – disk image, Intel and Apple Silicon
-- [pulse-layer-universal-apple-darwin.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz) – portable app, Intel and Apple Silicon
-
-**Windows:**
-
-- [pulse-layer-x86_64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe) – installer, 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe) – installer, ARM64
-- [pulse-layer-i686-pc-windows-msvc-setup.exe](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) – installer, 32-bit (x86)
-- [pulse-layer-x86_64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip) – portable, 64-bit (x86_64)
-- [pulse-layer-aarch64-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip) – portable, ARM64
-- [pulse-layer-i686-pc-windows-msvc.zip](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) – portable, 32-bit (x86)
-
-### macOS
-
-Open the `.dmg` and drag `PulseLayer.app` into **Applications** (or extract the portable archive). On first launch macOS will block it because the app isn't signed with a paid Apple certificate. To get past that:
-
-**Option A – right-click:**
-
-1. Right-click `PulseLayer.app` → **Open**
-2. Click **Open** in the dialog
-
-**Option B – terminal (one-time):**
-
-```bash
-xattr -cr PulseLayer.app
-open PulseLayer.app
-```
+| System  | Installer                                                                                                                                                                                                                                                                                                                                                                              | Portable                                                                                                                                                                                                                                                                                                                                                             |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows | [x64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc-setup.exe), [ARM64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc-setup.exe), [x86](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc-setup.exe) | [x64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-pc-windows-msvc.zip), [ARM64](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-aarch64-pc-windows-msvc.zip), [x86](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-i686-pc-windows-msvc.zip) |
+| macOS   | [.dmg](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.dmg) (Intel and Apple Silicon)                                                                                                                                                                                                                                       | [.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-universal-apple-darwin.tar.gz)                                                                                                                                                                                                                                         |
+| Linux   | [.deb](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.deb), [.AppImage](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.AppImage)                                                                                                                           | [.tar.gz](https://github.com/wielorzeczownik/pulse-layer/releases/latest/download/pulse-layer-x86_64-unknown-linux-gnu.tar.gz)                                                                                                                                                                                                                                       |
 
 ### Windows
 
-Run the `-setup.exe` installer. It installs for your user only and adds a Start menu shortcut and an uninstaller. Windows SmartScreen may warn about an unknown publisher because the installer isn't signed: click **More info** and then **Run anyway**. The portable zip needs no installation, extract it and run `pulse-layer.exe`.
+The installer isn't signed, so SmartScreen will complain about an unknown publisher. Click **More info**, then **Run anyway**.
 
-### Linux
+### macOS
+
+The app isn't signed with a paid Apple certificate, so macOS blocks the first launch. Right-click the app and pick **Open**, or run this once:
 
 ```bash
-# Debian / Ubuntu
-sudo apt install ./pulse-layer-x86_64-unknown-linux-gnu.deb
-
-# AppImage
-chmod +x pulse-layer-x86_64-unknown-linux-gnu.AppImage
-./pulse-layer-x86_64-unknown-linux-gnu.AppImage
-
-# Portable binary
-tar -xzf pulse-layer-*.tar.gz
-./pulse-layer
+xattr -cr /Applications/PulseLayer.app
 ```
 
-## Connecting your ring
+## Connecting the ring
 
-### First-time pairing
+Charge the ring, open PulseLayer, click **Scan for rings** and then **Connect** next to your ring.
 
-1. Make sure your ring is charged and nearby.
-2. Launch PulseLayer and click **Scan**.
-3. Your ring appears in the list – click **Connect**.
+The ring talks to one device at a time. If it's connected to the Qring app on your phone, PulseLayer won't find it, so turn off Bluetooth on the phone first.
 
-### Ring is already paired with your phone
+To go back to the phone later, the ring has to be forgotten on both sides:
 
-The ring can only talk to one device at a time. If it's connected to the Qring app on your phone, PulseLayer won't see it.
-
-Fix: **turn off Bluetooth on your phone** before scanning. PulseLayer will pick it up normally.
-
-### Going back to your phone after using PulseLayer
-
-The ring remembers the pairing. To re-pair with your phone you need to clear it from both sides:
-
-1. In PulseLayer – click **Disconnect**.
-2. On your computer – Bluetooth settings, find the ring, click **Forget / Remove device**.
-3. On your phone – forget the ring too.
-4. Re-pair from scratch via the Qring app.
+1. Click **Disconnect** in PulseLayer.
+2. Remove the ring in your computer's Bluetooth settings.
+3. Remove it on the phone too.
+4. Pair it again in the Qring app.
 
 > [!IMPORTANT]
-> Skipping step 2 or 3 will cause the pairing to fail on the phone side. Both devices need to forget the ring first.
+> If you skip step 2 or 3, pairing on the phone will fail.
 
-## OBS Setup
+## OBS
 
-The overlay runs as a local browser page served by PulseLayer. No external hosting needed.
+PulseLayer serves the overlay at `http://localhost:9000` as long as the app is open.
 
-1. **Start PulseLayer** and connect to your ring – the server starts on port `9000`.
-2. In OBS, click **+** in the Sources panel → **Browser**.
-3. Set the URL to:
+1. In OBS, add a new **Browser** source.
+2. Set the URL to `http://localhost:9000`, width `400` and height `300`.
+3. Optionally tick **Refresh browser when scene becomes active**.
 
-   ```text
-   http://localhost:9000
-   ```
-
-4. Set **Width** to `400` and **Height** to `300` (you can resize/crop freely in OBS).
-5. Check **Refresh browser when scene becomes active** if you want it to reconnect automatically.
-6. Click **OK** and the widget shows up. Use **Edit Transform** to place it where you want.
-
-> [!TIP]
-> The widget anchors to the bottom-left corner of the browser frame. Crop the browser source tightly and you can place it anywhere on the canvas.
-
-The overlay reconnects on its own if PulseLayer restarts, so you don't need to touch the browser source again.
+The widget sits in the bottom-left corner of the source, so crop the source and move it wherever you want. If you restart PulseLayer, the overlay reconnects by itself.
 
 ## Overlay styles
 
-Switch between styles in the **Settings** panel inside PulseLayer.
+You switch the style in the **Appearance** panel. **Heart** is a beating heart with the BPM next to it. **ECG Pulse** draws a line once per beat with the BPM below.
 
 <div align="center">
 <table>
 <tr>
-<td align="center" width="50%"><img src="assets/overlay-heart.png" alt="Heart overlay style on stream"/><br/><sub><b>Heart</b> style</sub></td>
-<td align="center" width="50%"><img src="assets/overlay-ecg.png" alt="ECG overlay style on stream"/><br/><sub><b>ECG</b> style</sub></td>
+<td align="center" width="50%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/overlay-heart.png" width="219" alt="Heart overlay style"/><br/><sub><b>Heart</b></sub></td>
+<td align="center" width="50%"><img src="https://raw.githubusercontent.com/wielorzeczownik/pulse-layer/main/assets/overlay-ecg.png" width="295" alt="ECG overlay style"/><br/><sub><b>ECG</b></sub></td>
 </tr>
 </table>
 </div>
 
-**Heart** – a beating heart icon with a large BPM number. Simple and readable.
+The color changes with the BPM zone. You can change every color in the **Appearance** panel.
 
-**ECG** – an animated ECG line that draws once per heartbeat, with a BPM readout below. Better for a more technical look.
+| Zone   | BPM     | Default color |
+| ------ | ------- | ------------- |
+| Calm   | 0-64    | green         |
+| Normal | 65-80   | blue          |
+| High   | 81-100  | yellow        |
+| Fast   | 101-130 | orange        |
+| Alarm  | 131+    | red           |
 
-Both change color based on BPM zone. All colors are customizable.
+## Settings file
 
-| Zone   | Default BPM range | Default color |
-| ------ | ----------------- | ------------- |
-| Calm   | 0 – 64            | Green         |
-| Normal | 65 – 80           | Blue          |
-| High   | 81 – 100          | Yellow        |
-| Fast   | 101 – 130         | Orange        |
-| Alarm  | 131+              | Red           |
+There are no command-line flags or environment variables. Settings are saved to `settings.json`:
 
-## Configuration
+| System  | Path                                                     |
+| ------- | -------------------------------------------------------- |
+| Windows | `%APPDATA%\pulselayer\settings.json`                     |
+| macOS   | `~/Library/Application Support/pulselayer/settings.json` |
+| Linux   | `~/.config/pulselayer/settings.json`                     |
 
-PulseLayer has no environment variables and no command-line flags. Everything is
-set in the **Settings** panel and saved to `pulselayer/settings.json` in your
-platform's config directory:
+<details>
+<summary>All keys</summary>
 
-| Platform | Path                                                     |
-| -------- | -------------------------------------------------------- |
-| macOS    | `~/Library/Application Support/pulselayer/settings.json` |
-| Linux    | `~/.config/pulselayer/settings.json`                     |
-| Windows  | `%APPDATA%\pulselayer\settings.json`                     |
+| Key               | Default   | Meaning                                  |
+| ----------------- | --------- | ---------------------------------------- |
+| `zone_calm_hex`   | `#52C27A` | calm zone color                          |
+| `zone_normal_hex` | `#5B9BD5` | normal zone color                        |
+| `zone_high_hex`   | `#E5B950` | high zone color                          |
+| `zone_fast_hex`   | `#E07A30` | fast zone color                          |
+| `zone_alarm_hex`  | `#D94545` | alarm zone color                         |
+| `panel_bg_hex`    | `#0A0A12` | overlay background, drawn at 82% opacity |
+| `overlay_style`   | `"Heart"` | `"Heart"` or `"Pulse"` (the ECG line)    |
 
-| Key               | Required | Default   | Meaning                                              |
-| ----------------- | -------- | --------- | ---------------------------------------------------- |
-| `zone_calm_hex`   | yes      | `#52C27A` | Colour for the calm zone (0 – 64 BPM)                |
-| `zone_normal_hex` | yes      | `#5B9BD5` | Colour for the normal zone (65 – 80 BPM)             |
-| `zone_high_hex`   | yes      | `#E5B950` | Colour for the high zone (81 – 100 BPM)              |
-| `zone_fast_hex`   | yes      | `#E07A30` | Colour for the fast zone (101 – 130 BPM)             |
-| `zone_alarm_hex`  | yes      | `#D94545` | Colour for the alarm zone (131+ BPM)                 |
-| `panel_bg_hex`    | yes      | `#0A0A12` | Overlay panel background, rendered at 82% opacity    |
-| `overlay_style`   | yes      | `"Heart"` | Overlay style: `"Heart"` or `"Pulse"` (the ECG line) |
+If any key is missing or the JSON is broken, the whole file is ignored and everything goes back to defaults. A color that isn't six hex digits shows up grey.
 
-Every key is required in the sense that a file missing any of them, or holding
-invalid JSON, is discarded whole and every setting returns to its default. A hex
-value that is not six hexadecimal digits renders as grey rather than failing.
+</details>
 
-The overlay server always listens on `127.0.0.1:9000`; the port is not
-configurable.
+The port is always `9000` and can't be changed.
 
 ## Building from source
 
-Requirements: [Rust](https://rustup.rs) stable, [Node.js](https://nodejs.org) 24+.
+You need [Rust](https://rustup.rs) stable and [Node.js](https://nodejs.org) 24+.
 
 ```bash
 git clone https://github.com/wielorzeczownik/pulse-layer
@@ -217,24 +144,17 @@ cd pulse-layer
 cargo build --release
 ```
 
-The overlay frontend is compiled by Vite as part of `cargo build` and embedded into the binary – no separate build step.
+`cargo build` builds the overlay with Vite too and embeds it in the binary.
 
-**macOS quick launch (debug build):**
-
-```bash
-./run_macos.sh
-```
-
-Builds a `.app` bundle under `target/` with [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`), signs it ad-hoc, and opens it.
-
-### Linux system dependencies
+On Linux you also need:
 
 ```bash
-# Ubuntu / Debian
 sudo apt-get install libdbus-1-dev pkg-config libxkbcommon-dev \
   libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev
 ```
 
+On macOS, `./run_macos.sh` builds a debug `.app`, signs it ad-hoc and opens it. It needs [cargo-packager](https://github.com/crabnebula-dev/cargo-packager) (`cargo install cargo-packager --locked`).
+
 ## Disclaimer
 
-Unofficial, unaffiliated with COLMI or any ring manufacturer. May break if the ring firmware changes the BLE protocol.
+Not official and not affiliated with COLMI or any other ring maker. If a ring firmware update changes the BLE protocol, PulseLayer may stop working.
