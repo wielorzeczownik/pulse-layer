@@ -43,6 +43,9 @@ dirs = "7.0.0"
 sys-locale = "0.3.2"
 uuid = "1.22.0"
 
+# Self-update
+cargo-packager-updater = "0.2.3"
+
 [package.metadata.packager.deb]
 depends = ["bluez", "libdbus-1-3"]
 
