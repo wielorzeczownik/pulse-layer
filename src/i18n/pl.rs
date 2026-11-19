@@ -35,5 +35,8 @@ pub static PL: Strings = Strings {
   status_disconnecting: "Rozłączanie...",
   status_disconnected: "Rozłączono.",
   status_error: "Błąd",
+  update_available: "Dostępna wersja",
+  btn_update: "Aktualizuj",
+  status_updating: "Pobieranie aktualizacji...",
   overlay_hint: "Overlay:",
 };

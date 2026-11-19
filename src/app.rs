@@ -15,11 +15,19 @@ use crate::server::PORT;
 use crate::settings::AppSettings;
 use crate::types::{BleCmd, BleEvent, DeviceInfo, Message};
 use crate::ui;
+use crate::update;
+use cargo_packager_updater::Update;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Screen {
   Scanning,
   Connected,
+}
+
+pub enum UpdateState {
+  None,
+  Available(Box<Update>),
+  Installing(Box<Update>),
 }
 
 pub struct App {
@@ -43,10 +51,12 @@ pub struct App {
   pub settings_open: bool,
   pub color_picker_zone: Option<crate::settings::ZoneKind>,
   pub bg_picker_open: bool,
+
+  pub update: UpdateState,
 }
 
 impl App {
-  pub fn new() -> Self {
+  pub fn new() -> (Self, Task<Message>) {
     let (cmd_tx, cmd_rx) = unbounded_channel();
     let (evt_tx, evt_rx) = unbounded_channel();
     let (hr_tx, hr_rx) = watch::channel(None::<u8>);
@@ -58,7 +68,7 @@ impl App {
 
     let lang = i18n::load();
 
-    Self {
+    let app = Self {
       cmd_tx,
       cmd_rx: Arc::new(Mutex::new(Some(cmd_rx))),
       evt_tx,
@@ -82,7 +92,21 @@ impl App {
       settings_open: false,
       color_picker_zone: None,
       bg_picker_open: false,
-    }
+
+      update: UpdateState::None,
+    };
+
+    let check = Task::perform(
+      async {
+        tokio::task::spawn_blocking(update::check)
+          .await
+          .ok()
+          .flatten()
+          .map(Box::new)
+      },
+      Message::UpdateFound,
+    );
+    (app, check)
   }
 
   pub fn title(&self) -> String {
@@ -156,6 +180,9 @@ impl App {
         config::save(&self.settings);
         let _ = self.settings_tx.send(self.settings.clone());
       }
+      Message::UpdateFound(_) | Message::InstallUpdate | Message::UpdateFailed(_) => {
+        return self.on_update(message);
+      }
       Message::BleEvent(event) => match event {
         BleEvent::ScanUpdate(list) => {
           self.devices = list;
@@ -193,13 +220,48 @@ impl App {
     Task::none()
   }
 
-  pub fn view(&self) -> Element<'_, Message> {
-    if self.settings_open {
-      return ui::settings_view::settings_view(self);
+  fn on_update(&mut self, message: Message) -> Task<Message> {
+    let lang = self.lang;
+    let state = std::mem::replace(&mut self.update, UpdateState::None);
+    match (message, state) {
+      (Message::UpdateFound(Some(found)), _) => {
+        self.update = UpdateState::Available(found);
+      }
+      (Message::InstallUpdate, UpdateState::Available(found)) => {
+        self.status = lang.status_updating.to_string();
+        let job = found.clone();
+        self.update = UpdateState::Installing(found);
+        return Task::perform(
+          async move {
+            tokio::task::spawn_blocking(move || update::install(&job))
+              .await
+              .map_err(|err| err.to_string())
+              .and_then(|res| res)
+          },
+          |res| Message::UpdateFailed(res.err().unwrap_or_default()),
+        );
+      }
+      (Message::UpdateFailed(err), UpdateState::Installing(found)) => {
+        self.status = format!("{}: {err}", lang.status_error);
+        self.update = UpdateState::Available(found);
+      }
+      (_, state) => self.update = state,
     }
-    match self.screen {
-      Screen::Scanning => ui::scan_view::scan_view(self),
-      Screen::Connected => ui::connected_view::connected_view(self),
+    Task::none()
+  }
+
+  pub fn view(&self) -> Element<'_, Message> {
+    let screen = if self.settings_open {
+      ui::settings_view::settings_view(self)
+    } else {
+      match self.screen {
+        Screen::Scanning => ui::scan_view::scan_view(self),
+        Screen::Connected => ui::connected_view::connected_view(self),
+      }
+    };
+    match ui::helpers::update_bar(self) {
+      Some(bar) => iced::widget::column![bar, screen].into(),
+      None => screen,
     }
   }
 }
