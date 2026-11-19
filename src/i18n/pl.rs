@@ -9,7 +9,7 @@ pub static PL: Strings = Strings {
   btn_connect: "Połącz",
 
   unknown_device: "Nieznane urządzenie",
-  zone_calm: "SPOKÓJ",
+  zone_calm: "SPOKOJNY",
   zone_normal: "UMIARKOWANY",
   zone_high: "PODWYŻSZONY",
   zone_fast: "INTENSYWNY",
