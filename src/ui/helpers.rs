@@ -1,6 +1,9 @@
-use iced::widget::{container, text};
-use iced::{Background, Border, Color, Element};
+use iced::widget::{Space, button, container, row, text};
+use iced::{Alignment, Background, Border, Color, Element, Length};
 
+use super::style;
+use crate::App;
+use crate::app::UpdateState;
 use crate::types::Message;
 
 pub fn section_label(label: &str) -> Element<'_, Message> {
@@ -38,4 +41,33 @@ pub fn zone_badge(label: &str, color: Color) -> Element<'_, Message> {
     })
     .padding([4, 10])
     .into()
+}
+
+/// Thin bar above every screen while a newer signed release is waiting.
+pub fn update_bar(app: &App) -> Option<Element<'_, Message>> {
+  let (found, installing) = match &app.update {
+    UpdateState::None => return None,
+    UpdateState::Available(found) => (found, false),
+    UpdateState::Installing(found) => (found, true),
+  };
+  let btn = button(text(app.lang.btn_update).size(12.0))
+    .style(style::btn_ghost)
+    .padding([4, 12])
+    .on_press_maybe((!installing).then_some(Message::InstallUpdate));
+  Some(
+    container(
+      row![
+        text(format!("{} v{}", app.lang.update_available, found.version))
+          .size(12.5)
+          .color(style::TEXT_MUTED),
+        Space::new().width(Length::Fill),
+        btn,
+      ]
+      .align_y(Alignment::Center),
+    )
+    .style(style::bar)
+    .padding([6, 18])
+    .width(Length::Fill)
+    .into(),
+  )
 }

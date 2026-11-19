@@ -41,6 +41,9 @@ pub struct Strings {
   pub status_disconnecting: &'static str,
   pub status_disconnected: &'static str,
   pub status_error: &'static str,
+  pub update_available: &'static str,
+  pub btn_update: &'static str,
+  pub status_updating: &'static str,
   pub overlay_hint: &'static str,
 }
 

@@ -8,6 +8,7 @@ mod server;
 mod settings;
 mod types;
 mod ui;
+mod update;
 
 use crate::app::App;
 

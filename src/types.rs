@@ -47,4 +47,9 @@ pub enum Message {
 
   // BLE events
   BleEvent(BleEvent),
+
+  // Self-update
+  UpdateFound(Option<Box<cargo_packager_updater::Update>>),
+  InstallUpdate,
+  UpdateFailed(String),
 }

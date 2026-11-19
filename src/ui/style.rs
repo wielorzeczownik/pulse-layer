@@ -48,6 +48,14 @@ const PICKER_BORDER: Color = Color {
   a: 1.0,
 };
 
+// Flat full-width strip for the update notice, a step lighter than the window
+pub fn bar(_theme: &Theme) -> iced::widget::container::Style {
+  iced::widget::container::Style {
+    background: Some(Background::Color(SURFACE)),
+    ..Default::default()
+  }
+}
+
 pub fn card(_theme: &Theme) -> iced::widget::container::Style {
   iced::widget::container::Style {
     background: Some(Background::Color(Color {

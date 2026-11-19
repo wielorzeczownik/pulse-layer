@@ -250,7 +250,8 @@ jobs:
           cargo packager --release --target "$TARGET" --formats app,dmg
           out="target/${TARGET}/release"
           mkdir -p dist
-          tar -C "$out" -czf "dist/pulse-layer-${TARGET}.tar.gz" PulseLayer.app
+          # No ._ AppleDouble entries, the updater unpacks this archive as the new app
+          COPYFILE_DISABLE=1 tar -C "$out" -czf "dist/pulse-layer-${TARGET}.tar.gz" PulseLayer.app
           cp "$out"/PulseLayer_*.dmg "dist/pulse-layer-${TARGET}.dmg"
 
       - name: Package Windows exe
@@ -298,6 +299,20 @@ jobs:
           cp "$out"/*.deb "dist/pulse-layer-${TARGET}.deb"
           cp "$out"/*.AppImage "dist/pulse-layer-${TARGET}.AppImage"
 
+      - name: Sign update bundle
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+          CARGO_PACKAGER_SIGN_PRIVATE_KEY: ${{ secrets.CARGO_PACKAGER_SIGN_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          case "$RUNNER_OS" in
+            macOS) file="pulse-layer-${TARGET}.tar.gz" ;;
+            Windows) file="pulse-layer-${TARGET}-setup.exe" ;;
+            Linux) file="pulse-layer-${TARGET}.AppImage" ;;
+          esac
+          cargo packager signer sign --password "" "dist/$file"
+
       - name: Upload artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -333,6 +348,16 @@ jobs:
           ref: ${{ needs.prepare-release.outputs.tag }}
           persist-credentials: false
           path: source
+
+      - name: Generate update manifest
+        shell: bash
+        env:
+          REPO: ${{ github.repository }}
+          TAG: ${{ needs.prepare-release.outputs.tag }}
+        run: |
+          set -euo pipefail
+          bash source/scripts/update-manifest.sh dist "$REPO" "$TAG" >dist/latest.json
+          cat dist/latest.json
 
       - name: Generate SBOM
         uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
