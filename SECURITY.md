@@ -1,34 +1,12 @@
-# Security Policy
+# Security
 
-## Supported versions
+Thanks for taking the time to look. Please report vulnerabilities privately through [GitHub Security Advisories](https://github.com/wielorzeczownik/pulse-layer/security/advisories/new) instead of a public issue, so there's a chance to fix them first. You'll be credited in the release notes unless you'd rather not be. Only the latest release gets fixes.
 
-Only the latest release receives security fixes.
+## In scope
 
-## Reporting a vulnerability
+- the overlay server on `127.0.0.1:9000` (the page and its WebSocket)
+- the self-updater: fetching `latest.json` and checking release signatures
+- BLE communication with the ring
+- reading and writing the settings file
 
-**Do not open a public GitHub issue for security vulnerabilities.**
-
-Report vulnerabilities privately via [GitHub Security Advisories](https://github.com/wielorzeczownik/pulse-layer/security/advisories/new).
-
-Include as much detail as possible:
-
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if any)
-
-You will receive a response within **7 days**. If the issue is confirmed, a fix will be released as soon as possible and you will be credited in the release notes (unless you prefer to remain anonymous).
-
-## Scope
-
-This project is a local desktop application. The attack surface includes:
-
-- The local HTTP server serving the overlay widget (bound to `127.0.0.1` by default)
-- BLE communication with the smart ring
-- Settings file handling
-
-Issues related to the upstream ring firmware or the COLMI protocol are out of scope.
-
-## Security notes for operators
-
-- The overlay server binds to `127.0.0.1` only, do not expose it to external networks.
+Problems in ring firmware or the ring's BLE protocol itself are out of scope.
