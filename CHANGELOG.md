@@ -5,6 +5,42 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.3...v0.4.0) - 2026-11-23
+
+### Features
+
+- Replace logo with smart ring icon (#393) ([a5ed934](https://github.com/wielorzeczownik/pulse-layer/commit/a5ed93439c507e6dcdd8dfaa91050eb039e83f19))
+- Self-update from signed GitHub releases (#384) ([9ec98eb](https://github.com/wielorzeczownik/pulse-layer/commit/9ec98ebd78d674f4b6c89772b1cd0f8d3923d894))
+
+### Performance
+
+- Compress app icon images (#394) ([dbeab20](https://github.com/wielorzeczownik/pulse-layer/commit/dbeab203a2320d78ce111656ebc85f9c43fd7242))
+
+### Documentation
+
+- Make contributing, security and issue forms friendlier (#395) ([729dbaf](https://github.com/wielorzeczownik/pulse-layer/commit/729dbaf81ed1e41bdc56556538dca0fb1453157d))
+- Rewrite readme, use the svg icon and redo overlay previews (#383) ([a387833](https://github.com/wielorzeczownik/pulse-layer/commit/a387833897119f42eb18b6ee598798a62a9c1171))
+
+### CI/CD
+
+- Update taiki-e/install-action action to v2.90.5 (#390) ([56b7d27](https://github.com/wielorzeczownik/pulse-layer/commit/56b7d272be7465b936bf3131709d82c4671c404e))
+- Update taiki-e/install-action action to v2.90.3 (#382) ([63dbf0e](https://github.com/wielorzeczownik/pulse-layer/commit/63dbf0e01856b495abcdd54bfef40268d2ecfb09))
+- Update dependency prettier to v3.10.1 (#381) ([e79c50c](https://github.com/wielorzeczownik/pulse-layer/commit/e79c50c507ff2d21428fa7ba03e23424350a69f0))
+- Update softprops/action-gh-release action to v3.0.4 (#379) ([63264c7](https://github.com/wielorzeczownik/pulse-layer/commit/63264c773e6a0f5d05ccb64309349906e2f6d956))
+
+### Dependencies
+
+- Update dependency eslint to v10.15.0 (#391) ([d6dc421](https://github.com/wielorzeczownik/pulse-layer/commit/d6dc4210f13580e96cce65089358c657a3bec0e8))
+- Update rust crate uuid to v1.29.3 (#389) ([0f87bcc](https://github.com/wielorzeczownik/pulse-layer/commit/0f87bcc29b58895dd12bbd1de3072ae243990804))
+- Update dependency vitest to v5.1.1 (#388) ([228848d](https://github.com/wielorzeczownik/pulse-layer/commit/228848d25096f40c501a088ec2817da11a1fdc5b))
+- Update dependency stylelint-config-recess-order to v7.10.1 (#387) ([b6cc317](https://github.com/wielorzeczownik/pulse-layer/commit/b6cc3175ad8a242e2e5cb7a61b8d8be86a930250))
+- Update html-eslint monorepo to v0.68.0 (#380) ([e50a8e2](https://github.com/wielorzeczownik/pulse-layer/commit/e50a8e26c9e7b18a3b0c98f55f50b7b81dd44177))
+- Update rust crate uuid to v1.29.2 (#378) ([83b1308](https://github.com/wielorzeczownik/pulse-layer/commit/83b130846fa695217ec60cdf77008375c70dec3f))
+
+### Miscellaneous
+
+- Optimize icon svg with svgo (#385) ([656d9eb](https://github.com/wielorzeczownik/pulse-layer/commit/656d9ebe0e6f535b279a6a9fe4ec3e3a0be30d0c))
+
 ## [0.3.3](https://github.com/wielorzeczownik/pulse-layer/compare/v0.3.2...v0.3.3) - 2026-11-16
 
 ### Build System
