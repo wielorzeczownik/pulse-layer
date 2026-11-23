@@ -1,26 +1,10 @@
-# Contributing to PulseLayer
+# Contributing
 
-Thank you for considering a contribution. This document covers everything you need to get started.
+Every contribution helps, including a typo fix, a bug report, support for another ring, or a question about how something works. For anything bigger than a small fix, opening an issue first is a good idea, so we can agree on the approach before you spend time on it.
 
-## Overview
+## Setup
 
-A macOS application that reads data from BLE smart rings and displays it in an on-screen overlay.
-
-## Project structure
-
-```text
-.
-├── src/                        Rust source code, with tests beside the code they cover
-├── overlay/
-│   ├── src/                    overlay frontend (Vite + TypeScript)
-│   └── tests/                  vitest suites, mirroring overlay/src
-├── macos/                      macOS app bundle metadata
-└── scripts/
-    ├── bump-version.sh         determines the next release version and bumps Cargo.toml
-    └── install-linux-deps.sh   apt packages the Linux build needs
-```
-
-## Development setup
+You need Rust and Node.js. On Linux, also run `scripts/install-linux-deps.sh` for the system libraries.
 
 ```bash
 git clone https://github.com/wielorzeczownik/pulse-layer.git
@@ -28,97 +12,47 @@ cd pulse-layer
 cargo run
 ```
 
-The `overlay/` frontend is built automatically by `build.rs` during `cargo build`/`cargo run`.
+`build.rs` builds the `overlay/` frontend as part of `cargo build` and `cargo run`, so there's no separate step for it.
 
-## Running checks locally
+On macOS, use `./run_macos.sh` instead. It builds an `.app` bundle, because that's what macOS needs to ask for Bluetooth permission.
 
-CI runs exactly these commands. Anything that passes here passes there.
+## Checks
 
-### With tools installed
+CI runs these on every pull request. You don't have to run them all locally, since CI will point out anything that's off:
 
 ```bash
-# Rust
 cargo fmt --check
 cargo clippy --all-targets --locked -- -D warnings
 cargo test --locked
 
-# Overlay
 cd overlay
 npm ci
-npm run lint                         # eslint, warnings are errors
-npm run lint:css                     # stylelint
-npm run typecheck                    # tsc --noEmit
-npm test                             # vitest run
+npm run lint
+npm run lint:css
+npm run typecheck
+npm test
 npm run build
 cd ..
 
-# Formatting (whole repo, honours .prettierignore)
-npx prettier@3.9.6 --check .
-
-# Shell
+npx prettier --check .
 shfmt --diff scripts/ run_macos.sh
 shellcheck scripts/*.sh run_macos.sh
-
-# Workflows
 actionlint
-
-# Markdown (exclusions come from .markdownlint-cli2.yaml)
 markdownlint-cli2 "**/*.md"
 ```
 
-`npm run fix` inside `overlay/` applies every autofixable finding from eslint,
-stylelint and prettier in one go.
+`npm run fix` in `overlay/` fixes whatever eslint, stylelint and prettier can fix on their own.
 
-### With Docker (no local installs required)
+## Tests
 
-```bash
-docker run --rm -v "$(pwd):/src" -w /src mvdan/shfmt --diff scripts/ run_macos.sh
+Rust tests sit next to the code they cover, in a `#[cfg(test)] mod tests` in the same file. Overlay tests are vitest suites in `overlay/tests/`, mirroring `overlay/src/`.
 
-docker run --rm -v "$(pwd):/mnt" -w /mnt koalaman/shellcheck:stable scripts/*.sh run_macos.sh
+## Commits and pull requests
 
-docker run --rm -v "$(pwd):/repo" -w /repo rhysd/actionlint:1.7.12
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat: ...`, `fix: ...`), because the changelog and version bumps are generated from them. Don't worry if you get the prefix wrong, it can be fixed before merging.
 
-docker run --rm -v "$(pwd):/workdir" davidanson/markdownlint-cli2 "**/*.md"
-```
+Smaller PRs that do one thing are easier to review. Tests for behavior changes are very welcome. If you're not sure how to test something, open the PR anyway and we'll work it out together.
 
-## Commit style
+Bugs and ideas go to [issues](https://github.com/wielorzeczownik/pulse-layer/issues). Security problems go through [SECURITY.md](SECURITY.md).
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/). Commit messages drive automatic changelog generation and version bumping.
-
-| Prefix      | When to use                                |
-| ----------- | ------------------------------------------ |
-| `feat:`     | New feature or behavior                    |
-| `fix:`      | Bug fix                                    |
-| `perf:`     | Performance improvement                    |
-| `refactor:` | Code change without behavior change        |
-| `test:`     | Tests only                                 |
-| `docs:`     | Documentation only                         |
-| `style:`    | Formatting, no logic change                |
-| `build:`    | Build tooling and development dependencies |
-| `ci:`       | Workflows and CI configuration             |
-| `chore:`    | Maintenance that fits nothing above        |
-
-Breaking changes must include `BREAKING CHANGE:` in the commit footer.
-
-Keep commits focused on a single concern. If a change touches both logic and tests, a single commit is fine – if it touches unrelated areas, split it.
-
-## Pull requests
-
-- Keep PRs focused on a single concern.
-- Reference any related issue in the PR description.
-- All CI checks must pass before merging.
-
-## Reporting bugs
-
-Open an [issue](https://github.com/wielorzeczownik/pulse-layer/issues) and include:
-
-- What you did
-- What you expected
-- What actually happened
-- Your environment (OS, Bluetooth adapter model, smart ring model)
-
-> For security issues, read [SECURITY.md](SECURITY.md) before opening a public issue.
-
-## License
-
-By contributing you agree that your changes will be licensed under the [MIT License](LICENSE).
+Contributions are licensed under the [MIT License](LICENSE).
